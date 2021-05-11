@@ -11,7 +11,10 @@
     "dev": "next dev -p ${PORT:-666}",
     "build": "next build",
     "start": "next start -p ${PORT:-666}",
-    "export": "next export -o docs/"
+    "export": "next export -o docs/",
+    "clean": "rm -rf .next docs",
+    "isNotDirty": "[[ -z $(git status -s) ]]",
+    "release": "yarn isNotDirty && yarn clean && yarn build && yarn export"
   },
   "dependencies": {
     "next": "10.2.0",
