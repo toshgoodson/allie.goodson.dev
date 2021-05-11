@@ -11,7 +11,7 @@
     "dev": "next dev -p ${PORT:-666}",
     "build": "next build",
     "start": "next start -p ${PORT:-666}",
-    "export": "next export"
+    "export": "next export -o docs/"
   },
   "dependencies": {
     "next": "10.2.0",
