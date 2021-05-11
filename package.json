@@ -1,0 +1,20 @@
+{
+  "name": "allie.goodson.dev",
+  "version": "0.0.1",
+  "description": "Allie Goodson's personal website",
+  "main": "index.js",
+  "repository": "https://github.com/toshgoodson/allie.goodson.dev",
+  "author": "Tosh Goodson",
+  "license": "AGPLv3",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "10.2.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  }
+}
