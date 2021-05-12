@@ -1,6 +1,7 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import vercelLogo from '../assets/images/vercel.svg'
+import styles from '../../styles/Home.module.css'
+import vercelLogo from '../../assets/images/vercel.svg'
+import { Grit } from '../components/Grit'
 
 export default function Home() {
 	return (
@@ -64,6 +65,7 @@ export default function Home() {
 					</span>
 				</a>
 			</footer>
+			<Grit/>
 		</div>
 	)
 }
