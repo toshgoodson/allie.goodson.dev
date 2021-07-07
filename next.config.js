@@ -4,7 +4,9 @@ const optimizedImages = require('next-optimized-images')
 module.exports = withPlugins([
 	[optimizedImages, {}]
 ], {
-	future: {
-		webpack5: true
+	optimizeImages: false,
+	inlineImageLimit: -1,
+	images: {
+		disableStaticImages: true
 	}
 })

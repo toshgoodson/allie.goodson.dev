@@ -13,6 +13,7 @@ const Noise = styled.div<{bgSrc: string, bgSize: number}>`
 	background-size: ${({bgSize}) => bgSize * 2}px;
 	bottom: 0;
 	left: 0;
+	min-height: 100vh;
 	opacity: .012;
 	pointer-events: none;
 	position: absolute;
