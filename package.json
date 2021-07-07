@@ -8,9 +8,9 @@
   "license": "AGPLv3",
   "private": true,
   "scripts": {
-    "dev": "next dev -p ${PORT:-666}",
+    "dev": "next dev -p ${PORT:-8084}",
     "build": "next build",
-    "start": "next start -p ${PORT:-666}",
+    "start": "next start -p ${PORT:-8084}",
     "export": "next export -o docs/",
     "clean": "rm -rf .next docs",
     "isNotDirty": "[[ -z $(git status -s) ]]",
