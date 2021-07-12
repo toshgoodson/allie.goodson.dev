@@ -12,6 +12,8 @@ const Navbar = styled.div`
 	${rfs.padding('40px 0 17px')}
 `
 const NavbarToggler = styled.button`
+	color: inherit;
+	
 	&:focus {
 		box-shadow: none;
 		outline: -webkit-focus-ring-color auto 1px;

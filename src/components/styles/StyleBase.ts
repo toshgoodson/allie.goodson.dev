@@ -4,6 +4,8 @@ import { rfs } from '../../models/rfs'
 
 export const StyleBase = createGlobalStyle`
 	body {
+		background: ${({theme}) => theme?.colors[0]};
+		color: ${({theme}) => theme?.colors[1]};
 		font-family: 'Open Sans', sans-serif;
 		position: relative;
 	}
