@@ -14,7 +14,7 @@
     "export": "next export -o docs/",
     "clean": "rm -rf .next docs",
     "isNotDirty": "[[ -z $(git status -s) ]]",
-    "release": "yarn isNotDirty && yarn clean && yarn build && yarn export"
+    "release": "yarn install && yarn isNotDirty && yarn clean && yarn build && yarn export"
   },
   "dependencies": {
     "bootstrap": "^5.0.1",
