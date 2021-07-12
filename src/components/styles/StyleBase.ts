@@ -23,6 +23,9 @@ export const StyleBase = createGlobalStyle`
 			color: ${({theme}) => theme?.colors[2][3]};
 		}
 	}
+	img {
+		width: 100%;
+	}
 	h1 {
 		${rfs.fontSize('60px')}
 		font-weight: bold;
