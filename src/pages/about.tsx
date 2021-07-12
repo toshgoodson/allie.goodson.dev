@@ -17,15 +17,19 @@ import solderImg from '../../assets/images/profile/profile-solder.jpg'
 import solderImg2x from '../../assets/images/profile/profile-solder@2x.jpg'
 
 const Description = styled.div`
-	font-family: 'Lustria', serif;
+	font-family: 'Judson', serif;
 	${rfs.fontSize('28px')};
+
+	@media (min-width: 768px) {
+		margin-top: -0.35em;
+	}
 
 	${Brand} {
 		${rfs.fontSize('26px')};
 	}
 `
 
-export default function Home() {
+export default function About() {
 	const images = [{
 		src: meImg,
 		src2x: meImg2x
@@ -45,7 +49,7 @@ export default function Home() {
 
 	return <RootLayout>
 		<ContentContainer>
-			<div className="row gy-4">
+			<div className="row gy-4 g-lg-4">
 				<div className="col-12 col-md-5">
 					<Flipbook images={images}/>
 				</div>

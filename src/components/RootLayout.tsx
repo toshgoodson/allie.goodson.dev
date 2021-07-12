@@ -10,7 +10,9 @@ import { theme, darkTheme } from '../models/theme'
 import { PageContent } from './PageContent'
 import Cookies from 'js-cookie'
 
-type Props = {}
+type Props = {
+	flexContent?: boolean
+}
 
 const FullHeight = styled.div`
 	display: flex;
@@ -38,19 +40,17 @@ export const RootLayout: React.FunctionComponent<Props> = (props) => {
 		isDarkMode() ? setDarkMode(true) : setDarkMode(false);
 	}
 
-	return <div>
-		<ThemeProvider theme={darkMode ? darkTheme : theme}>
-			<RootHead/>
-			<Fonts/>
-			<StyleBase/>
-			<FullHeight>
-				<PageHeader/>
-				<PageContent>
-					{props.children}
-				</PageContent>
-				<PageFooter darkMode={darkMode} onClickToggleMode={handleClickToggleMode}/>
-			</FullHeight>
-			<Grit/>
-		</ThemeProvider>
-	</div>
+	return <ThemeProvider theme={darkMode ? darkTheme : theme}>
+		<RootHead/>
+		<Fonts/>
+		<StyleBase/>
+		<FullHeight>
+			<PageHeader/>
+			<PageContent flex={props.flexContent ?? false}>
+				{props.children}
+			</PageContent>
+			<PageFooter darkMode={darkMode} onClickToggleMode={handleClickToggleMode}/>
+		</FullHeight>
+		<Grit/>
+	</ThemeProvider>
 }
