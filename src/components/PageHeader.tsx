@@ -13,7 +13,7 @@ const Navbar = styled.div`
 `
 const NavbarToggler = styled.button`
 	color: inherit;
-	
+
 	&:focus {
 		box-shadow: none;
 		outline: -webkit-focus-ring-color auto 1px;
@@ -68,16 +68,16 @@ export const PageHeader: React.FunctionComponent = (props) => {
 				<div className="collapse navbar-collapse" id="navbarNav">
 					<ul className="navbar-nav ms-auto">
 						<li className="nav-item">
-							<NavLink className="nav-link active" aria-current="page" href="#"><Swoop>Work</Swoop></NavLink>
+							<NavLink className="nav-link active" aria-current="page" href="/#work"><Swoop>Work</Swoop></NavLink>
 						</li>
 						<li className="nav-item">
-							<NavLink className="nav-link" href="#"><Swoop>About</Swoop></NavLink>
+							<NavLink className="nav-link" href="/about"><Swoop>About</Swoop></NavLink>
 						</li>
 						<li className="nav-item">
-							<NavLink className="nav-link" href="#"><Swoop>Contact</Swoop></NavLink>
+							<NavLink className="nav-link" href="/contact"><Swoop>Contact</Swoop></NavLink>
 						</li>
 						<li className="nav-item">
-							<NavLink className="nav-link" href="#"><Swoop>Resume</Swoop></NavLink>
+							<NavLink className="nav-link" href="/resume-2021-07-11.pdf" target="_blank"><Swoop>Resume</Swoop></NavLink>
 						</li>
 					</ul>
 				</div>

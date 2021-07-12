@@ -34,7 +34,7 @@ export const PageFooter: React.FunctionComponent<Props> = (props) => {
 						<a href="https://www.linkedin.com/in/allie-goodson-611802b2/" target="_blank"><StyledLinkedin title="Visit my LinkedIn"/></a>
 					</div>
 					<div className="col-auto">
-						<a href="mailto:allie@goodson.dev"><StyledMail title="Send me an email"/></a>
+						<a href="mailto:allie@goodson.dev" target="_blank"><StyledMail title="Send me an email"/></a>
 					</div>
 				</div>
 			</div>
