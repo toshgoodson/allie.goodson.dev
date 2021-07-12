@@ -20,7 +20,7 @@ export const RootHead: React.FunctionComponent<Props> = ({darkMode, meta}) => {
 			<title key="title">{meta.title}</title>
 			<meta key="description" name="description" content={meta.description}/>
 			<meta key="viewport" name="viewport" content="width=device-width, initial-scale=1.0"/>
-			<link key="faviconIco" rel="icon" href={darkMode ? faviconDarkIco : faviconIco}/>
+			<link key="faviconIco" rel="icon" href={darkMode ? faviconDarkIco : faviconIco} sizes="32x32"/>
 			<link key="faviconSvg" rel="icon" href={darkMode ? faviconDarkSvg : faviconSvg}/>
 			<link key="faviconMask" rel="mask-icon" href={darkMode ? faviconDarkSvg : faviconSvg} color={themeContext.colors[2][0]}/>
 			<meta key="themeColor" name="theme-color" content={themeContext.colors[2][0]} />
