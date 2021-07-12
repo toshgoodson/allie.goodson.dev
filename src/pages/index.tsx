@@ -2,8 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { Brand } from '../components/Brand'
 import { ContentContainer } from '../components/layout/ContentContainer'
-import { RootLayout } from '../components/RootLayout'
+import { RootLayout, Props as RootProps } from '../components/RootLayout'
 import { rfs } from '../models/rfs'
+import { GetStaticProps } from 'next'
 
 
 const Subheader = styled.div`
@@ -20,11 +21,24 @@ const Wide = styled.span`
 	span { letter-spacing: normal; }
 `
 
-export default function Home() {
-	return <RootLayout>
+type Props = RootProps
+
+export default function Home(props: Props) {
+	return <RootLayout {...props}>
 		<ContentContainer>
 			<h1>Hello, I'm <Brand>Allie</Brand>.</h1>
 			<Subheader>I am a designer and artist based in San Francisco.<br/>I have a passion for <Wide>aesthetic<span>s</span></Wide> &amp; actually taking a moment to stop and smell the flowers.</Subheader>
 		</ContentContainer>
 	</RootLayout>
+}
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+	return {
+		props: {
+			meta: {
+				title: 'home | allie goodson',
+				description: ''
+			}
+		}
+	}
 }

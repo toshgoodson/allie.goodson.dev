@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Brand } from '../components/Brand'
 import { Flipbook } from '../components/Flipbook'
 import { ContentContainer } from '../components/layout/ContentContainer'
-import { RootLayout } from '../components/RootLayout'
+import { RootLayout, Props as RootProps } from '../components/RootLayout'
 import { rfs } from '../models/rfs'
 import boyImg from '../../assets/images/profile/profile-boy.jpg'
 import boyImg2x from '../../assets/images/profile/profile-boy@2x.jpg'
@@ -15,6 +15,7 @@ import pencilImg from '../../assets/images/profile/profile-pencil.jpg'
 import pencilImg2x from '../../assets/images/profile/profile-pencil@2x.jpg'
 import solderImg from '../../assets/images/profile/profile-solder.jpg'
 import solderImg2x from '../../assets/images/profile/profile-solder@2x.jpg'
+import { GetStaticProps } from 'next'
 
 const Description = styled.div`
 	font-family: 'Judson', serif;
@@ -29,7 +30,9 @@ const Description = styled.div`
 	}
 `
 
-export default function About() {
+type Props = RootProps
+
+export default function About(props: Props) {
 	const images = [{
 		src: meImg,
 		src2x: meImg2x
@@ -47,7 +50,7 @@ export default function About() {
 		src2x: boyImg2x
 	}]
 
-	return <RootLayout>
+	return <RootLayout {...props}>
 		<ContentContainer>
 			<div className="row gy-4 g-lg-4">
 				<div className="col-12 col-md-5">
@@ -63,4 +66,16 @@ export default function About() {
 			</div>
 		</ContentContainer>
 	</RootLayout>
+}
+
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+	return {
+		props: {
+			meta: {
+				title: 'about | allie goodson',
+				description: ''
+			}
+		}
+	}
 }

@@ -3,6 +3,9 @@ import { Palette } from "../../models/Palette"
 import { rfs } from '../../models/rfs'
 
 export const StyleBase = createGlobalStyle`
+	:root {
+		--test: #FF5B4D;
+	}
 	body {
 		background: ${({theme}) => theme?.colors[0]};
 		color: ${({theme}) => theme?.colors[1]};
