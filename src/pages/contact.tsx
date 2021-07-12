@@ -21,12 +21,10 @@ const Subheader = styled.div`
 `
 
 export default function Contact() {
-	return <RootLayout flexContent={true}>
-		<div>
-			<ContentContainer>
-				<Email as="h1">allie@goodson.dev</Email>
-			</ContentContainer>
-		</div>
+	return <RootLayout>
+		<ContentContainer>
+			<Email as="h1">allie@goodson.dev</Email>
+		</ContentContainer>
 		<ColorSection>
 			<ContentContainer>
 				<Subheader>Let’s connect! Email me anytime about questions, project collaborations, UX work, or whatever else.</Subheader>
