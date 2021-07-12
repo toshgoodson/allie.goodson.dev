@@ -73,16 +73,16 @@ export const PageHeader: React.FunctionComponent = (props) => {
 				<div className="collapse navbar-collapse" id="navbarNav">
 					<ul className="navbar-nav ms-auto">
 						<li className="nav-item">
-							<NavLink className="nav-link active" aria-current="page" href="/#work"><Swoop>Work</Swoop></NavLink>
+							<Link href="/#work" passHref><NavLink className="nav-link"><Swoop>Work</Swoop></NavLink></Link>
 						</li>
 						<li className="nav-item">
-							<NavLink className="nav-link" href="/about"><Swoop>About</Swoop></NavLink>
+							<Link href="/about" passHref><NavLink className="nav-link"><Swoop>About</Swoop></NavLink></Link>
 						</li>
 						<li className="nav-item">
-							<NavLink className="nav-link" href="/contact"><Swoop>Contact</Swoop></NavLink>
+							<Link href="/contact" passHref><NavLink className="nav-link"><Swoop>Contact</Swoop></NavLink></Link>
 						</li>
 						<li className="nav-item">
-							<NavLink className="nav-link" href="/resume-2021-07-12.pdf" target="_blank"><Swoop>Resume</Swoop></NavLink>
+							<Link href="/resume-2021-07-12.pdf" passHref><NavLink className="nav-link" target="_blank"><Swoop>Resume</Swoop></NavLink></Link>
 						</li>
 					</ul>
 				</div>
