@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { rfs } from "../models/rfs"
 import { Brand } from "./Brand"
 import { FiMenu } from 'react-icons/fi'
+import strokeImg from '../../assets/images/stroke.png'
 
 const NavBrand = styled(Brand)`
 	${rfs.fontSize('34px')}
@@ -30,6 +31,10 @@ const Swoop = styled.span`
 		content: '';
 		height: 1em;
 		left: 0.25em;
+		mask: url(${strokeImg}) no-repeat;
+		mask-position: center;
+		mask-repeat: no-repeat;
+		mask-size: 100% 100%;
 		position: absolute;
 		top: -0.05em;
 		transition: background-size 0.15s ease-out, background-position 0s ease-out;
