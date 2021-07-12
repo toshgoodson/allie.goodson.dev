@@ -22,6 +22,7 @@ export const RootLayout: React.FunctionComponent<Props> = (props) => {
 	const isDarkMode = () => {
 		if (typeof window === 'undefined') { return false }
 		if (Cookies.get('darkMode') === '1') { return true }
+		if (Cookies.get('darkMode') === '0') { return false }
 		return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
 	}
 

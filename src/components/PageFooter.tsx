@@ -11,7 +11,7 @@ const Padding = styled.div`
 	${rfs.padding('49px 0 41px')}
 `
 const StyledLinkedin = styled(IoLogoLinkedin)`
-	${rfs.fontSize('38px')}
+	${rfs.fontSize('37px')}
 `
 const StyledMail = styled(HiOutlineMail)`
 	${rfs.fontSize('40px')}
@@ -28,7 +28,7 @@ export const PageFooter: React.FunctionComponent<Props> = (props) => {
 			<div className="container">
 				<div className="row justify-content-end align-items-center">
 					<div className="col-auto">
-						<a href="#" onClick={props.onClickToggleMode}>{props.darkMode ? <FiSunrise title="Toggle light mode"/> : <FiSunset title="Toggle dark mode"/>}</a>
+						<a href="#" onClick={(e: any) => {e.preventDefault(); props.onClickToggleMode()}}>{props.darkMode ? <FiSunrise title="Toggle light mode"/> : <FiSunset title="Toggle dark mode"/>}</a>
 					</div>
 					<div className="col-auto">
 						<a href="https://www.linkedin.com/in/allie-goodson-611802b2/" target="_blank"><StyledLinkedin title="Visit my LinkedIn"/></a>
