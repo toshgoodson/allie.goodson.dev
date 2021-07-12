@@ -34,7 +34,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 		props: {
 			meta: {
 				title: 'copyright | allie goodson',
-				description: 'Copyright Information & Credits.'
+				description: 'Copyright Information & Credits. Copyright 2021 Allie Goodson.'
 			}
 		}
 	}
