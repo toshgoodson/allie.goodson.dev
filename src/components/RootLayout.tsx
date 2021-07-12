@@ -9,14 +9,18 @@ import styled, { ThemeProvider } from 'styled-components'
 import { theme, darkTheme } from '../models/theme'
 import { PageContent } from './PageContent'
 import Cookies from 'js-cookie'
+import { Meta } from '../interfaces/Meta'
 
-type Props = {}
 
 const FullHeight = styled.div`
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
 `
+
+export type Props = {
+	meta: Meta
+}
 
 export const RootLayout: React.FunctionComponent<Props> = (props) => {
 	const isDarkMode = () => {
@@ -39,7 +43,7 @@ export const RootLayout: React.FunctionComponent<Props> = (props) => {
 	}
 
 	return <ThemeProvider theme={darkMode ? darkTheme : theme}>
-		<RootHead/>
+		<RootHead darkMode={darkMode} meta={props.meta}/>
 		<Fonts/>
 		<StyleBase/>
 		<FullHeight>

@@ -82,7 +82,7 @@ export const PageHeader: React.FunctionComponent = (props) => {
 							<NavLink className="nav-link" href="/contact"><Swoop>Contact</Swoop></NavLink>
 						</li>
 						<li className="nav-item">
-							<NavLink className="nav-link" href="/resume-2021-07-11.pdf" target="_blank"><Swoop>Resume</Swoop></NavLink>
+							<NavLink className="nav-link" href="/resume-2021-07-12.pdf" target="_blank"><Swoop>Resume</Swoop></NavLink>
 						</li>
 					</ul>
 				</div>

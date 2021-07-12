@@ -2,9 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { Brand } from '../components/Brand'
 import { ContentContainer } from '../components/layout/ContentContainer'
-import { RootLayout } from '../components/RootLayout'
+import { RootLayout, Props as RootProps } from '../components/RootLayout'
 import { rfs } from '../models/rfs'
 import strokeImg from '../../assets/images/stroke.png'
+import { GetStaticProps } from 'next'
 
 const Swoop = styled.span`
 	display: inline-block;
@@ -52,8 +53,10 @@ const Subheader = styled.div`
 	font-weight: bold;
 `
 
-export default function Contact() {
-	return <RootLayout>
+type Props = RootProps
+
+export default function Contact(props: Props) {
+	return <RootLayout {...props}>
 		<ContentContainer>
 			<Email as="h1"><a href="mailto:allie@goodson.dev" target="_blank"><Swoop>allie@goodson.dev</Swoop></a></Email>
 		</ContentContainer>
@@ -63,4 +66,15 @@ export default function Contact() {
 			</ContentContainer>
 		</ColorSection>
 	</RootLayout>
+}
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+	return {
+		props: {
+			meta: {
+				title: 'contact | allie goodson',
+				description: ''
+			}
+		}
+	}
 }
