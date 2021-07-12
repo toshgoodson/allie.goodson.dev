@@ -1,7 +1,6 @@
 import styled from "styled-components"
-import { Palette } from "../models/Palette"
+import { rfs } from "../models/rfs"
 
 export const PageContent = styled.div`
-	background: ${Palette.sazerac};
-	padding: 120px 0 100px;
+	${rfs.padding('120px 0 120px')}
 `

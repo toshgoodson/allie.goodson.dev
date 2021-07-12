@@ -1,14 +1,29 @@
 import {createGlobalStyle} from 'styled-components'
 import { Palette } from "../../models/Palette"
+import { rfs } from '../../models/rfs'
 
 export const StyleBase = createGlobalStyle`
 	body {
+		font-family: 'Open Sans', sans-serif;
 		position: relative;
 	}
+	a {
+		color: ${({theme}) => theme?.colors[2][0]};
+		text-decoration: none;
 
-	@media (min-width: 1200px) {
-		.container {
-			max-width: 970px;
+		&:hover, &:focus {
+			color: ${({theme}) => theme?.colors[2][1]};
 		}
+		&:active {
+			color: ${({theme}) => theme?.colors[2][2]};
+		}
+		&:disabled, &.disabled {
+			color: ${({theme}) => theme?.colors[2][3]};
+		}
+	}
+	h1 {
+		${rfs.fontSize('60px')}
+		font-weight: bold;
+		text-transform: lowercase;
 	}
 `

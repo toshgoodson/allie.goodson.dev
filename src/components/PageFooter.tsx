@@ -1,51 +1,28 @@
 import React from "react"
+import { IoLogoLinkedin } from 'react-icons/io'
+import { HiOutlineMail } from 'react-icons/hi'
 import styled from "styled-components"
-import { Palette } from "../models/Palette"
-import { HeaderBar, HeaderBarOne, HeaderBarThree, HeaderBarTwo, HeaderContainer, HeaderSlant } from "./PageHeader"
+import {rfs} from "../models/rfs"
 
-const FooterSlant = styled(HeaderSlant)`
-	transform-origin: 100% 100%;
-`
-
-const FooterBarSpecial = styled(HeaderBar)`
-	background: ${Palette.bittersweet};
-`
-
-const FooterContent = styled.div`
-	padding: 60px 0 120px;
-`
-
-const Headshot = styled.img`
-	width: 200px;
-	clip-path: polygon(50% 50%, 100% 50%, 50% 100%, 0 50%);
-	transition: clip-path .3s ease;
-
-	&:hover {
-		clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
-	}
+const Padding = styled.div`
+	${rfs.fontSize('30px')}
+	line-height: 1;
+	${rfs.padding('49px 0 41px')}
 `
 
 export const PageFooter: React.FunctionComponent = () => {
 	return (
-		<HeaderContainer>
-			<FooterSlant>
-				<HeaderBarThree/>
-				<HeaderBarTwo/>
-				<FooterBarSpecial/>
-				<HeaderBarOne/>
-			</FooterSlant>
-			<FooterContent>
-				<div className="container">
-					<div className="row">
-						<div className="col-auto">
-							<Headshot src=""/>
-						</div>
-						<div className="col">
-							hey
-						</div>
+		<Padding>
+			<div className="container">
+				<div className="row justify-content-end">
+					<div className="col-auto">
+						<a href="https://www.linkedin.com/in/allie-goodson-611802b2/"><IoLogoLinkedin/></a>
+					</div>
+					<div className="col-auto">
+						<a href="mailto:allie@goodson.dev"><HiOutlineMail/></a>
 					</div>
 				</div>
-			</FooterContent>
-		</HeaderContainer>
+			</div>
+		</Padding>
 	)
 }
