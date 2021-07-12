@@ -31,7 +31,7 @@ export const PageFooter: React.FunctionComponent<Props> = (props) => {
 						<a href="#" onClick={(e: any) => {e.preventDefault(); props.onClickToggleMode()}}>{props.darkMode ? <FiSunrise title="Toggle light mode"/> : <FiSunset title="Toggle dark mode"/>}</a>
 					</div>
 					<div className="col-auto">
-						<a href="https://www.linkedin.com/in/allie-goodson-611802b2/" target="_blank"><StyledLinkedin title="Visit my LinkedIn"/></a>
+						<a href="https://www.linkedin.com/in/allie-goodson-611802b2/" target="_blank" rel="noopener noreferrer"><StyledLinkedin title="Visit my LinkedIn"/></a>
 					</div>
 					<div className="col-auto">
 						<a href="mailto:allie@goodson.dev" target="_blank"><StyledMail title="Send me an email"/></a>
