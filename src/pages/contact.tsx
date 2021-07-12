@@ -4,6 +4,7 @@ import { Brand } from '../components/Brand'
 import { ContentContainer } from '../components/layout/ContentContainer'
 import { RootLayout } from '../components/RootLayout'
 import { rfs } from '../models/rfs'
+import strokeImg from '../../assets/images/stroke.png'
 
 const Swoop = styled.span`
 	display: inline-block;
@@ -15,6 +16,10 @@ const Swoop = styled.span`
 		content: '';
 		height: 1em;
 		left: 0.25em;
+		mask: url(${strokeImg});
+		mask-position: center;
+		mask-repeat: no-repeat;
+		mask-size: 100% 100%;
 		position: absolute;
 		top: -0.05em;
 		transition: background-size 0.15s ease-out, background-position 0s ease-out;
