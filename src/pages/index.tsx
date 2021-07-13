@@ -37,7 +37,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 		props: {
 			meta: {
 				title: 'home | allie goodson',
-				description: ''
+				description: "Hello, I'm Allie. I am a designer and artist based in San Francisco. I have a passion for  A E S T H E T I C S  & actually taking a moment to stop and smell the flowers."
 			}
 		}
 	}
