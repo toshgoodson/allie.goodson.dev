@@ -47,15 +47,24 @@ const Swoop = styled.span`
 
 const NavList = styled.ul`
 	${rfs.marginTop('12px')}
+	text-align: right;
 
 	@media (min-width: ${Breakpoints.min.md}px) {
 		margin-top: 0;
+		text-align: inherit;
 	}
 `
 
 const NavLink = styled.a`
 	color: ${({theme}) => theme.colors[1]} !important;
+	display: inline-block;
 	${rfs.fontSize('17px')}
+	transition: none;
+
+	.navbar-nav & { /* specificity needed to override bootstrap */
+		padding-right: 0.75rem;
+		padding-left: 0.75rem;
+	}
 	
 	@media (min-width: ${Breakpoints.min.md}px) {
 		${rfs.margin('0 20px')}

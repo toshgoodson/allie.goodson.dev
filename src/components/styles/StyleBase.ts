@@ -1,10 +1,14 @@
 import {createGlobalStyle} from 'styled-components'
-import { Palette } from "../../models/Palette"
 import { rfs } from '../../models/rfs'
+import Color from 'color'
 
 export const StyleBase = createGlobalStyle`
 	:root {
 		--test: #FF5B4D;
+	}
+	::selection {
+		color: ${({theme}) => theme?.colors[1]};
+		background: ${({theme}) => Color(theme?.colors[2][0]).alpha(0.5).toString()};
 	}
 	body {
 		background: ${({theme}) => theme?.colors[0]};
