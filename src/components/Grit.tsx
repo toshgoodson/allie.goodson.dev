@@ -19,7 +19,7 @@ const Noise = styled.div<{bgSrc: string, bgSize: number}>`
 	position: absolute;
 	right: 0;
 	top: 0; 
-	z-index: 990;
+	z-index: 16777271;
 `
 
 /***
