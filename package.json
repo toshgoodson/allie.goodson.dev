@@ -23,6 +23,7 @@
     "next-compose-plugins": "^2.2.1",
     "next-optimized-images": "^2.6.2",
     "react": "^17.0.2",
+    "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
     "rfs": "^9.0.4",
@@ -31,6 +32,7 @@
   "devDependencies": {
     "@types/js-cookie": "^2.2.7",
     "@types/react": "^17.0.5",
+    "@types/react-bootstrap": "^0.32.26",
     "@types/styled-components": "^5.1.9",
     "next-images": "^1.7.0",
     "sass": "1.32.*",

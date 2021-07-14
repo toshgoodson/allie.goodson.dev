@@ -1,18 +1,20 @@
 import styled from "styled-components"
 import Link from 'next/link'
+import { Navbar as BsNavbar } from 'react-bootstrap'
 import { rfs } from "../models/rfs"
 import { Brand } from "./Brand"
 import { FiMenu } from 'react-icons/fi'
 import strokeImg from '../../assets/images/stroke.png'
+import { Breakpoints } from "../models/Breakpoints"
 
 const NavBrand = styled(Brand)`
 	${rfs.fontSize('34px')}
 	padding: 0;
 `
-const Navbar = styled.div`
+const Navbar = styled(BsNavbar)`
 	${rfs.padding('40px 0 17px')}
 `
-const NavbarToggler = styled.button`
+const NavbarToggler = styled(BsNavbar.Toggle)`
 	color: inherit;
 
 	&:focus {
@@ -43,16 +45,27 @@ const Swoop = styled.span`
 	}
 `
 
+const NavList = styled.ul`
+	${rfs.marginTop('12px')}
+
+	@media (min-width: ${Breakpoints.min.md}px) {
+		margin-top: 0;
+	}
+`
+
 const NavLink = styled.a`
 	color: ${({theme}) => theme.colors[1]} !important;
 	${rfs.fontSize('17px')}
-	${rfs.margin('0 20px')}
-	margin-bottom: -0.5rem !important; // match default bootstrap padding
+	
+	@media (min-width: ${Breakpoints.min.md}px) {
+		${rfs.margin('0 20px')}
+		margin-bottom: -0.5rem !important; // match default bootstrap padding
+	}
 
 	li:last-child & {
 		margin-right: 0;
 
-		@media (min-width: 768px) {
+		@media (min-width: ${Breakpoints.min.md}px) {
 			margin-right: -0.5rem; // match default bootstrap padding
 		}
 	}
@@ -64,14 +77,14 @@ const NavLink = styled.a`
 
 export const PageHeader: React.FunctionComponent = (props) => {
 	return (
-		<Navbar className="navbar navbar-expand-md">
+		<Navbar variant={"none" as any} expand="md">
 			<div className="container">
 				<Link href="/" passHref><NavBrand as="a" className="navbar-brand">Allie Goodson</NavBrand></Link>
-				<NavbarToggler className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<NavbarToggler type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 					<FiMenu/>
 				</NavbarToggler>
-				<div className="collapse navbar-collapse" id="navbarNav">
-					<ul className="navbar-nav ms-auto">
+				<BsNavbar.Collapse id="navbarNav">
+					<NavList className="navbar-nav ms-auto">
 						<li className="nav-item">
 							<Link href="/#work" passHref><NavLink className="nav-link"><Swoop>Work</Swoop></NavLink></Link>
 						</li>
@@ -84,8 +97,8 @@ export const PageHeader: React.FunctionComponent = (props) => {
 						<li className="nav-item">
 							<Link href="/resume-2021-07-12.pdf" passHref><NavLink className="nav-link" target="_blank"><Swoop>Resume</Swoop></NavLink></Link>
 						</li>
-					</ul>
-				</div>
+					</NavList>
+				</BsNavbar.Collapse>
 			</div>
 		</Navbar>
 	)
