@@ -32,11 +32,19 @@ export default function Home(props: Props) {
 			<h1>Hello, I'm <Brand>Allie</Brand>.</h1>
 			<Subheader>I am a designer and artist based in San Francisco.<br/>I have a passion for <Wide>aesthetic<span>s</span></Wide> &amp; actually taking a moment to stop and smell the flowers.</Subheader>
 		
-			<BobaContainer>
-				<BobaElement type="depth" strength={-20}>
-					<img src={meImg2x}/>
-				</BobaElement>
-			</BobaContainer>
+			<div className="row">
+				<div className="col"></div>
+				<div className="col-8">
+					<BobaContainer>
+						<BobaElement type="depth" strength={5}>
+							<h1><a href="#">Marshawarma</a></h1>
+							<h1><a href="#">Plant Project Prolly</a></h1>
+							<h1><a href="#">& A Third Project</a></h1>
+							<h1><a href="#">Various Multimedia</a></h1>
+						</BobaElement>
+					</BobaContainer>
+				</div>
+			</div>
 		</ContentContainer>
 	</RootLayout>
 }
