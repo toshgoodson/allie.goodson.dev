@@ -1,4 +1,4 @@
-export default function (cycleData) {
+export default function cyclicMovement(cycleData) {
   const {
     referencePosition,
     elementPosition,

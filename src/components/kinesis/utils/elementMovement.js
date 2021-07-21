@@ -1,6 +1,6 @@
 import getCoordinates from './getCoordinates';
 
-export default function (action) {
+export default function elementMovement(action) {
   const {
     y, x, target, originX = 50, strength = 10, event = null,
   } = action;

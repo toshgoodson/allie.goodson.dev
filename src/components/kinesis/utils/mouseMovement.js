@@ -1,7 +1,7 @@
 import getCoordinates from './getCoordinates';
 import getCenter from './getCenter';
 
-export default function (action) {
+export default function mouseMovement(action) {
   const { target, event } = action;
   const x = event.clientX;
   const y = event.clientY;

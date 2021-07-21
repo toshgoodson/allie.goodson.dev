@@ -8,7 +8,7 @@ export default function throttle(callback, delay, type) {
     if (type === 'scroll') {
       newDelay = delay;
     } else {
-      newDelay = context.duration > 1000 ? delay : context.duration / 10;
+      newDelay = delay//context.duration > 1000 ? delay : context.duration / 10;
     }
 
     const now = +new Date();

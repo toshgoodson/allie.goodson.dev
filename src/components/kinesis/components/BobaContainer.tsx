@@ -7,17 +7,18 @@ import getCoordinates from "../utils/getCoordinates"
 import orientationElement from "../utils/orientationElement"
 import scrollMovement from "../utils/scrollMovement"
 import { BobaContext } from './BobaContext'
+import { PartialBy } from "../../../interfaces/PartialBy"
 
 export type Props = {
 	active: boolean
 	duration: number
 	easing: string
-	tag:  keyof JSX.IntrinsicElements
+	tag: keyof JSX.IntrinsicElements
 	perspective: number
 	event: 'move' | 'scroll' | 'orientation'
 }
 
-export const BobaContainer: FunctionComponent<Props> = (props) => {
+const BobaContainerComponent: FunctionComponent<Props> = (props) => {
 	const {
 		active,
 		children,
@@ -71,13 +72,13 @@ export const BobaContainer: FunctionComponent<Props> = (props) => {
 		if (event === 'move' && isMoving && !isTouch()) {
 			setMovement(mouseMovement({
 				target: currentShape,
-				evt
+				event: evt
 			}))
 			setEventData(getCoordinates(evt.clientX, evt.clientY))
 		} else if ((event === 'orientation' || (event === 'move' && isTouch())) && isInViewport) {
 			setMovement(orientationElement({
 				target: currentShape,
-				evt
+				event: evt
 			}))
 		} else if (event === 'scroll' && isInViewport && !!currentShape?.height) {
 			setMovement(scrollMovement(currentShape))
@@ -111,7 +112,9 @@ export const BobaContainer: FunctionComponent<Props> = (props) => {
 	</BobaContext.Provider>
 }
 
-BobaContainer.defaultProps = {
+export const BobaContainer: FunctionComponent<PartialBy<Props, keyof typeof defaultProps>> = BobaContainerComponent as any
+
+const defaultProps = {
 	active: true,
 	duration: 1000,
 	easing: 'cubic-bezier(0.23, 1, 0.32, 1)',
@@ -119,3 +122,4 @@ BobaContainer.defaultProps = {
 	perspective: 1000,
 	event: 'move'
 }
+BobaContainer.defaultProps = defaultProps as Props

@@ -5,6 +5,8 @@ import { ContentContainer } from '../components/layout/ContentContainer'
 import { RootLayout, Props as RootProps } from '../components/RootLayout'
 import { rfs } from '../models/rfs'
 import { GetStaticProps } from 'next'
+import { BobaContainer } from '../components/kinesis/components/BobaContainer'
+import { BobaElement } from '../components/kinesis/components/BobaElement'
 
 
 const Subheader = styled.div`
@@ -28,6 +30,12 @@ export default function Home(props: Props) {
 		<ContentContainer>
 			<h1>Hello, I'm <Brand>Allie</Brand>.</h1>
 			<Subheader>I am a designer and artist based in San Francisco.<br/>I have a passion for <Wide>aesthetic<span>s</span></Wide> &amp; actually taking a moment to stop and smell the flowers.</Subheader>
+		
+			<BobaContainer>
+				<BobaElement>
+					Hello
+				</BobaElement>
+			</BobaContainer>
 		</ContentContainer>
 	</RootLayout>
 }
