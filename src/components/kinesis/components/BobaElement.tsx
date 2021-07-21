@@ -105,14 +105,14 @@ export const BobaElementComponent: FunctionComponent<Props> = (props) => {
 	const transformMovement = () => {
 		if (!isMoving && event === 'move') return {}
 		let movementX, movementY
-		const strength = strengthManager()
+		const modifiedStrength = strengthManager()
 
 		if (cycle <= 0) {
 			const { x, y } = elementMovement({
 				...movement,
 				originX,
 				originY,
-				strength
+				modifiedStrength
 			})
 
 			if (event !== 'scroll') {
@@ -124,7 +124,7 @@ export const BobaElementComponent: FunctionComponent<Props> = (props) => {
 					y: movement.y,
 					originX,
 					originY,
-					strength,
+					modifiedStrength,
 					event
 				}).y;
 				movementX = axis === 'x' ? scrollMovement : 0;
@@ -154,8 +154,8 @@ export const BobaElementComponent: FunctionComponent<Props> = (props) => {
 						cycles: cycle,
 					})
 					: 0;
-				movementX = cycleX * strength;
-				movementY = cycleY * strength;
+				movementX = cycleX * modifiedStrength;
+				movementY = cycleY * modifiedStrength;
 			}
 		}
 

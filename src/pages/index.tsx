@@ -7,6 +7,7 @@ import { rfs } from '../models/rfs'
 import { GetStaticProps } from 'next'
 import { BobaContainer } from '../components/kinesis/components/BobaContainer'
 import { BobaElement } from '../components/kinesis/components/BobaElement'
+import meImg2x from '../../assets/images/profile/profile-me@2x.jpg'
 
 
 const Subheader = styled.div`
@@ -32,8 +33,8 @@ export default function Home(props: Props) {
 			<Subheader>I am a designer and artist based in San Francisco.<br/>I have a passion for <Wide>aesthetic<span>s</span></Wide> &amp; actually taking a moment to stop and smell the flowers.</Subheader>
 		
 			<BobaContainer>
-				<BobaElement>
-					Hello
+				<BobaElement type="depth" strength={-20}>
+					<img src={meImg2x}/>
 				</BobaElement>
 			</BobaContainer>
 		</ContentContainer>
