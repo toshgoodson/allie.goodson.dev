@@ -6,7 +6,7 @@ import mouseMovement from "../utils/mouseMovement"
 import getCoordinates from "../utils/getCoordinates"
 import orientationElement from "../utils/orientationElement"
 import scrollMovement from "../utils/scrollMovement"
-import { BobaContext } from './BobaContext'
+import { KinesisContext } from './KinesisContext'
 import { PartialBy } from "../../../interfaces/PartialBy"
 
 export type Props = {
@@ -18,7 +18,7 @@ export type Props = {
 	event: 'move' | 'scroll' | 'orientation'
 }
 
-const BobaContainerComponent: FunctionComponent<Props> = (props) => {
+const KinesisContainerComponent: FunctionComponent<Props> = (props) => {
 	const {
 		active,
 		children,
@@ -99,7 +99,7 @@ const BobaContainerComponent: FunctionComponent<Props> = (props) => {
 
 	const Tag = tag as any
 
-	return <BobaContext.Provider value={{duration, easing, event, eventData, isMoving, movement, shape}}>
+	return <KinesisContext.Provider value={{duration, easing, event, eventData, isMoving, movement, shape}}>
 		<Tag 
 			ref={ref} 
 			style={{ perspective: `${perspective}px` }} 
@@ -109,10 +109,10 @@ const BobaContainerComponent: FunctionComponent<Props> = (props) => {
 		>
 			{children}
 		</Tag>
-	</BobaContext.Provider>
+	</KinesisContext.Provider>
 }
 
-export const BobaContainer: FunctionComponent<PartialBy<Props, keyof typeof defaultProps>> = BobaContainerComponent as any
+export const KinesisContainer: FunctionComponent<PartialBy<Props, keyof typeof defaultProps>> = KinesisContainerComponent as any
 
 const defaultProps = {
 	active: true,
@@ -122,4 +122,4 @@ const defaultProps = {
 	perspective: 1000,
 	event: 'move'
 }
-BobaContainer.defaultProps = defaultProps as Props
+KinesisContainer.defaultProps = defaultProps as Props

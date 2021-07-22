@@ -5,8 +5,8 @@ import { ContentContainer } from '../components/layout/ContentContainer'
 import { RootLayout, Props as RootProps } from '../components/RootLayout'
 import { rfs } from '../models/rfs'
 import { GetStaticProps } from 'next'
-import { BobaContainer } from '../components/kinesis/components/BobaContainer'
-import { BobaElement } from '../components/kinesis/components/BobaElement'
+import { KinesisContainer } from '../components/kinesis/components/KinesisContainer'
+import { KinesisElement } from '../components/kinesis/components/KinesisElement'
 import meImg2x from '../../assets/images/profile/profile-me@2x.jpg'
 
 
@@ -35,14 +35,14 @@ export default function Home(props: Props) {
 			<div className="row">
 				<div className="col"></div>
 				<div className="col-8">
-					<BobaContainer>
-						<BobaElement type="depth" strength={5}>
+					<KinesisContainer>
+						<KinesisElement type="depth" strength={5}>
 							<h1><a href="#">Marshawarma</a></h1>
 							<h1><a href="#">Plant Project Prolly</a></h1>
 							<h1><a href="#">& A Third Project</a></h1>
 							<h1><a href="#">Various Multimedia</a></h1>
-						</BobaElement>
-					</BobaContainer>
+						</KinesisElement>
+					</KinesisContainer>
 				</div>
 			</div>
 		</ContentContainer>

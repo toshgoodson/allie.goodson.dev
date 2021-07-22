@@ -17,7 +17,7 @@ type Props = {
 	shape: DOMRect | null
 }
 
-export const BobaContext = React.createContext<Props>({
+export const KinesisContext = React.createContext<Props>({
 	duration: 1000,
 	easing: 'cubic-bezier(0.23, 1, 0.32, 1)',
 	event: 'move',

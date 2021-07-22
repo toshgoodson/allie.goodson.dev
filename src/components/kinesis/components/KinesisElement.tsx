@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react"
 import { useContext } from "react"
 import { PartialBy } from "../../../interfaces/PartialBy"
-import { BobaContext } from "./BobaContext"
+import { KinesisContext } from "./KinesisContext"
 import elementMovement from '../utils/elementMovement'
 import clamp from '../utils/clamp'
 import cyclicMovement from '../utils/cyclicMovement'
@@ -22,7 +22,7 @@ export type Props = {
 	cycle: number
 }
 
-export const BobaElementComponent: FunctionComponent<Props> = (props) => {
+export const KinesisElementComponent: FunctionComponent<Props> = (props) => {
 	const {
 		axis,
 		children,
@@ -44,7 +44,7 @@ export const BobaElementComponent: FunctionComponent<Props> = (props) => {
 		eventData,
 		isMoving,
 		movement,
-		shape } = useContext(BobaContext)
+		shape } = useContext(KinesisContext)
 
 
 	const strengthManager = () => {
@@ -177,7 +177,7 @@ export const BobaElementComponent: FunctionComponent<Props> = (props) => {
 	</Tag>
 }
 
-export const BobaElement: FunctionComponent<PartialBy<Props, keyof typeof defaultProps>> = BobaElementComponent as any
+export const KinesisElement: FunctionComponent<PartialBy<Props, keyof typeof defaultProps>> = KinesisElementComponent as any
 
 
 const defaultProps = {
@@ -195,4 +195,4 @@ const defaultProps = {
 	minY: null,
 	cycle: 0
 }
-BobaElement.defaultProps = defaultProps as Props
+KinesisElement.defaultProps = defaultProps as Props
