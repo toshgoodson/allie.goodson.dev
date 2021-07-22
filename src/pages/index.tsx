@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import { Brand } from '../components/Brand'
 import { ContentContainer } from '../components/layout/ContentContainer'
@@ -7,7 +7,12 @@ import { rfs } from '../models/rfs'
 import { GetStaticProps } from 'next'
 import { KinesisContainer } from '../components/kinesis/components/KinesisContainer'
 import { KinesisElement } from '../components/kinesis/components/KinesisElement'
-import meImg2x from '../../assets/images/profile/profile-me@2x.jpg'
+import { Spacer } from '../components/layout/Spacer'
+import { isDarkMode } from '../models/isDarkMode'
+import { PageHeader } from '../components/PageHeader'
+import { PageContent } from '../components/PageContent'
+import { PageFooter } from '../components/PageFooter'
+import Link from 'next/link'
 
 
 const Subheader = styled.div`
@@ -23,35 +28,112 @@ const Wide = styled.span`
 	vertical-align: middle;
 	span { letter-spacing: normal; }
 `
+const CheckOut = styled.a`
+	color: inherit !important;
+	display: block;
+	float: right;
+	${rfs.margin('40px 0')}
+	${rfs.padding('0 0 20px')}
+	position: relative;
+
+	width: 100px;
+
+	& > *:hover {
+		transform: none !important;
+	}
+`
+const ArrowContainer = styled.div`
+	height: 100%;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 0;
+
+	& > div {
+		height: 100%;
+	}
+`
+const Arrow = styled.div`
+	border-right: 2px solid currentColor;
+	height: 100%;
+
+	&:after {
+		content: '';
+		border: 10px solid currentColor;
+		border-radius: 5px;
+		border-bottom: 0;
+		border-left-color: transparent;
+		border-right-color: transparent;
+		bottom: -2px;
+		height: 10px;
+		position: absolute;
+		right: -10.5px;
+		width: 20px;
+	}
+`
+
+const FullHeight = styled.div`
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+`
 
 type Props = RootProps
 
 export default function Home(props: Props) {
-	return <RootLayout {...props}>
-		<ContentContainer>
-			<h1>Hello, I'm <Brand>Allie</Brand>.</h1>
-			<Subheader>I am a designer and artist based in San Francisco.<br/>I have a passion for <Wide>aesthetic<span>s</span></Wide> &amp; actually taking a moment to stop and smell the flowers.</Subheader>
-		
-			<div className="row">
-				<div className="col"></div>
-				<div className="col-8">
-					<KinesisContainer>
-						<KinesisElement type="depth" strength={5}>
-							<h1><a href="#">Marshawarma</a></h1>
-							<h1><a href="#">Plant Project Prolly</a></h1>
-							<h1><a href="#">& A Third Project</a></h1>
-							<h1><a href="#">Various Multimedia</a></h1>
-						</KinesisElement>
-					</KinesisContainer>
-				</div>
-			</div>
-		</ContentContainer>
+	const [darkMode, setDarkMode] = useState(isDarkMode())
+
+	return <RootLayout {...props} onChangeMode={(darkMode) => setDarkMode(darkMode)}>
+		<KinesisContainer>
+			<FullHeight>
+				<PageHeader/>
+				<PageContent>
+					<ContentContainer>
+						<h1>Hello, I'm <Brand>Allie</Brand>.</h1>
+						<Subheader>I am a designer and artist based in San Francisco.<br/>I have a passion for <Wide>aesthetic<span>s</span></Wide> &amp; actually taking a moment to stop and smell the flowers.</Subheader>
+					</ContentContainer>
+				</PageContent>
+				<ContentContainer>
+					<Link href="/#work" passHref>
+						<CheckOut>
+							Check out some of my work.
+							<ArrowContainer>
+								<KinesisElement type="translate" strength={5} axis="y" cycle={2}>
+									<Arrow/>
+								</KinesisElement>
+							</ArrowContainer>
+						</CheckOut>
+					</Link>
+				</ContentContainer>
+			</FullHeight>
+		</KinesisContainer>
+		<FullHeight id="work">
+			<PageContent>
+				<ContentContainer>
+					<div className="row">
+						<div className="col"></div>
+						<div className="col-8">
+							<KinesisContainer>
+								<KinesisElement type="depth" strength={5}>
+									<h1><a href="#">Marshawarma</a></h1>
+									<h1><a href="#">Plant Project Prolly</a></h1>
+									<h1><a href="#">& A Third Project</a></h1>
+									<h1><a href="#">Various Multimedia</a></h1>
+								</KinesisElement>
+							</KinesisContainer>
+						</div>
+					</div>
+				</ContentContainer>
+			</PageContent>
+			<PageFooter darkMode={darkMode}/>
+		</FullHeight>
 	</RootLayout>
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
 	return {
 		props: {
+			plain: true,
 			meta: {
 				title: 'home | allie goodson',
 				description: "Hello, I'm Allie. I am a designer and artist based in San Francisco. I have a passion for  A E S T H E T I C S  & actually taking a moment to stop and smell the flowers."
