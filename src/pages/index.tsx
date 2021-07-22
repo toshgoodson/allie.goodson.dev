@@ -32,15 +32,10 @@ const CheckOut = styled.a`
 	color: inherit !important;
 	display: block;
 	float: right;
-	${rfs.margin('40px 0')}
-	${rfs.padding('0 0 20px')}
+	${rfs.margin('0 0 40px')}
+	${rfs.padding('0 10px 20px 0')}
 	position: relative;
-
 	width: 100px;
-
-	& > *:hover {
-		transform: none !important;
-	}
 `
 const ArrowContainer = styled.div`
 	height: 100%;
@@ -54,21 +49,21 @@ const ArrowContainer = styled.div`
 	}
 `
 const Arrow = styled.div`
+	border-radius: 2px;
 	border-right: 2px solid currentColor;
 	height: 100%;
 
 	&:after {
 		content: '';
-		border: 10px solid currentColor;
-		border-radius: 5px;
+		border: 8px solid currentColor;
 		border-bottom: 0;
 		border-left-color: transparent;
 		border-right-color: transparent;
 		bottom: -2px;
-		height: 10px;
+		height: 8px;
 		position: absolute;
-		right: -10.5px;
-		width: 20px;
+		right: -9px;
+		width: 16px;
 	}
 `
 
@@ -110,15 +105,16 @@ export default function Home(props: Props) {
 		<FullHeight id="work">
 			<PageContent>
 				<ContentContainer>
-					<div className="row">
-						<div className="col"></div>
-						<div className="col-8">
+					<div className="row justify-content-end">
+						{/* <div className="col"></div> */}
+						<div className="col-auto">
 							<KinesisContainer>
 								<KinesisElement type="depth" strength={5}>
-									<h1><a href="#">Marshawarma</a></h1>
+									<h1>Project info<br/>coming soon</h1>
+									{/* <h1><a href="#">Marshawarma</a></h1>
 									<h1><a href="#">Plant Project Prolly</a></h1>
 									<h1><a href="#">& A Third Project</a></h1>
-									<h1><a href="#">Various Multimedia</a></h1>
+									<h1><a href="#">Various Multimedia</a></h1> */}
 								</KinesisElement>
 							</KinesisContainer>
 						</div>
