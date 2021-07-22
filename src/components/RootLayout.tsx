@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, BaseSyntheticEvent} from 'react'
 import { Fonts } from './styles/Fonts'
 import { Grit } from './Grit'
 import { StyleBase } from './styles/StyleBase'
@@ -10,6 +10,7 @@ import { theme, darkTheme } from '../models/theme'
 import { PageContent } from './PageContent'
 import Cookies from 'js-cookie'
 import { Meta } from '../interfaces/Meta'
+import { isDarkMode } from '../models/isDarkMode'
 
 
 const FullHeight = styled.div`
@@ -20,26 +21,20 @@ const FullHeight = styled.div`
 
 export type Props = {
 	meta: Meta
+	plain?: boolean
+	onChangeMode?: (darkMode: boolean) => void
 }
 
 export const RootLayout: React.FunctionComponent<Props> = (props) => {
-	const isDarkMode = () => {
-		if (typeof window === 'undefined') { return false }
-		if (Cookies.get('darkMode') === '1') { return true }
-		if (Cookies.get('darkMode') === '0') { return false }
-		return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-	}
-
-	let [darkMode, setDarkMode] = useState(false)
+	
+	const [darkMode, setDarkMode] = useState(isDarkMode())
 	useEffect(() => {
-		if (isDarkMode()) {
-			setDarkMode(true)
-		}
-	}, [])
+		Cookies.set('darkMode', darkMode ? '1' : '0')
+	}, [darkMode])
 
-	const handleClickToggleMode = () => {
-		Cookies.set('darkMode', isDarkMode() ? '0' : '1')
-		isDarkMode() ? setDarkMode(true) : setDarkMode(false);
+	const handleClickToggleMode = (e: BaseSyntheticEvent) => {
+		e.preventDefault()
+		setDarkMode(prevState => { props.onChangeMode?.(!prevState); return !prevState})
 	}
 
 	return <ThemeProvider theme={darkMode ? darkTheme : theme}>
@@ -47,12 +42,17 @@ export const RootLayout: React.FunctionComponent<Props> = (props) => {
 		<Fonts/>
 		<StyleBase/>
 		<FullHeight>
-			<PageHeader/>
-			<PageContent>
-				{props.children}
-			</PageContent>
-			<PageFooter darkMode={darkMode} onClickToggleMode={handleClickToggleMode}/>
+			{props.plain || <PageHeader/>}
+			{props.plain ?
+				props.children 
+			:
+				<PageContent>
+					{props.children}
+				</PageContent>
+			}
+			{props.plain || <PageFooter darkMode={darkMode}/>}
 		</FullHeight>
+		<form id="i-mode-form" onSubmit={handleClickToggleMode}/> {/* Hack to place toggle button anywhere! */}
 		<Grit/>
 	</ThemeProvider>
 }

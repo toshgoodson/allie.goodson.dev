@@ -6,6 +6,7 @@ import { IoLogoLinkedin } from 'react-icons/io'
 import { RiCopyrightLine } from 'react-icons/ri'
 import styled from "styled-components"
 import { rfs } from "../models/rfs"
+import { LinkButton } from "./Buttons"
 
 const Padding = styled.div`
 	${rfs.fontSize('30px')}
@@ -24,7 +25,6 @@ const StyledCopyright = styled(RiCopyrightLine)`
 
 type Props = {
 	darkMode: boolean
-	onClickToggleMode: () => void
 }
 
 export const PageFooter: React.FunctionComponent<Props> = (props) => {
@@ -33,7 +33,7 @@ export const PageFooter: React.FunctionComponent<Props> = (props) => {
 			<div className="container">
 				<div className="row justify-content-end align-items-center">
 					<div className="col-auto">
-						<a href="#" onClick={(e: any) => {e.preventDefault(); props.onClickToggleMode()}}>{props.darkMode ? <FiSunrise title="Toggle light mode"/> : <FiSunset title="Toggle dark mode"/>}</a>
+						<LinkButton type="submit" form="i-mode-form">{props.darkMode ? <FiSunrise title="Toggle light mode"/> : <FiSunset title="Toggle dark mode"/>}</LinkButton>
 					</div>
 					<div className="col-auto">
 						<a href="https://www.linkedin.com/in/allie-goodson-611802b2/" target="_blank" rel="noopener noreferrer"><StyledLinkedin title="Visit my LinkedIn"/></a>
