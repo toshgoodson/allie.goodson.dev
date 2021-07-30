@@ -13,7 +13,9 @@ import { PageHeader } from '../components/PageHeader'
 import { PageContent } from '../components/PageContent'
 import { PageFooter } from '../components/PageFooter'
 import Link from 'next/link'
-
+import { ProjectPicker } from '../components/ProjectPicker'
+import marshawarmaImg from '../../assets/images/marshawarma-preview.png'
+import multimediaImg from '../../assets/images/multimedia-preview.jpg'
 
 const Subheader = styled.div`
 	${rfs.fontSize('36px')}
@@ -109,20 +111,40 @@ export default function Home(props: Props) {
 		<FullHeight id="work">
 			<PageContent>
 				<ContentContainer>
-					<div className="row justify-content-end">
-						{/* <div className="col"></div> */}
-						<div className="col-auto">
-							<KinesisContainer>
-								<KinesisElement type="depth" strength={5}>
-									<h1>Project info<br/>coming soon</h1>
-									{/* <h1><a href="#">Marshawarma</a></h1>
-									<h1><a href="#">Plant Project Prolly</a></h1>
-									<h1><a href="#">& A Third Project</a></h1>
-									<h1><a href="#">Various Multimedia</a></h1> */}
-								</KinesisElement>
-							</KinesisContainer>
-						</div>
-					</div>
+					<ProjectPicker projects={[{
+						title: 'Marshawarma',
+						type: 'UX/UI App Design',
+						url: '/marshawarma',
+						image: {
+							src: marshawarmaImg,
+							alt: 'Marshawarma'
+						}
+					}, {
+						title: 'Ponydud Skateboards',
+						type: 'UX/UI Web Design',
+						url: '/ponydud',
+						image: {
+							src: '',
+							alt: 'Ponydud Skateboards'
+						}
+					}, {
+						title: '& A Third Project',
+						type: 'UX/UI Design',
+						url: '',
+						image: {
+							src: '',
+							alt: ''
+						}
+					}, {
+						title: 'Various Multimedia',
+						type: 'Personal Projects',
+						url: '/multimedia',
+						image: {
+							src: multimediaImg,
+							alt: 'Various Multimedia'
+						}
+					}
+					]}/>
 				</ContentContainer>
 			</PageContent>
 			<PageFooter darkMode={darkMode}/>

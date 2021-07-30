@@ -5,7 +5,8 @@ export const theme: Theme = {
 		'#FDFDFD',
 		'#313539',
 		['#FF5B4D', '#FF5B4D', '#FF5B4D', '#313539'],
-		'#FFD7D3'
+		'#FFD7D3',
+		['#E0877F', '#313539', '#313539', '#313539']
 	]
 }
 
@@ -14,6 +15,7 @@ export const darkTheme: Theme = {
 		'#272821',
 		'#FDFDFD',
 		['#F92672', '#F92672', '#F92672', '#FDFDFD'],
-		'#3E3D32'
+		'#3E3D32',
+		['#DB1273', '#FDFDFD', '#FDFDFD', '#FDFDFD']
 	]
 }
