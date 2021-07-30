@@ -46,7 +46,10 @@ const Big = styled.span`
 	font-family: 'Judson', serif;
 	font-weight: bold;
 	${rfs.fontSize('42px')}
-
+	white-space: pre;
+`
+const IB = styled.span`
+	display: inline-block;
 `
 
 
@@ -72,7 +75,7 @@ export const ProjectPicker: FunctionComponent<Props> = ({projects}) => {
 					<ProjectList>
 						{projects.map(({title, url, type, image}, idx) => 
 							<ListItem key={idx}>
-								<Link href={url} passHref><A onMouseEnter={() => setActiveImage(image)} onFocus={() => setActiveImage(image)}>{idx + 1}<Big>&nbsp;&nbsp;&nbsp;{title}&nbsp;&nbsp;&nbsp;</Big>{type}</A></Link>
+								<Link href={url} passHref><A onMouseEnter={() => setActiveImage(image)} onFocus={() => setActiveImage(image)}>{idx + 1}<wbr/><Big>   {title}   </Big><wbr/><br className="d-md-none"/><IB>{type}</IB></A></Link>
 							</ListItem>
 						)}
 					</ProjectList>
