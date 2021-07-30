@@ -26,8 +26,12 @@ export type Props = {
 }
 
 export const RootLayout: React.FunctionComponent<Props> = (props) => {
-	
-	const [darkMode, setDarkMode] = useState(isDarkMode())
+	// https://github.com/vercel/next.js/discussions/15003
+	const [darkMode, setDarkMode] = useState(false)
+	useEffect(() => {
+		setDarkMode(isDarkMode())
+	}, [])
+
 	useEffect(() => {
 		Cookies.set('darkMode', darkMode ? '1' : '0')
 	}, [darkMode])

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import { Brand } from '../components/Brand'
 import { ContentContainer } from '../components/layout/ContentContainer'
@@ -76,7 +76,11 @@ const FullHeight = styled.div`
 type Props = RootProps
 
 export default function Home(props: Props) {
-	const [darkMode, setDarkMode] = useState(isDarkMode())
+	// https://github.com/vercel/next.js/discussions/15003
+	const [darkMode, setDarkMode] = useState(false)
+	useEffect(() => {
+		setDarkMode(isDarkMode())
+	}, [])
 
 	return <RootLayout {...props} onChangeMode={(darkMode) => setDarkMode(darkMode)}>
 		<KinesisContainer>
