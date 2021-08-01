@@ -22,9 +22,25 @@ import styleGuide from '../../assets/images/marshawarma/style-guide.webp'
 import styleGuideFallback from '../../assets/images/marshawarma/style-guide.jpg'
 import mocks from '../../assets/images/marshawarma/mocks.png'
 import { isDarkMode } from '../models/isDarkMode'
+import { Breakpoints } from '../models/Breakpoints'
+import { ImageCarousel } from '../components/ImageCarousel'
+import paperMockOne from '../../assets/images/marshawarma/paper-mock-1.jpg'
+import paperMockOne2x from '../../assets/images/marshawarma/paper-mock-1@2x.jpg'
+import paperMockTwo from '../../assets/images/marshawarma/paper-mock-2.jpg'
+import paperMockTwo2x from '../../assets/images/marshawarma/paper-mock-2@2x.jpg'
+import paperMockThree from '../../assets/images/marshawarma/paper-mock-3.jpg'
+import paperMockThree2x from '../../assets/images/marshawarma/paper-mock-3@2x.jpg'
 
 const H1 = styled.h1`
 	${rfs.fontSize('40px')};
+`
+const MockFrame = styled.iframe`
+	height: 800px;
+	width: 100%;
+
+	@media (min-width: ${Breakpoints.min.sm}px) {
+		height: 900px;
+	}
 `
 
 type Props = RootProps
@@ -154,7 +170,21 @@ export default function Home(props: Props) {
 			<Spacer size={12} />
 			<p>After reviewing the interviews and the resulting personas I established a list of features and functionalities that included mobile ordering, a map with date picking capabilities, and a stamp reward system. My research indicated that creating an enticing environment while keeping functionality clear and easy to use is very important.</p>
 			<Spacer size={36} />
-			<div>Carousel</div>
+			<div>
+				<ImageCarousel images={[{
+					src: paperMockOne,
+					src2x: paperMockOne2x,
+					alt: 'Wireframing done by hand on paper #1'
+				}, {
+					src: paperMockTwo,
+					src2x: paperMockTwo2x,
+					alt: 'Wireframing done by hand on paper #2'
+				}, {
+					src: paperMockThree,
+					src2x: paperMockThree2x,
+					alt: 'Wireframing done by hand on paper #3'
+				}]}/>
+			</div>
 			<Spacer size={36} />
 			<p>I then moved to Figma to develop a few screens as digital low fidelity prototypes.</p>
 			<Spacer size={12} />
@@ -175,9 +205,9 @@ export default function Home(props: Props) {
 			<Spacer size={48} />
 			<p>After completing my HiFi wireframes my prototype is ready to go!</p>
 			{darkMode ? 
-				<iframe key="darkmock" width="100%" height="900" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FTL8a6uYYfCs0zvcXKn1Vft%2FMarshawarma%3Fnode-id%3D352%253A888%26scaling%3Dscale-down%26page-id%3D352%253A144%26starting-point-node-id%3D352%253A855" allowFullScreen/>
+				<MockFrame key="darkmock" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FTL8a6uYYfCs0zvcXKn1Vft%2FMarshawarma%3Fnode-id%3D352%253A888%26scaling%3Dscale-down%26page-id%3D352%253A144%26starting-point-node-id%3D352%253A855" allowFullScreen/>
 			:
-				<iframe key="lightmock" width="100%" height="900" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FTL8a6uYYfCs0zvcXKn1Vft%2FMarshawarma%3Fnode-id%3D224%253A1650%26scaling%3Dscale-down%26page-id%3D224%253A126%26starting-point-node-id%3D224%253A1650" allowFullScreen/>
+				<MockFrame key="lightmock" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FTL8a6uYYfCs0zvcXKn1Vft%2FMarshawarma%3Fnode-id%3D224%253A1650%26scaling%3Dscale-down%26page-id%3D224%253A126%26starting-point-node-id%3D224%253A1650" allowFullScreen/>
 			}
 			<hr />
 			<Spacer size={36} />
