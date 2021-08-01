@@ -113,7 +113,7 @@ export default function Home(props: Props) {
 		</KinesisContainer>
 		<FullHeight id="work">
 			<PageContent>
-				<ContentContainer>
+				<div className="container">
 					<ProjectPicker darkMode={darkMode} projects={[{
 						title: 'Marshawarma',
 						type: 'UX/UI App Design',
@@ -137,19 +137,19 @@ export default function Home(props: Props) {
 							}
 						}
 					}, {
-						title: 'Ponydud Skateboards',
+						title: 'Boring Gov Website',
 						type: 'UX/UI Web Design',
-						url: '/ponydud',
+						url: '/gov',
 						image: {
 							sources: [],
 							fallback: {
 								src: '',
-								alt: 'Ponydud Skateboards'
+								alt: 'Boring Gov Website'
 							}
 						}
 					}, {
-						title: '& A Third Project',
-						type: 'UX/UI Design',
+						title: 'Project in the Works',
+						type: 'Check back in a bit :)',
 						url: '',
 						image: {
 							sources: [],
@@ -171,7 +171,7 @@ export default function Home(props: Props) {
 						}
 					}
 					]}/>
-				</ContentContainer>
+				</div>
 			</PageContent>
 			<PageFooter darkMode={darkMode}/>
 		</FullHeight>

@@ -3,12 +3,18 @@ import React, { FunctionComponent } from "react"
 import { useState } from "react"
 import styled from "styled-components"
 import { Image } from '../interfaces/Image'
+import { Breakpoints } from "../models/Breakpoints"
 import { rfs } from "../models/rfs"
 import { KinesisContainer } from './kinesis/components/KinesisContainer'
 import { KinesisElement } from './kinesis/components/KinesisElement'
 import { Picture, Props as PictureProps } from './Picture'
 
 
+const LeftAlign = styled.div`
+	@media (min-width: ${Breakpoints.min.lg}px) {
+		padding-left: calc((100% - 960px) / 2); /* Align with the left side of content */
+	}
+`
 const A = styled.a`
 	color: ${({theme}) => theme.colors[4][0]};
 	display: inline-block;
@@ -53,6 +59,22 @@ const Big = styled.span`
 const IB = styled.span`
 	display: inline-block;
 `
+const PictureContainer = styled.div`
+	height: 480px;
+	text-align: center;
+	width: 480px;
+`
+const StyledPicture = styled(Picture)`
+	display: block;
+	height: 100%;
+	width: 100%;
+
+	img {
+		max-height: 100%;
+		max-width: 100%;
+		width: auto;
+	}
+`
 
 interface Project {
 	url: string
@@ -72,23 +94,27 @@ export const ProjectPicker: FunctionComponent<Props> = ({darkMode, projects}) =>
 
 	const activeImage = darkMode ? (activeProject?.darkModeImage ?? activeProject?.image) : activeProject?.image
 
-	return <div className="row justify-content-center align-items-center">
-		<div className="col d-none d-lg-block">
-			{activeImage && <Picture {...activeImage}/>}
+	return <LeftAlign>
+		<div className="row justify-content-lg-start justify-content-center align-items-center">
+			<div className="col-auto d-none d-lg-block">
+				<PictureContainer>
+					{activeImage && <StyledPicture {...activeImage}/>}
+				</PictureContainer>
+			</div>
+			<div className="col-auto col-lg" onMouseLeave={() => setActiveProject(null)}>
+				<KinesisContainer>
+					<KinesisElement type="depth" strength={5}>
+						<ProjectList>
+							{projects.map((project, idx) => {
+								const {title, url, type} = project
+								return <ListItem key={idx}>
+									<Link href={url} passHref><A onMouseEnter={() => setActiveProject(project)} onFocus={() => setActiveProject(project)}>{idx + 1}<wbr/><Big>   {title}   </Big><wbr/><br className="d-sm-inline d-md-none d-lg-inline d-xxl-none"/><IB>{type}</IB></A></Link>
+								</ListItem>
+							})}
+						</ProjectList>
+					</KinesisElement>
+				</KinesisContainer>
+			</div>
 		</div>
-		<div className="col-auto" onMouseLeave={() => setActiveProject(null)}>
-			<KinesisContainer>
-				<KinesisElement type="depth" strength={5}>
-					<ProjectList>
-						{projects.map((project, idx) => {
-							const {title, url, type, image} = project
-							return <ListItem key={idx}>
-								<Link href={url} passHref><A onMouseEnter={() => setActiveProject(project)} onFocus={() => setActiveProject(project)}>{idx + 1}<wbr/><Big>   {title}   </Big><wbr/><br className="d-md-none"/><IB>{type}</IB></A></Link>
-							</ListItem>
-						})}
-					</ProjectList>
-				</KinesisElement>
-			</KinesisContainer>
-		</div>
-	</div>
+	</LeftAlign>
 }

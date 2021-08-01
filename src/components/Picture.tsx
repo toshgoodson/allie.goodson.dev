@@ -4,12 +4,13 @@ type SourceProps = React.DetailedHTMLProps<React.SourceHTMLAttributes<HTMLSource
 type ImgProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
 
 export type Props = {
+	className?: string
 	sources: Array<SourceProps>
 	fallback: ImgProps
 }
 
 export const Picture: FunctionComponent<Props> = (props) => {
-	return <picture>
+	return <picture className={props.className}>
 		{props.sources.map((source, idx) => 
 			<source key={idx} {...source}/>
 		)}
