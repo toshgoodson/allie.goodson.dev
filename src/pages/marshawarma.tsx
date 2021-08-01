@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { RootLayout, Props as RootProps } from '../components/RootLayout'
 import { Marshawarma } from '../components/marshawarma/Marshawarma'
 import styled from 'styled-components'
@@ -21,6 +21,7 @@ import trucksterLogo from '../../assets/images/marshawarma/truckster-logo.png'
 import styleGuide from '../../assets/images/marshawarma/style-guide.webp'
 import styleGuideFallback from '../../assets/images/marshawarma/style-guide.jpg'
 import mocks from '../../assets/images/marshawarma/mocks.png'
+import { isDarkMode } from '../models/isDarkMode'
 
 const H1 = styled.h1`
 	${rfs.fontSize('40px')};
@@ -29,7 +30,13 @@ const H1 = styled.h1`
 type Props = RootProps
 
 export default function Home(props: Props) {
-	return <RootLayout {...props}>
+	// https://github.com/vercel/next.js/discussions/15003
+	const [darkMode, setDarkMode] = useState(false)
+	useEffect(() => {
+		setDarkMode(isDarkMode())
+	}, [])
+	
+	return <RootLayout {...props} onChangeMode={(darkMode) => setDarkMode(darkMode)}>
 		<ContentContainer>
 			<div className="text-center">
 				<H1><Marshawarma /></H1>
@@ -167,19 +174,16 @@ export default function Home(props: Props) {
 			</div>
 			<Spacer size={48} />
 			<p>After completing my HiFi wireframes my prototype is ready to go!</p>
-			<div className="row justify-content-center">
-				<div className="col-9 col-md-7 col-lg-5">
-					<Picture sources={[{
-						srcSet: loginScreen
-					}]} fallback={{
-						src: loginScreenFallback,
-						alt: 'Marshawarma login screen'
-					}} />
-				</div>
-			</div>
+			{darkMode ? 
+				<iframe key="darkmock" width="100%" height="900" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FTL8a6uYYfCs0zvcXKn1Vft%2FMarshawarma%3Fnode-id%3D352%253A888%26scaling%3Dscale-down%26page-id%3D352%253A144%26starting-point-node-id%3D352%253A855" allowFullScreen/>
+			:
+				<iframe key="lightmock" width="100%" height="900" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FTL8a6uYYfCs0zvcXKn1Vft%2FMarshawarma%3Fnode-id%3D224%253A1650%26scaling%3Dscale-down%26page-id%3D224%253A126%26starting-point-node-id%3D224%253A1650" allowFullScreen/>
+			}
+			<hr />
 			<Spacer size={36} />
 			<h2>Reflection</h2>
 			<p>The process of completing my first project has given me practice with design thinking and invaluable experience with user interviews and prototyping. After getting feedback from peers and iterating on my final designs a few times I am satisfied with the end product. What I would do differently next time is choose a topic and research how viable the idea is before moving forward with the project. I enjoyed making a funky app for an imaginary food truck, but there really isn’t a need to have one whole app for a singular food truck.</p>
+			<Spacer size={36}/>
 		</ContentContainer>
 	</RootLayout>
 }

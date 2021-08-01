@@ -40,7 +40,7 @@ export const AnalysisColumn: FunctionComponent<Props> = ({title, logo, strengths
 				<Logo src={logo}/>
 			</div>
 		</Ordered>
-		<Ordered colIdx={index} itemIdx={1} className="col-6 col-sm-6 col-lg-3 align-self-center">
+		<Ordered colIdx={index} itemIdx={1} className="col-6 col-sm-6 col-lg-3 align-self-end">
 			<Spacer size={12} />
 			<div className="text-center">
 				<h4>{title}</h4>
