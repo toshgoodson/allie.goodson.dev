@@ -6,7 +6,7 @@ import { Image } from '../interfaces/Image'
 import { rfs } from "../models/rfs"
 import { KinesisContainer } from './kinesis/components/KinesisContainer'
 import { KinesisElement } from './kinesis/components/KinesisElement'
-
+import { Picture, Props as PictureProps } from './Picture'
 
 
 const A = styled.a`
@@ -54,32 +54,38 @@ const IB = styled.span`
 	display: inline-block;
 `
 
-
-export type Props = {
-	projects: Array<{
-		url: string
-		image: Image
-		title: string
-		type: string
-	}>
+interface Project {
+	url: string
+	image: PictureProps
+	darkModeImage?: PictureProps
+	title: string
+	type: string
 }
 
-export const ProjectPicker: FunctionComponent<Props> = ({projects}) => {
-	const [activeImage, setActiveImage] = useState<Image | null>(null)
+export type Props = {
+	darkMode: boolean
+	projects: Project[]
+}
+
+export const ProjectPicker: FunctionComponent<Props> = ({darkMode, projects}) => {
+	const [activeProject, setActiveProject] = useState<Project | null>(null)
+
+	const activeImage = darkMode ? (activeProject?.darkModeImage ?? activeProject?.image) : activeProject?.image
 
 	return <div className="row justify-content-center align-items-center">
 		<div className="col d-none d-lg-block">
-			{activeImage && <img src={activeImage.src} alt={activeImage.alt}/>}
+			{activeImage && <Picture {...activeImage}/>}
 		</div>
-		<div className="col-auto" onMouseLeave={() => setActiveImage(null)}>
+		<div className="col-auto" onMouseLeave={() => setActiveProject(null)}>
 			<KinesisContainer>
 				<KinesisElement type="depth" strength={5}>
 					<ProjectList>
-						{projects.map(({title, url, type, image}, idx) => 
-							<ListItem key={idx}>
-								<Link href={url} passHref><A onMouseEnter={() => setActiveImage(image)} onFocus={() => setActiveImage(image)}>{idx + 1}<wbr/><Big>   {title}   </Big><wbr/><br className="d-md-none"/><IB>{type}</IB></A></Link>
+						{projects.map((project, idx) => {
+							const {title, url, type, image} = project
+							return <ListItem key={idx}>
+								<Link href={url} passHref><A onMouseEnter={() => setActiveProject(project)} onFocus={() => setActiveProject(project)}>{idx + 1}<wbr/><Big>   {title}   </Big><wbr/><br className="d-md-none"/><IB>{type}</IB></A></Link>
 							</ListItem>
-						)}
+						})}
 					</ProjectList>
 				</KinesisElement>
 			</KinesisContainer>

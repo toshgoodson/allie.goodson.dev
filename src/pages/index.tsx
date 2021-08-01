@@ -14,8 +14,11 @@ import { PageContent } from '../components/PageContent'
 import { PageFooter } from '../components/PageFooter'
 import Link from 'next/link'
 import { ProjectPicker } from '../components/ProjectPicker'
-import marshawarmaImg from '../../assets/images/marshawarma-preview.png'
-import multimediaImg from '../../assets/images/multimedia-preview.jpg'
+import marshawarmaImg from '../../assets/images/home/marshawarma-preview.webp'
+import marshawarmaDarkImg from '../../assets/images/home/marshawarma-preview-dark.webp'
+import marshawarmaFallback from '../../assets/images/home/marshawarma-preview.png'
+import marshawarmaDarkFallback from '../../assets/images/home/marshawarma-preview-dark.png'
+import multimediaImg from '../../assets/images/home/multimedia-preview.jpg'
 
 const Subheader = styled.div`
 	${rfs.fontSize('36px')}
@@ -111,37 +114,60 @@ export default function Home(props: Props) {
 		<FullHeight id="work">
 			<PageContent>
 				<ContentContainer>
-					<ProjectPicker projects={[{
+					<ProjectPicker darkMode={darkMode} projects={[{
 						title: 'Marshawarma',
 						type: 'UX/UI App Design',
 						url: '/marshawarma',
 						image: {
-							src: marshawarmaImg,
-							alt: 'Marshawarma'
+							sources: [{
+								srcSet: marshawarmaImg
+							}],
+							fallback: {
+								src: marshawarmaFallback,
+								alt: 'Marshawarma'
+							}
+						},
+						darkModeImage: {
+							sources: [{
+								srcSet: marshawarmaDarkImg
+							}],
+							fallback: {
+								src: marshawarmaDarkFallback,
+								alt: 'Marshawarma'
+							}
 						}
 					}, {
 						title: 'Ponydud Skateboards',
 						type: 'UX/UI Web Design',
 						url: '/ponydud',
 						image: {
-							src: '',
-							alt: 'Ponydud Skateboards'
+							sources: [],
+							fallback: {
+								src: '',
+								alt: 'Ponydud Skateboards'
+							}
 						}
 					}, {
 						title: '& A Third Project',
 						type: 'UX/UI Design',
 						url: '',
 						image: {
-							src: '',
-							alt: ''
+							sources: [],
+							fallback: {
+								src: '',
+								alt: ''
+							}
 						}
 					}, {
 						title: 'Various Multimedia',
 						type: 'Personal Projects',
 						url: '/multimedia',
 						image: {
-							src: multimediaImg,
-							alt: 'Various Multimedia'
+							sources: [],
+							fallback: {
+								src: multimediaImg,
+								alt: 'Various Multimedia'
+							}
 						}
 					}
 					]}/>

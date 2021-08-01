@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react'
 type SourceProps = React.DetailedHTMLProps<React.SourceHTMLAttributes<HTMLSourceElement>, HTMLSourceElement>
 type ImgProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
 
-type Props = {
+export type Props = {
 	sources: Array<SourceProps>
 	fallback: ImgProps
 }
