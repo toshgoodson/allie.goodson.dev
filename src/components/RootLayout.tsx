@@ -28,12 +28,13 @@ export type Props = {
 
 export const RootLayout: React.FunctionComponent<Props> = (props) => {
 	// https://github.com/vercel/next.js/discussions/15003
-	const [darkMode, setDarkMode] = useState(false)
+	const [darkMode, setDarkMode] = useState<boolean>()
 	useEffect(() => {
 		setDarkMode(isDarkMode())
 	}, [])
 
 	useEffect(() => {
+		if (darkMode == null) return
 		Cookies.set('darkMode', darkMode ? '1' : '0')
 	}, [darkMode])
 
@@ -43,7 +44,7 @@ export const RootLayout: React.FunctionComponent<Props> = (props) => {
 	}
 
 	return <ThemeProvider theme={darkMode ? darkTheme : theme}>
-		<RootHead darkMode={darkMode} meta={props.meta}/>
+		<RootHead darkMode={darkMode ?? false} meta={props.meta}/>
 		<Fonts/>
 		<StyleBase/>
 		<FullHeight>
@@ -55,7 +56,7 @@ export const RootLayout: React.FunctionComponent<Props> = (props) => {
 					{props.children}
 				</PageContent>
 			}
-			{props.plain || <PageFooter darkMode={darkMode}/>}
+			{props.plain || <PageFooter darkMode={darkMode ?? false}/>}
 		</FullHeight>
 		<form id="i-mode-form" onSubmit={handleClickToggleMode}/> {/* Hack to place toggle button anywhere! */}
 		<Grit/>
