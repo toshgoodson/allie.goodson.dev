@@ -11,6 +11,7 @@ import { PageContent } from './PageContent'
 import Cookies from 'js-cookie'
 import { Meta } from '../interfaces/Meta'
 import { isDarkMode } from '../models/isDarkMode'
+import { GlobalTypography } from './styles/Typography'
 
 
 const FullHeight = styled.div`

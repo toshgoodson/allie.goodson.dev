@@ -16,6 +16,7 @@ const A = styled.a`
 	${rfs.fontSize('16px')}
 	font-weight: 300;
 	transition: color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+	text-transform: uppercase;
 
 	&:hover {
 		color: ${({theme}) => theme.colors[4][1]};
@@ -46,6 +47,7 @@ const Big = styled.span`
 	font-family: 'Judson', serif;
 	font-weight: bold;
 	${rfs.fontSize('42px')}
+	text-transform: none;
 	white-space: pre;
 `
 const IB = styled.span`
