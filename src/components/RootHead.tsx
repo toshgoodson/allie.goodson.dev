@@ -12,7 +12,7 @@ export type Props = {
 	meta: Meta
 }
 
-export const RootHead: React.FunctionComponent<Props> = ({darkMode, meta}) => {
+export const RootHead: React.FC<Props> = ({darkMode, meta}) => {
 	const themeContext = useContext(ThemeContext)
 
 	return (

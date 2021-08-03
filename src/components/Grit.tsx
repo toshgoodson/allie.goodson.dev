@@ -26,7 +26,7 @@ const Noise = styled.div<{bgSrc: string, bgSize: number}>`
  * Get that page looking * C R I S P Y *
  * Idea copied from https://surma.dev/ 
  */
-export const Grit: React.FunctionComponent = () => {
+export const Grit: React.FC = () => {
 	// some constants
 	const SIZE = 64
 	const PIXEL_BUFFER_SIZE = 4

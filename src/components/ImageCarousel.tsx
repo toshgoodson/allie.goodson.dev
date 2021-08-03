@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect } from "react"
+import React, { FC, useState, useEffect } from "react"
 import styled from "styled-components"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Image } from "../interfaces/Image"
@@ -54,7 +54,7 @@ export type Props = {
 	images: Image[]
 }
 
-export const ImageCarousel: FunctionComponent<Props> = ({ images }) => {
+export const ImageCarousel: FC<Props> = ({ images }) => {
 	const [id, setId] = useState<string>()
 	useEffect(() => {
 		setId(`${Math.random()}`.replace('.', ''))

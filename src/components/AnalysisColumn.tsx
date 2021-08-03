@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React, { FC } from "react"
 import styled from "styled-components"
 import { Breakpoints } from "../models/Breakpoints"
 import { rfs } from "../models/rfs"
@@ -33,7 +33,7 @@ export type Props = {
 	index: number
 }
 
-export const AnalysisColumn: FunctionComponent<Props> = ({title, logo, strengths, weaknesses, index}) => {
+export const AnalysisColumn: FC<Props> = ({title, logo, strengths, weaknesses, index}) => {
 	return <>
 		<Ordered colIdx={index} itemIdx={0} className="col-6 col-sm-6 col-lg-3 align-self-center">
 			<div className="text-center">

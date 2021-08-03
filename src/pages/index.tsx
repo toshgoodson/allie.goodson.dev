@@ -1,24 +1,24 @@
-import React, {useState, useEffect} from 'react'
-import styled from 'styled-components'
-import { Brand } from '../components/Brand'
-import { ContentContainer } from '../components/layout/ContentContainer'
-import { RootLayout, Props as RootProps } from '../components/RootLayout'
-import { rfs } from '../models/rfs'
 import { GetStaticProps } from 'next'
-import { KinesisContainer } from '../components/kinesis/components/KinesisContainer'
-import { KinesisElement } from '../components/kinesis/components/KinesisElement'
-import { Spacer } from '../components/layout/Spacer'
-import { isDarkMode } from '../models/isDarkMode'
-import { PageHeader } from '../components/PageHeader'
-import { PageContent } from '../components/PageContent'
-import { PageFooter } from '../components/PageFooter'
 import Link from 'next/link'
-import { ProjectPicker } from '../components/ProjectPicker'
-import marshawarmaImg from '../../assets/images/home/marshawarma-preview.webp'
+import React from 'react'
+import styled from 'styled-components'
+import marshawarmaDarkFallback from '../../assets/images/home/marshawarma-preview-dark.png'
 import marshawarmaDarkImg from '../../assets/images/home/marshawarma-preview-dark.webp'
 import marshawarmaFallback from '../../assets/images/home/marshawarma-preview.png'
-import marshawarmaDarkFallback from '../../assets/images/home/marshawarma-preview-dark.png'
+import marshawarmaImg from '../../assets/images/home/marshawarma-preview.webp'
 import multimediaImg from '../../assets/images/home/multimedia-preview.jpg'
+import { Brand } from '../components/Brand'
+import { KinesisContainer } from '../components/kinesis/components/KinesisContainer'
+import { KinesisElement } from '../components/kinesis/components/KinesisElement'
+import { ContentContainer } from '../components/layout/ContentContainer'
+import { CoreLayout } from '../components/layout/CoreLayout'
+import { PageContent } from '../components/PageContent'
+import { PageFooter } from '../components/PageFooter'
+import { PageHeader } from '../components/PageHeader'
+import { ProjectPicker } from '../components/ProjectPicker'
+import { PageProps } from '../interfaces/PageProps'
+import { useAppSelector } from '../models/redux/hooks'
+import { rfs } from '../models/rfs'
 
 const Subheader = styled.div`
 	${rfs.fontSize('36px')}
@@ -78,16 +78,12 @@ const FullHeight = styled.div`
 	min-height: 100vh;
 `
 
-type Props = RootProps
+type Props = PageProps
 
 export default function Home(props: Props) {
-	// https://github.com/vercel/next.js/discussions/15003
-	const [darkMode, setDarkMode] = useState(false)
-	useEffect(() => {
-		setDarkMode(isDarkMode())
-	}, [])
+	const { darkMode } = useAppSelector(state => state)
 
-	return <RootLayout {...props} onChangeMode={(darkMode) => setDarkMode(darkMode)}>
+	return <CoreLayout {...props} darkMode={darkMode}>
 		<KinesisContainer>
 			<FullHeight>
 				<PageHeader/>
@@ -175,13 +171,12 @@ export default function Home(props: Props) {
 			</PageContent>
 			<PageFooter darkMode={darkMode}/>
 		</FullHeight>
-	</RootLayout>
+	</CoreLayout>
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
 	return {
 		props: {
-			plain: true,
 			meta: {
 				title: 'home | allie goodson',
 				description: "Hello, I'm Allie. I am a designer and artist based in San Francisco. I have a passion for  A E S T H E T I C S  & actually taking a moment to stop and smell the flowers."

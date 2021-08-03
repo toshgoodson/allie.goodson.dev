@@ -1,11 +1,13 @@
+import { GetStaticProps } from 'next'
 import React from 'react'
 import styled from 'styled-components'
+import strokeImg from '../../assets/images/stroke.png'
 import { Brand } from '../components/Brand'
 import { ContentContainer } from '../components/layout/ContentContainer'
-import { RootLayout, Props as RootProps } from '../components/RootLayout'
+import { MainLayout } from '../components/layout/MainLayout'
+import { PageProps } from '../interfaces/PageProps'
+import { useAppSelector } from '../models/redux/hooks'
 import { rfs } from '../models/rfs'
-import strokeImg from '../../assets/images/stroke.png'
-import { GetStaticProps } from 'next'
 
 const Swoop = styled.span`
 	display: inline-block;
@@ -53,10 +55,12 @@ const Subheader = styled.div`
 	font-weight: bold;
 `
 
-type Props = RootProps
+type Props = PageProps
 
 export default function Contact(props: Props) {
-	return <RootLayout {...props}>
+	const { darkMode } = useAppSelector(state => state)
+
+	return <MainLayout {...props} darkMode={darkMode}>
 		<ContentContainer>
 			<Email as="h1"><a href="mailto:allie@goodson.dev" target="_blank"><Swoop>allie@goodson.dev</Swoop></a></Email>
 		</ContentContainer>
@@ -65,7 +69,7 @@ export default function Contact(props: Props) {
 				<Subheader>Let’s connect! Email me anytime about questions, project collaborations, UX work, or whatever else.</Subheader>
 			</ContentContainer>
 		</ColorSection>
-	</RootLayout>
+	</MainLayout>
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {

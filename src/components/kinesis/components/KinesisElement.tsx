@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React, { FC } from "react"
 import { useContext } from "react"
 import { PartialBy } from "../../../interfaces/PartialBy"
 import { KinesisContext } from "./KinesisContext"
@@ -22,7 +22,7 @@ export type Props = {
 	cycle: number
 }
 
-export const KinesisElementComponent: FunctionComponent<Props> = (props) => {
+export const KinesisElementComponent: FC<Props> = (props) => {
 	const {
 		axis,
 		children,
@@ -177,7 +177,7 @@ export const KinesisElementComponent: FunctionComponent<Props> = (props) => {
 	</Tag>
 }
 
-export const KinesisElement: FunctionComponent<PartialBy<Props, keyof typeof defaultProps>> = KinesisElementComponent as any
+export const KinesisElement: FC<PartialBy<Props, keyof typeof defaultProps>> = KinesisElementComponent as any
 
 
 const defaultProps = {

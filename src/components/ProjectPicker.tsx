@@ -1,5 +1,5 @@
 import Link from "next/link"
-import React, { FunctionComponent } from "react"
+import React, { FC } from "react"
 import { useState } from "react"
 import styled from "styled-components"
 import { Image } from '../interfaces/Image'
@@ -89,7 +89,7 @@ export type Props = {
 	projects: Project[]
 }
 
-export const ProjectPicker: FunctionComponent<Props> = ({darkMode, projects}) => {
+export const ProjectPicker: FC<Props> = ({darkMode, projects}) => {
 	const [activeProject, setActiveProject] = useState<Project | null>(null)
 
 	const activeImage = darkMode ? (activeProject?.darkModeImage ?? activeProject?.image) : activeProject?.image

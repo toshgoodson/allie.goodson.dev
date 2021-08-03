@@ -1,35 +1,36 @@
 import { GetStaticProps } from 'next'
-import React, { useEffect, useState } from 'react'
-import { RootLayout, Props as RootProps } from '../components/RootLayout'
-import { Marshawarma } from '../components/marshawarma/Marshawarma'
+import React from 'react'
 import styled from 'styled-components'
-import { rfs } from '../models/rfs'
-import { ContentContainer } from '../components/layout/ContentContainer'
-import { Spacer } from '../components/layout/Spacer'
-import { Picture } from '../components/Picture'
-import loginScreen from '../../assets/images/marshawarma/screen-login.webp'
-import loginScreenFallback from '../../assets/images/marshawarma/screen-login.png'
-import homeScreen from '../../assets/images/marshawarma/screen-home.webp'
-import homeScreenFallback from '../../assets/images/marshawarma/screen-home.png'
-import mapScreen from '../../assets/images/marshawarma/screen-map.webp'
-import mapScreenFallback from '../../assets/images/marshawarma/screen-map.png'
-import { AnalysisColumn } from '../components/AnalysisColumn'
-import paradiseLogo from '../../assets/images/marshawarma/paradise-logo.png'
-import hustleNDoughLogo from '../../assets/images/marshawarma/hustle-n-dough-logo.png'
 import fkLogo from '../../assets/images/marshawarma/fk-logo.png'
-import trucksterLogo from '../../assets/images/marshawarma/truckster-logo.png'
-import styleGuide from '../../assets/images/marshawarma/style-guide.webp'
-import styleGuideFallback from '../../assets/images/marshawarma/style-guide.jpg'
+import hustleNDoughLogo from '../../assets/images/marshawarma/hustle-n-dough-logo.png'
 import mocks from '../../assets/images/marshawarma/mocks.png'
-import { isDarkMode } from '../models/isDarkMode'
-import { Breakpoints } from '../models/Breakpoints'
-import { ImageCarousel } from '../components/ImageCarousel'
 import paperMockOne from '../../assets/images/marshawarma/paper-mock-1.jpg'
 import paperMockOne2x from '../../assets/images/marshawarma/paper-mock-1@2x.jpg'
 import paperMockTwo from '../../assets/images/marshawarma/paper-mock-2.jpg'
 import paperMockTwo2x from '../../assets/images/marshawarma/paper-mock-2@2x.jpg'
 import paperMockThree from '../../assets/images/marshawarma/paper-mock-3.jpg'
 import paperMockThree2x from '../../assets/images/marshawarma/paper-mock-3@2x.jpg'
+import paradiseLogo from '../../assets/images/marshawarma/paradise-logo.png'
+import homeScreenFallback from '../../assets/images/marshawarma/screen-home.png'
+import homeScreen from '../../assets/images/marshawarma/screen-home.webp'
+import loginScreenFallback from '../../assets/images/marshawarma/screen-login.png'
+import loginScreen from '../../assets/images/marshawarma/screen-login.webp'
+import mapScreenFallback from '../../assets/images/marshawarma/screen-map.png'
+import mapScreen from '../../assets/images/marshawarma/screen-map.webp'
+import styleGuideFallback from '../../assets/images/marshawarma/style-guide.jpg'
+import styleGuide from '../../assets/images/marshawarma/style-guide.webp'
+import trucksterLogo from '../../assets/images/marshawarma/truckster-logo.png'
+import { AnalysisColumn } from '../components/AnalysisColumn'
+import { ImageCarousel } from '../components/ImageCarousel'
+import { ContentContainer } from '../components/layout/ContentContainer'
+import { MainLayout } from '../components/layout/MainLayout'
+import { Spacer } from '../components/layout/Spacer'
+import { MarshawarmaTitle } from '../components/marshawarma/MarshawarmaTitle'
+import { Picture } from '../components/Picture'
+import { PageProps } from '../interfaces/PageProps'
+import { Breakpoints } from '../models/Breakpoints'
+import { useAppSelector } from '../models/redux/hooks'
+import { rfs } from '../models/rfs'
 
 const H1 = styled.h1`
 	${rfs.fontSize('40px')};
@@ -43,19 +44,15 @@ const MockFrame = styled.iframe`
 	}
 `
 
-type Props = RootProps
+type Props = PageProps
 
-export default function Home(props: Props) {
-	// https://github.com/vercel/next.js/discussions/15003
-	const [darkMode, setDarkMode] = useState(false)
-	useEffect(() => {
-		setDarkMode(isDarkMode())
-	}, [])
+export default function Marshawarma(props: Props) {
+	const { darkMode } = useAppSelector(state => state)
 	
-	return <RootLayout {...props} onChangeMode={(darkMode) => setDarkMode(darkMode)}>
+	return <MainLayout {...props} darkMode={darkMode}>
 		<ContentContainer>
 			<div className="text-center">
-				<H1><Marshawarma /></H1>
+				<H1><MarshawarmaTitle /></H1>
 				<div>A customer loyalty app for a fictional food truck</div>
 			</div>
 			<Spacer size={24} />
@@ -215,7 +212,7 @@ export default function Home(props: Props) {
 			<p>The process of completing my first project has given me practice with design thinking and invaluable experience with user interviews and prototyping. After getting feedback from peers and iterating on my final designs a few times I am satisfied with the end product. What I would do differently next time is choose a topic and research how viable the idea is before moving forward with the project. I enjoyed making a funky app for an imaginary food truck, but there really isn’t a need to have one whole app for a singular food truck.</p>
 			<Spacer size={36}/>
 		</ContentContainer>
-	</RootLayout>
+	</MainLayout>
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {

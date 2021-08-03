@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect, useRef, MouseEvent} from "react"
+import React, { FC, useState, useEffect, useRef, MouseEvent} from "react"
 import isTouch from "../utils/isTouch"
 import throttle from "../utils/throttle"
 import inViewport from "../utils/inViewport"
@@ -18,7 +18,7 @@ export type Props = {
 	event: 'move' | 'scroll' | 'orientation'
 }
 
-const KinesisContainerComponent: FunctionComponent<Props> = (props) => {
+const KinesisContainerComponent: FC<Props> = (props) => {
 	const {
 		active,
 		children,
@@ -112,7 +112,7 @@ const KinesisContainerComponent: FunctionComponent<Props> = (props) => {
 	</KinesisContext.Provider>
 }
 
-export const KinesisContainer: FunctionComponent<PartialBy<Props, keyof typeof defaultProps>> = KinesisContainerComponent as any
+export const KinesisContainer: FC<PartialBy<Props, keyof typeof defaultProps>> = KinesisContainerComponent as any
 
 const defaultProps = {
 	active: true,

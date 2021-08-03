@@ -84,7 +84,7 @@ const NavLink = styled.a`
 	}
 `
 
-export const PageHeader: React.FunctionComponent = (props) => {
+export const PageHeader: React.FC = (props) => {
 	return (
 		<Navbar variant={"none" as any} expand="md">
 			<div className="container">

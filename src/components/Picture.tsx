@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 
 type SourceProps = React.DetailedHTMLProps<React.SourceHTMLAttributes<HTMLSourceElement>, HTMLSourceElement>
 type ImgProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
@@ -9,7 +9,7 @@ export type Props = {
 	fallback: ImgProps
 }
 
-export const Picture: FunctionComponent<Props> = (props) => {
+export const Picture: FC<Props> = (props) => {
 	return <picture className={props.className}>
 		{props.sources.map((source, idx) => 
 			<source key={idx} {...source}/>
