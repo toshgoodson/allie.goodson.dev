@@ -134,14 +134,15 @@ export default function Home(props: Props) {
 							}
 						}
 					}, {
-						title: 'Boring Gov Website',
+						disabled: true,
+						title: 'Government Website',
 						type: 'UX/UI Web Design',
 						url: '/gov',
 						image: {
 							sources: [],
 							fallback: {
 								src: '',
-								alt: 'Boring Gov Website'
+								alt: ''
 							}
 						}
 					}, {
@@ -157,6 +158,7 @@ export default function Home(props: Props) {
 							}
 						}
 					}, {
+						disabled: true,
 						title: 'Various Multimedia',
 						type: 'Personal Projects',
 						url: '/multimedia',
