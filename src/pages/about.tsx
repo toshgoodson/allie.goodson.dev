@@ -17,6 +17,7 @@ import { ContentContainer } from '../components/layout/ContentContainer'
 import { MainLayout } from '../components/layout/MainLayout'
 import { PageProps } from '../interfaces/PageProps'
 import { useAppSelector } from '../models/redux/hooks'
+import { wrapper } from '../models/redux/store'
 import { rfs } from '../models/rfs'
 
 const Description = styled.div`
@@ -74,13 +75,15 @@ export default function About(props: Props) {
 }
 
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-	return {
-		props: {
-			meta: {
-				title: 'about | allie goodson',
-				description: 'Hello! I’m Allie. I am an artist with a bachelor’s in Digital Media Art from San Jose State University and a hopeful UX designer.'
+export const getStaticProps: GetStaticProps<Props> = wrapper.getStaticProps(store =>
+	async () => {
+		return {
+			props: {
+				meta: {
+					title: 'about | allie goodson',
+					description: 'Hello! I’m Allie. I am an artist with a bachelor’s in Digital Media Art from San Jose State University and a hopeful UX designer.'
+				}
 			}
 		}
 	}
-}
+)

@@ -30,6 +30,7 @@ import { Picture } from '../components/Picture'
 import { PageProps } from '../interfaces/PageProps'
 import { Breakpoints } from '../models/Breakpoints'
 import { useAppSelector } from '../models/redux/hooks'
+import { wrapper } from '../models/redux/store'
 import { rfs } from '../models/rfs'
 
 const H1 = styled.h1`
@@ -215,13 +216,15 @@ export default function Marshawarma(props: Props) {
 	</MainLayout>
 }
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-	return {
-		props: {
-			meta: {
-				title: 'marshawarma | allie goodson',
-				description: ''
+export const getStaticProps: GetStaticProps<Props> = wrapper.getStaticProps(store =>
+	async () => {
+		return {
+			props: {
+				meta: {
+					title: 'marshawarma | allie goodson',
+					description: ''
+				}
 			}
 		}
 	}
-}
+)

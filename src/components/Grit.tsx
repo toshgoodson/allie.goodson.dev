@@ -36,22 +36,26 @@ export const Grit: React.FC = () => {
 	// react lifecycle
 	const [src, setSrc] = useState('')
 	useEffect(() => {
-		(async () => {
-			// Create canvas
-			const canvas = document.createElement('canvas')
-			canvas.height = canvas.width = SIZE
+		let isSubscribed = true
+		// Create canvas
+		const canvas = document.createElement('canvas')
+		canvas.height = canvas.width = SIZE
 
-			// populate 
-			const pixelData = new Uint8ClampedArray(SIZE * SIZE * PIXEL_BUFFER_SIZE)
-			for (let idx = 0; idx < pixelData.length; idx += PIXEL_BUFFER_SIZE) {
-				pixelData.set(Math.random() > 0.5 ? BLACK_P : WHITE_P, idx)
+		// populate 
+		const pixelData = new Uint8ClampedArray(SIZE * SIZE * PIXEL_BUFFER_SIZE)
+		for (let idx = 0; idx < pixelData.length; idx += PIXEL_BUFFER_SIZE) {
+			pixelData.set(Math.random() > 0.5 ? BLACK_P : WHITE_P, idx)
+		}
+
+		canvas.getContext('2d')?.putImageData(new ImageData(pixelData, SIZE, SIZE), 0, 0)
+
+		new Promise(resolve => canvas.toBlob(resolve, 'image/png')).then(blob => {
+			if (isSubscribed) {
+				setSrc(URL.createObjectURL(blob))
 			}
+		})
 
-			canvas.getContext('2d')?.putImageData(new ImageData(pixelData, SIZE, SIZE), 0, 0)
-
-			const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'))
-			setSrc(URL.createObjectURL(blob))
-		})()
+		return () => { isSubscribed = false }
 	}, [])
 
 	// page-spanning div with repeating noise background

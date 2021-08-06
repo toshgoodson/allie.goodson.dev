@@ -7,6 +7,7 @@ import { ContentContainer } from '../components/layout/ContentContainer'
 import { MainLayout } from '../components/layout/MainLayout'
 import { PageProps } from '../interfaces/PageProps'
 import { useAppSelector } from '../models/redux/hooks'
+import { wrapper } from '../models/redux/store'
 import { rfs } from '../models/rfs'
 
 const Swoop = styled.span`
@@ -72,13 +73,15 @@ export default function Contact(props: Props) {
 	</MainLayout>
 }
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-	return {
-		props: {
-			meta: {
-				title: 'contact | allie goodson',
-				description: "Hello, I'm Allie. I am a designer and artist based in San Francisco. Let’s connect! Email me anytime about questions, project collaborations, UX work, or whatever else."
+export const getStaticProps: GetStaticProps<Props> = wrapper.getStaticProps(store =>
+	async () => {
+		return {
+			props: {
+				meta: {
+					title: 'contact | allie goodson',
+					description: "Hello, I'm Allie. I am a designer and artist based in San Francisco. Let’s connect! Email me anytime about questions, project collaborations, UX work, or whatever else."
+				}
 			}
 		}
 	}
-}
+)

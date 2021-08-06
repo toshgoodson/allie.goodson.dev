@@ -5,6 +5,7 @@ import { ContentContainer } from '../components/layout/ContentContainer'
 import { MainLayout } from '../components/layout/MainLayout'
 import { PageProps } from '../interfaces/PageProps'
 import { useAppSelector } from '../models/redux/hooks'
+import { wrapper } from '../models/redux/store'
 
 const HideOuter = styled.div`
 	.navbar {
@@ -33,13 +34,15 @@ export default function Copyright(props: Props) {
 	</HideOuter>
 }
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-	return {
-		props: {
-			meta: {
-				title: 'copyright | allie goodson',
-				description: 'Copyright Information & Credits. Copyright 2021 Allie Goodson.'
+export const getStaticProps: GetStaticProps<Props> = wrapper.getStaticProps(store =>
+	async () => {
+		return {
+			props: {
+				meta: {
+					title: 'copyright | allie goodson',
+					description: 'Copyright Information & Credits. Copyright 2021 Allie Goodson.'
+				}
 			}
 		}
 	}
-}
+)
