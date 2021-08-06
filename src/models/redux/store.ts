@@ -1,9 +1,19 @@
-import {createStore, AnyAction, Store} from 'redux'
-import {createWrapper, Context, HYDRATE} from 'next-redux-wrapper'
-import { rootReducer } from './reducers/rootReducer'
+import { nextReduxCookieMiddleware, wrapMakeStore } from "next-redux-cookie-wrapper"
+import { createWrapper } from 'next-redux-wrapper'
+import { applyMiddleware, createStore, Store } from 'redux'
 import { HydrateAppState } from '../../interfaces/HydrateAction'
+import { rootReducer } from './reducers/rootReducer'
 
-const makeStore = (context: Context) => createStore(rootReducer)
+const makeStore = wrapMakeStore(() => 
+	createStore(
+		rootReducer,
+		applyMiddleware(
+			nextReduxCookieMiddleware({
+				subtrees: ["darkMode"]
+			})
+		)
+	)
+)
 
 export type AppState = ReturnType<typeof rootReducer>
 export type AppDispatch = ReturnType<typeof makeStore>['dispatch']

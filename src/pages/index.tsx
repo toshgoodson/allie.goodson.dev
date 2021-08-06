@@ -18,6 +18,7 @@ import { PageHeader } from '../components/PageHeader'
 import { ProjectPicker } from '../components/ProjectPicker'
 import { PageProps } from '../interfaces/PageProps'
 import { useAppSelector } from '../models/redux/hooks'
+import { wrapper } from '../models/redux/store'
 import { rfs } from '../models/rfs'
 
 const Subheader = styled.div`
@@ -146,7 +147,7 @@ export default function Home(props: Props) {
 					}, {
 						title: 'Project in the Works',
 						type: 'Check back in a bit :)',
-						url: '',
+						url: '/',
 						image: {
 							sources: [],
 							fallback: {
@@ -174,13 +175,15 @@ export default function Home(props: Props) {
 	</CoreLayout>
 }
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-	return {
-		props: {
-			meta: {
-				title: 'home | allie goodson',
-				description: "Hello, I'm Allie. I am a designer and artist based in San Francisco. I have a passion for  A E S T H E T I C S  & actually taking a moment to stop and smell the flowers."
+export const getStaticProps: GetStaticProps<Props> = wrapper.getStaticProps(store =>
+	async () => {
+		return {
+			props: {
+				meta: {
+					title: 'home | allie goodson',
+					description: "Hello, I'm Allie. I am a designer and artist based in San Francisco. I have a passion for  A E S T H E T I C S  & actually taking a moment to stop and smell the flowers."
+				}
 			}
 		}
 	}
-}
+)

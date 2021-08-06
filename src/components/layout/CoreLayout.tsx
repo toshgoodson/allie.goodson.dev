@@ -18,14 +18,14 @@ export type Props = PageProps & {
 	darkMode: boolean
 }
 
-export const CoreLayout: React.FC<Props> = ({darkMode, meta, children}) => {
+export const CoreLayout: React.FC<Props> = ({ darkMode, meta, children }) => {
 	return <ThemeProvider theme={darkMode ? darkTheme : theme}>
-		<RootHead darkMode={darkMode} meta={meta}/>
-		<Fonts/>
-		<StyleBase/>
+		<RootHead darkMode={darkMode} meta={meta} />
+		<Fonts />
+		<StyleBase />
 		<FullHeight>
 			{children}
 		</FullHeight>
-		<Grit/>
+		<Grit />
 	</ThemeProvider>
 }
