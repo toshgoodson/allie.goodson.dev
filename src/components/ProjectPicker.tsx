@@ -15,8 +15,9 @@ const LeftAlign = styled.div`
 		padding-left: calc((100% - 960px) / 2); /* Align with the left side of content */
 	}
 `
-const A = styled.a`
+const A = styled.a<{isDisabled?: boolean}>`
 	color: ${({theme}) => theme.colors[4][0]};
+	${({isDisabled}) => isDisabled ? 'cursor: not-allowed;' : ''}
 	display: inline-block;
 	font-family: 'Open Sans', sans-serif;
 	${rfs.fontSize('16px')}
@@ -82,6 +83,7 @@ interface Project {
 	darkModeImage?: PictureProps
 	title: string
 	type: string
+	disabled?: boolean
 }
 
 export type Props = {
@@ -106,9 +108,9 @@ export const ProjectPicker: FC<Props> = ({darkMode, projects}) => {
 					<KinesisElement type="depth" strength={5}>
 						<ProjectList>
 							{projects.map((project, idx) => {
-								const {title, url, type} = project
+								const {title, url, type, disabled} = project
 								return <ListItem key={idx}>
-									<Link href={url} passHref><A onMouseEnter={() => setActiveProject(project)} onFocus={() => setActiveProject(project)}>{idx + 1}<wbr/><Big>   {title}   </Big><wbr/><br className="d-sm-inline d-md-none d-lg-inline d-xxl-none"/><IB>{type}</IB></A></Link>
+									<Link href={url} passHref><A onClick={disabled ? ((e) => e.preventDefault()) : undefined} isDisabled={disabled} onMouseEnter={() => setActiveProject(project)} onFocus={() => setActiveProject(project)}>{idx + 1}<wbr/><Big>   {title}   </Big><wbr/><br className="d-sm-inline d-md-none d-lg-inline d-xxl-none"/><IB>{type}</IB></A></Link>
 								</ListItem>
 							})}
 						</ProjectList>

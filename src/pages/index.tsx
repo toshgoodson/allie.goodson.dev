@@ -145,9 +145,10 @@ export default function Home(props: Props) {
 							}
 						}
 					}, {
+						disabled: true,
 						title: 'Project in the Works',
 						type: 'Check back in a bit :)',
-						url: '/',
+						url: '#',
 						image: {
 							sources: [],
 							fallback: {
