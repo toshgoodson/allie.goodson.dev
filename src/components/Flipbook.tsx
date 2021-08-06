@@ -23,7 +23,7 @@ export type Props = {
 	}>
 }
 
-export const Flipbook: React.FunctionComponent<Props> = (props) => {
+export const Flipbook: React.FC<Props> = (props) => {
 	const [showIdx, setShowIdx] = useState(0)
 	const [autoFlip, setAutoFlip] = useState(true)
 

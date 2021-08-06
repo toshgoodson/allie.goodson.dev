@@ -5,8 +5,10 @@ import { HiOutlineMail } from 'react-icons/hi'
 import { IoLogoLinkedin } from 'react-icons/io'
 import { RiCopyrightLine } from 'react-icons/ri'
 import styled from "styled-components"
+import { useAppDispatch } from "../models/redux/hooks"
 import { rfs } from "../models/rfs"
 import { LinkButton } from "./Buttons"
+
 
 const Padding = styled.div`
 	${rfs.fontSize('30px')}
@@ -27,13 +29,19 @@ type Props = {
 	darkMode: boolean
 }
 
-export const PageFooter: React.FunctionComponent<Props> = (props) => {
+export const PageFooter: React.FC<Props> = (props) => {
+	const dispatch = useAppDispatch()
+
+	const handleToggleMode = () => {
+		dispatch({type: 'TOGGLE_DARK_MODE'})
+	}
+
 	return (
 		<Padding className="footer">
 			<div className="container">
 				<div className="row justify-content-end align-items-center">
 					<div className="col-auto">
-						<LinkButton type="submit" form="i-mode-form">{props.darkMode ? <FiSunrise title="Toggle light mode"/> : <FiSunset title="Toggle dark mode"/>}</LinkButton>
+						<LinkButton type="button" onClick={handleToggleMode}>{props.darkMode ? <FiSunrise title="Toggle light mode"/> : <FiSunset title="Toggle dark mode"/>}</LinkButton>
 					</div>
 					<div className="col-auto">
 						<a href="https://www.linkedin.com/in/allie-goodson-611802b2/" target="_blank" rel="noopener noreferrer"><StyledLinkedin title="Visit my LinkedIn"/></a>

@@ -8,7 +8,7 @@ const SmallContainer = styled.div`
 	width: 100%;
 `
 
-export const ContentContainer: React.FunctionComponent = ({children}) => {
+export const ContentContainer: React.FC = ({children}) => {
 	return <SmallContainer>
 		<div className="container">{children}</div>
 	</SmallContainer>

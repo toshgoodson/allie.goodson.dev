@@ -1,19 +1,25 @@
-import React, {useState, useEffect} from 'react'
-import styled from 'styled-components'
-import { Brand } from '../components/Brand'
-import { ContentContainer } from '../components/layout/ContentContainer'
-import { RootLayout, Props as RootProps } from '../components/RootLayout'
-import { rfs } from '../models/rfs'
 import { GetStaticProps } from 'next'
+import Link from 'next/link'
+import React from 'react'
+import styled from 'styled-components'
+import marshawarmaDarkFallback from '../../assets/images/home/marshawarma-preview-dark.png'
+import marshawarmaDarkImg from '../../assets/images/home/marshawarma-preview-dark.webp'
+import marshawarmaFallback from '../../assets/images/home/marshawarma-preview.png'
+import marshawarmaImg from '../../assets/images/home/marshawarma-preview.webp'
+import multimediaImg from '../../assets/images/home/multimedia-preview.jpg'
+import { Brand } from '../components/Brand'
 import { KinesisContainer } from '../components/kinesis/components/KinesisContainer'
 import { KinesisElement } from '../components/kinesis/components/KinesisElement'
-import { Spacer } from '../components/layout/Spacer'
-import { isDarkMode } from '../models/isDarkMode'
-import { PageHeader } from '../components/PageHeader'
+import { ContentContainer } from '../components/layout/ContentContainer'
+import { CoreLayout } from '../components/layout/CoreLayout'
 import { PageContent } from '../components/PageContent'
 import { PageFooter } from '../components/PageFooter'
-import Link from 'next/link'
-
+import { PageHeader } from '../components/PageHeader'
+import { ProjectPicker } from '../components/ProjectPicker'
+import { PageProps } from '../interfaces/PageProps'
+import { useAppSelector } from '../models/redux/hooks'
+import { wrapper } from '../models/redux/store'
+import { rfs } from '../models/rfs'
 
 const Subheader = styled.div`
 	${rfs.fontSize('36px')}
@@ -73,16 +79,12 @@ const FullHeight = styled.div`
 	min-height: 100vh;
 `
 
-type Props = RootProps
+type Props = PageProps
 
 export default function Home(props: Props) {
-	// https://github.com/vercel/next.js/discussions/15003
-	const [darkMode, setDarkMode] = useState(false)
-	useEffect(() => {
-		setDarkMode(isDarkMode())
-	}, [])
+	const { darkMode } = useAppSelector(state => state)
 
-	return <RootLayout {...props} onChangeMode={(darkMode) => setDarkMode(darkMode)}>
+	return <CoreLayout {...props} darkMode={darkMode}>
 		<KinesisContainer>
 			<FullHeight>
 				<PageHeader/>
@@ -108,36 +110,83 @@ export default function Home(props: Props) {
 		</KinesisContainer>
 		<FullHeight id="work">
 			<PageContent>
-				<ContentContainer>
-					<div className="row justify-content-end">
-						{/* <div className="col"></div> */}
-						<div className="col-auto">
-							<KinesisContainer>
-								<KinesisElement type="depth" strength={5}>
-									<h1>Project info<br/>coming soon</h1>
-									{/* <h1><a href="#">Marshawarma</a></h1>
-									<h1><a href="#">Plant Project Prolly</a></h1>
-									<h1><a href="#">& A Third Project</a></h1>
-									<h1><a href="#">Various Multimedia</a></h1> */}
-								</KinesisElement>
-							</KinesisContainer>
-						</div>
-					</div>
-				</ContentContainer>
+				<div className="container">
+					<ProjectPicker darkMode={darkMode} projects={[{
+						title: 'Marshawarma',
+						type: 'UX/UI App Design',
+						url: '/marshawarma',
+						image: {
+							sources: [{
+								srcSet: marshawarmaImg
+							}],
+							fallback: {
+								src: marshawarmaFallback,
+								alt: 'Marshawarma'
+							}
+						},
+						darkModeImage: {
+							sources: [{
+								srcSet: marshawarmaDarkImg
+							}],
+							fallback: {
+								src: marshawarmaDarkFallback,
+								alt: 'Marshawarma'
+							}
+						}
+					}, {
+						disabled: true,
+						title: 'Government Website',
+						type: 'UX/UI Web Design',
+						url: '/gov',
+						image: {
+							sources: [],
+							fallback: {
+								src: '',
+								alt: ''
+							}
+						}
+					}, {
+						disabled: true,
+						title: 'Project in the Works',
+						type: 'Check back in a bit :)',
+						url: '#',
+						image: {
+							sources: [],
+							fallback: {
+								src: '',
+								alt: ''
+							}
+						}
+					}, {
+						disabled: true,
+						title: 'Various Multimedia',
+						type: 'Personal Projects',
+						url: '/multimedia',
+						image: {
+							sources: [],
+							fallback: {
+								src: multimediaImg,
+								alt: 'Various Multimedia'
+							}
+						}
+					}
+					]}/>
+				</div>
 			</PageContent>
 			<PageFooter darkMode={darkMode}/>
 		</FullHeight>
-	</RootLayout>
+	</CoreLayout>
 }
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-	return {
-		props: {
-			plain: true,
-			meta: {
-				title: 'home | allie goodson',
-				description: "Hello, I'm Allie. I am a designer and artist based in San Francisco. I have a passion for  A E S T H E T I C S  & actually taking a moment to stop and smell the flowers."
+export const getStaticProps: GetStaticProps<Props> = wrapper.getStaticProps(store =>
+	async () => {
+		return {
+			props: {
+				meta: {
+					title: 'home | allie goodson',
+					description: "Hello, I'm Allie. I am a designer and artist based in San Francisco. I have a passion for  A E S T H E T I C S  & actually taking a moment to stop and smell the flowers."
+				}
 			}
 		}
 	}
-}
+)

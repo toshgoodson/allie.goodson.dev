@@ -1,10 +1,6 @@
+import { GetStaticProps } from 'next'
 import React from 'react'
 import styled from 'styled-components'
-import { Brand } from '../components/Brand'
-import { Flipbook } from '../components/Flipbook'
-import { ContentContainer } from '../components/layout/ContentContainer'
-import { RootLayout, Props as RootProps } from '../components/RootLayout'
-import { rfs } from '../models/rfs'
 import boyImg from '../../assets/images/profile/profile-boy.jpg'
 import boyImg2x from '../../assets/images/profile/profile-boy@2x.jpg'
 import meImg from '../../assets/images/profile/profile-me.jpg'
@@ -15,7 +11,14 @@ import pencilImg from '../../assets/images/profile/profile-pencil.jpg'
 import pencilImg2x from '../../assets/images/profile/profile-pencil@2x.jpg'
 import solderImg from '../../assets/images/profile/profile-solder.jpg'
 import solderImg2x from '../../assets/images/profile/profile-solder@2x.jpg'
-import { GetStaticProps } from 'next'
+import { Brand } from '../components/Brand'
+import { Flipbook } from '../components/Flipbook'
+import { ContentContainer } from '../components/layout/ContentContainer'
+import { MainLayout } from '../components/layout/MainLayout'
+import { PageProps } from '../interfaces/PageProps'
+import { useAppSelector } from '../models/redux/hooks'
+import { wrapper } from '../models/redux/store'
+import { rfs } from '../models/rfs'
 
 const Description = styled.div`
 	font-family: 'Judson', serif;
@@ -30,9 +33,11 @@ const Description = styled.div`
 	}
 `
 
-type Props = RootProps
+type Props = PageProps
 
 export default function About(props: Props) {
+	const { darkMode } = useAppSelector(state => state)
+
 	const images = [{
 		src: meImg,
 		src2x: meImg2x
@@ -49,8 +54,9 @@ export default function About(props: Props) {
 		src: boyImg,
 		src2x: boyImg2x
 	}]
+	
 
-	return <RootLayout {...props}>
+	return <MainLayout {...props} darkMode={darkMode}>
 		<ContentContainer>
 			<div className="row gy-4 g-lg-4">
 				<div className="col-12 col-md-5">
@@ -65,17 +71,19 @@ export default function About(props: Props) {
 				</div>
 			</div>
 		</ContentContainer>
-	</RootLayout>
+	</MainLayout>
 }
 
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-	return {
-		props: {
-			meta: {
-				title: 'about | allie goodson',
-				description: 'Hello! I’m Allie. I am an artist with a bachelor’s in Digital Media Art from San Jose State University and a hopeful UX designer.'
+export const getStaticProps: GetStaticProps<Props> = wrapper.getStaticProps(store =>
+	async () => {
+		return {
+			props: {
+				meta: {
+					title: 'about | allie goodson',
+					description: 'Hello! I’m Allie. I am an artist with a bachelor’s in Digital Media Art from San Jose State University and a hopeful UX designer.'
+				}
 			}
 		}
 	}
-}
+)
