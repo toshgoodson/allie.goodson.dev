@@ -26,4 +26,4 @@ type Equals<T, S> =
 
 const ensureEquality: Equals<AppState, HydrateAppState> = true; ensureEquality
 
-export const wrapper = createWrapper<Store<AppState, any>>(makeStore, {debug: true})
+export const wrapper = createWrapper<Store<AppState, any>>(makeStore)
