@@ -7,6 +7,7 @@ import marshawarmaDarkImg from '../../assets/images/home/marshawarma-preview-dar
 import marshawarmaFallback from '../../assets/images/home/marshawarma-preview.png'
 import marshawarmaImg from '../../assets/images/home/marshawarma-preview.webp'
 import multimediaImg from '../../assets/images/home/multimedia-preview.jpg'
+import multimediaVid from '../../assets/videos/spine.webm'
 import { Brand } from '../components/Brand'
 import { KinesisContainer } from '../components/kinesis/components/KinesisContainer'
 import { KinesisElement } from '../components/kinesis/components/KinesisElement'
@@ -162,8 +163,10 @@ export default function Home(props: Props) {
 						title: 'Various Multimedia',
 						type: 'Personal Projects',
 						url: '/multimedia',
-						image: {
-							sources: [],
+						video: {
+							sources: [{
+								src: multimediaVid
+							}],
 							fallback: {
 								src: multimediaImg,
 								alt: 'Various Multimedia'

@@ -8,6 +8,7 @@ import { rfs } from "../models/rfs"
 import { KinesisContainer } from './kinesis/components/KinesisContainer'
 import { KinesisElement } from './kinesis/components/KinesisElement'
 import { Picture, Props as PictureProps } from './Picture'
+import { Video, Props as VideoProps } from './Video'
 
 
 const LeftAlign = styled.div`
@@ -76,14 +77,36 @@ const StyledPicture = styled(Picture)`
 		width: auto;
 	}
 `
+const StyledVideo = styled(Video)`
+	display: block;
+	height: 100%;
+	width: 100%;
 
-interface Project {
+	img {
+		max-height: 100%;
+		max-width: 100%;
+		width: auto;
+	}
+`
+
+interface BaseProject {
 	url: string
 	image: PictureProps
 	darkModeImage?: PictureProps
 	title: string
 	type: string
 	disabled?: boolean
+}
+interface ProjectWithImage extends BaseProject {
+	image: PictureProps
+}
+interface ProjectWithVideo extends BaseProject {
+	video: PictureProps
+}
+type Project = ProjectWithImage | ProjectWithVideo
+
+const isProjectWithVideo = (project: Project | null): project is ProjectWithVideo => {
+	return (project as any)?.video != null
 }
 
 export type Props = {
@@ -95,19 +118,21 @@ export const ProjectPicker: FC<Props> = ({darkMode, projects}) => {
 	const [activeProject, setActiveProject] = useState<Project | null>(null)
 
 	const activeImage = darkMode ? (activeProject?.darkModeImage ?? activeProject?.image) : activeProject?.image
+	const activeVideo = isProjectWithVideo(activeProject) ? activeProject.video : undefined
 
 	return <LeftAlign>
 		<div className="row justify-content-lg-start justify-content-center align-items-center">
 			<div className="col-auto d-none d-lg-block">
 				<PictureContainer>
 					{activeImage && <StyledPicture {...activeImage}/>}
+					{activeVideo && <StyledPicture as={Video} {...activeVideo} autoPlay loop/>}
 				</PictureContainer>
 			</div>
 			<div className="col-auto col-lg" onMouseLeave={() => setActiveProject(null)}>
 				<KinesisContainer>
 					<KinesisElement type="depth" strength={5}>
 						<ProjectList>
-							{projects.map((project, idx) => {
+							{projects.map((project: Project, idx) => {
 								const {title, url, type, disabled} = project
 								return <ListItem key={idx}>
 									<Link href={url} passHref><A onClick={disabled ? ((e) => e.preventDefault()) : undefined} isDisabled={disabled} onMouseEnter={() => setActiveProject(project)} onFocus={() => setActiveProject(project)}>{idx + 1}<wbr/><Big>   {title}   </Big><wbr/><br className="d-sm-inline d-md-none d-lg-inline d-xxl-none"/><IB>{type}</IB></A></Link>
