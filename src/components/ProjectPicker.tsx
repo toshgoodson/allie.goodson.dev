@@ -91,7 +91,6 @@ const StyledVideo = styled(Video)`
 
 interface BaseProject {
 	url: string
-	image: PictureProps
 	darkModeImage?: PictureProps
 	title: string
 	type: string
@@ -117,7 +116,7 @@ export type Props = {
 export const ProjectPicker: FC<Props> = ({darkMode, projects}) => {
 	const [activeProject, setActiveProject] = useState<Project | null>(null)
 
-	const activeImage = darkMode ? (activeProject?.darkModeImage ?? activeProject?.image) : activeProject?.image
+	const activeImage = !isProjectWithVideo(activeProject) ? ((darkMode && activeProject?.darkModeImage) || activeProject?.image) : undefined
 	const activeVideo = isProjectWithVideo(activeProject) ? activeProject.video : undefined
 
 	return <LeftAlign>
