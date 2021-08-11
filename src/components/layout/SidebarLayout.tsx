@@ -67,7 +67,7 @@ export const SidebarLayout: React.FC<Props> = (props) => {
 					<FixedContainer className="d-flex flex-grow-1">
 						<div className="row gx-0 flex-grow-1">
 							<ColoredSide className="col-12 col-md-auto d-none d-lg-block">
-								<div className="container gx-5">
+								<div className="container gx-5 position-sticky top-0">
 									<SidebarPageContent>
 										<div className="position-relative d-inline-block">
 											<CheaterNavBrand>Allie Goodson</CheaterNavBrand>
