@@ -7,8 +7,9 @@ import { FiMenu } from 'react-icons/fi'
 import strokeImg from '../../assets/images/stroke.png'
 import { Breakpoints } from "../models/Breakpoints"
 
-const NavBrand = styled(Brand)`
+export const NavBrand = styled(Brand)`
 	${rfs.fontSize('34px')}
+	margin: 0;
 	padding: 0;
 `
 const Navbar = styled(BsNavbar)`

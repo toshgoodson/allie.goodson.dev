@@ -9,5 +9,9 @@
 // @import "~bootstrap/scss/bootstrap-grid.scss";
 // @import "~bootstrap/scss/_navbar.scss";
 
+.gx-reset {
+	--bs-gutter-x: initial;
+}
+
 @import "~bootstrap/scss/bootstrap.scss";
 @import '~swiper/swiper-bundle.css';
