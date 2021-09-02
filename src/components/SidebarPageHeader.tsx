@@ -3,10 +3,10 @@ import Link from 'next/link'
 import { Navbar as BsNavbar } from 'react-bootstrap'
 import { rfs } from "../models/rfs"
 import { FiMenu } from 'react-icons/fi'
-import strokeImg from '../../assets/images/stroke.png'
 import { Breakpoints } from "../models/Breakpoints"
 import { NavBrand } from "./PageHeader"
 import { FixedContainer } from './layout/FixedContainer'
+import { Swoop, swoopHoverCss } from "./Swoop"
 
 const Navbar = styled(BsNavbar)`
 	${rfs.padding('40px 0 17px')}
@@ -17,28 +17,6 @@ const NavbarToggler = styled(BsNavbar.Toggle)`
 	&:focus {
 		box-shadow: none;
 		outline: -webkit-focus-ring-color auto 1px;
-	}
-`
-
-const Swoop = styled.span`
-	display: inline-block;
-	position: relative;
-
-	&:after {
-		background: linear-gradient(to right, ${({theme}) => theme.colors[3]}, ${({theme}) => theme.colors[3]}) no-repeat right;
-		background-size: 0% auto;
-		content: '';
-		height: 1em;
-		left: 0.25em;
-		mask: url(${strokeImg}) no-repeat;
-		mask-position: center;
-		mask-repeat: no-repeat;
-		mask-size: 100% 100%;
-		position: absolute;
-		top: -0.05em;
-		transition: background-size 0.15s ease-out, background-position 0s ease-out;
-		width: 100%;
-		z-index: -1;
 	}
 `
 
@@ -75,9 +53,8 @@ const NavLink = styled.a`
 			margin-right: -0.5rem; // match default bootstrap padding
 		}
 	}
-	&:hover ${Swoop}:after {
-		background-position: left;
-		background-size: 100% auto;
+	&:hover ${Swoop} {
+		${swoopHoverCss}
 	}
 `
 
