@@ -1,11 +1,24 @@
 import { GetStaticProps } from 'next'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BiSmile } from 'react-icons/bi'
-import tigerThumb from '../../assets/images/multimedia/tiger-thumb.jpg'
-import spineThumb from '../../assets/images/multimedia/spine-thumb.jpg'
+import tigerThumb from '../../assets/images/multimedia/tiger-1-thumb.jpg'
+import tigerCloseupThumb from '../../assets/images/multimedia/tiger-1-closeup-thumb.jpg'
+import tiger from '../../assets/images/multimedia/tiger-1.jpg'
+import tigerCloseup from '../../assets/images/multimedia/tiger-1-closeup.jpg'
+import spineThumb from '../../assets/images/multimedia/spine-jacket-1-thumb.jpg'
+import spinePoster from '../../assets/images/multimedia/spine-jacket-1.jpg'
+import spineVideo from '../../assets/videos/spine.webm'
 import symbolsThumb from '../../assets/images/multimedia/symbols-thumb.jpg'
-import weldingThumb from '../../assets/images/multimedia/welding-thumb.jpg'
-import macrameThumb from '../../assets/images/multimedia/macrame-thumb.jpg'
+import symbols from '../../assets/images/multimedia/symbols.jpg'
+import welding1Thumb from '../../assets/images/multimedia/welding-practice-1-thumb.jpg'
+import welding2Thumb from '../../assets/images/multimedia/welding-practice-2-thumb.jpg'
+import welding1 from '../../assets/images/multimedia/welding-practice-1.jpg'
+import welding2 from '../../assets/images/multimedia/welding-practice-2.jpg'
+import macrame2Thumb from '../../assets/images/multimedia/macrame-2-thumb.jpg'
+import macrame2 from '../../assets/images/multimedia/macrame-2.jpg'
+import PhotoSwipeLightbox from 'photoswipe/dist/photoswipe-lightbox.esm.min.js';
+import PhotoSwipe from 'photoswipe/dist/photoswipe.esm.min.js';
+
 import { SidebarLayout } from '../components/layout/SidebarLayout'
 import { Spacer } from '../components/layout/Spacer'
 import { ArtEntry } from '../components/multimedia/ArtEntry'
@@ -18,6 +31,128 @@ type Props = PageProps
 export default function Multimedia(props: Props) {
 	const { darkMode } = useAppSelector(state => state)
 
+	useEffect(() => {
+		const lightbox = new PhotoSwipeLightbox({
+			gallerySelector: '#js-gallery',
+			childSelector: '.js-gallery-item',
+			loop: true,
+			pswpModule: PhotoSwipe,
+			// showHideAnimationType: 'fade'
+		})
+		lightbox.on('itemData', (e: any) => {
+			const element = e.itemData.element;
+			if (element  && element.dataset.pswpIsVideo) {
+				const videoURL = element.href;
+				const imgPoster= element.dataset.pswpVideoPoster;
+				e.itemData = {
+					// ...e.itemData,
+					// msrc: imgPoster,
+					// src: imgPoster,
+					// html: `<video style="height: ${e.itemData.h}px; width: ${e.itemData.w}px; object-fit: cover;" autoplay loop poster="${imgPoster}"><source src="${videoURL}"></video>`
+					html: `<video style="height: ${e.itemData.h}px; width: ${e.itemData.w}px; object-fit: contain;" class="lightbox-video" autoplay loop poster="${imgPoster}"><source src="${videoURL}"></video>`
+				}
+			}
+		})
+		lightbox.init()
+
+		return () => {
+			lightbox.destroy()
+		}
+	}, [])
+
+	const entries = [{
+		year: 2019,
+		title: 'Tiger 1',
+		medium: 'Acrylic on wood',
+		items: [{
+			thumb: {
+				src: tigerThumb,
+				alt: 'Tiger 1'
+			},
+			thumbColSize: 8,
+			src: tiger,
+			cropped: true,
+			height: 4096,
+			width: 2793
+		}, {
+			thumb: {
+				src: tigerCloseupThumb,
+				alt: 'Tiger 1 closeup'
+			},
+			src: tigerCloseup,
+			cropped: true,
+			height: 4096,
+			width: 2882
+		}]
+	}, {
+		year: 2017,
+		title: 'Spine Jacket 1',
+		medium: '3D printed pieces & LED’s',
+		items: [{
+			thumb: {
+				src: spineThumb,
+				alt: 'Spine Jacket 1'
+			},
+			src: spineVideo,
+			posterSrc: spinePoster,
+			isVideo: true,
+			cropped: true,
+			height: 904,
+			width: 682
+		}]
+	}, {
+		year: 2017,
+		title: 'Symbols',
+		medium: 'Acrylic on reclaimed canvas',
+		items: [{
+			thumb: {
+				src: symbolsThumb,
+				alt: 'Symbols'
+			},
+			src: symbols,
+			cropped: true,
+			height: 1769,
+			width: 2000
+		}]
+	}, {
+		year: 2020,
+		title: 'Welding Practice 1 & 2',
+		medium: 'Steel',
+		items: [{
+			thumb: {
+				src: welding1Thumb,
+				alt: 'Welding Practice 1'
+			},
+			src: welding1,
+			cropped: true,
+			height: 2014,
+			width: 2000
+		}, {
+			thumb: {
+				src: welding2Thumb,
+				alt: 'Welding Practice 2'
+			},
+			src: welding2,
+			cropped: true,
+			height: 2347,
+			width: 2375
+		}]
+	}, {
+		year: 2018,
+		title: 'Macrame 2',
+		medium: 'Fiber',
+		items: [{
+			thumb: {
+				src: macrame2Thumb,
+				alt: 'Macrame 2'
+			},
+			src: macrame2,
+			cropped: true,
+			height: 3873,
+			width: 2296
+		}]	
+	}]
+
 	return <SidebarLayout {...props} darkMode={darkMode}
 		sidebarContent={<>
 			<div>Here is a collection of a few of my favorite personal and collaborative projects. A few were made to experiment, some made for fun, &amp; all because I love making things.</div>
@@ -25,56 +160,83 @@ export default function Multimedia(props: Props) {
 			<div className="text-end"><small>Please click image to enlarge <BiSmile/></small></div>
 		</>}
 	>
-			<ArtEntry
-				year={2019}
-				title="Tiger 1"
-				medium="Acrylic on wood"
-				thumb={{
-					src: tigerThumb,
-					alt: 'Tiger 1'
-				}}
-			/>
-			<Spacer size={100}/>
-			<ArtEntry
-				year={2017}
-				title="Spine Jacket 1"
-				medium="3D printed pieces & LED’s"
-				thumb={{
-					src: spineThumb,
-					alt: 'Spine Jacket 1'
-				}}
-			/>
-			<Spacer size={100}/>
-			<ArtEntry
-				year={2017}
-				title="Symbols"
-				medium="Acrylic on reclaimed canvas"
-				thumb={{
-					src: symbolsThumb,
-					alt: 'Symbols'
-				}}
-			/>
-			<Spacer size={100}/>
-			<ArtEntry
-				year={2020}
-				title="Welding Practice 1 & 2"
-				medium="Steel"
-				thumb={{
-					src: weldingThumb,
-					alt: 'Welding Practice 1 & 2'
-				}}
-			/>
-			<Spacer size={100}/>
-			<ArtEntry
-				year={2018}
-				title="Macrame 2"
-				medium="Fiber"
-				thumb={{
-					src: macrameThumb,
-					alt: 'Macrame 2'
-				}}
-			/>
-		</SidebarLayout>
+		<div id="js-gallery">
+			{entries.map((entry, idx, array) =>
+				<React.Fragment key={idx}>
+					<ArtEntry {...entry}/>
+					{idx !== array.length - 1 && <Spacer size={100}/>}
+				</React.Fragment>
+			)}
+		</div>
+		{/* <LightGallery
+			speed={500}
+			mode="lg-fade"
+			download={false}
+			plugins={[lgVideo]}
+		>
+			<a data-lg-size="554-554" data-src={tigerThumb} className="gallery-item">
+				<img src={tigerThumb} className="img-responsive" />
+			</a>
+			<a data-lg-size="682-904" data-video={`{"source": [{"src":"${testVideo}", "type":"video/webm"}], "attributes": {"preload": false, "autoplay": true}}`}>
+				<img src={tigerThumb} />
+			</a>
+		</LightGallery> */}
+
+		{/* <Gallery>
+			<Item
+				original="https://placekitten.com/1024/768?image=1"
+				thumbnail={tigerThumb}
+				width="1024"
+				height="768"
+				cropped={true}
+				
+			>
+				{({ ref, open }) => (
+					<a onClick={(e) => {e.preventDefault(); open()}} href="https://placekitten.com/1024/768?image=1" target="_blank">
+						<img ref={ref as any} src={tigerThumb} data-pswp-width="554" data-pswp-height="554" width="554" height="554" style={{height: '554px', width: '554px'}}/>
+					</a>
+				)}
+			</Item>
+			<Item
+				original="https://placekitten.com/1024/768?image=2"
+				thumbnail="https://placekitten.com/80/60?image=2"
+				width="1024"
+				height="768"
+			>
+				{({ ref, open }) => (
+					<a onClick={(e) => {e.preventDefault(); open()}} href="https://placekitten.com/1024/768?image=2" target="_blank">
+						<img ref={ref as any} src="https://placekitten.com/80/60?image=2" />
+					</a>
+				)}
+			</Item>
+		</Gallery> */}
+
+		{/* <div id="gallery">
+			<a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-2500.jpg" 
+				data-pswp-width="1875" 
+				data-pswp-height="2500" 
+				data-cropped="true" 
+				target="_blank">
+				<img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-200.jpg" alt="" style={{height: '300px', objectFit: 'cover'}} />
+			</a>
+			<a href={testVideo}
+				data-pswp-video-poster={spineThumb}
+				data-pswp-width="682"
+				data-pswp-height="904"
+				data-cropped="true" 
+				data-pswp-is-video="true"
+				target="_blank">
+				<img src={spineThumb} alt="" style={{height: '554px', width: '554px', objectFit: 'cover'}} />
+			</a>
+			<a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-2500.jpg" 
+				data-pswp-width="1875" 
+				data-pswp-height="2500" 
+				data-cropped="true" 
+				target="_blank">
+				<img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-200.jpg" alt="" style={{height: '300px', objectFit: 'cover'}} />
+			</a>
+		</div> */}
+	</SidebarLayout>
 }
 
 export const getStaticProps: GetStaticProps<Props> = wrapper.getStaticProps(store =>

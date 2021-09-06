@@ -35,6 +35,13 @@ export default class MyDocument extends Document {
 				<body>
 					<Main />
 					<NextScript />
+					
+					<div dangerouslySetInnerHTML={{__html: `
+						<script type="module">
+							import PhotoSwipe from '/photoswipe.esm.js';
+							window.PhotoSwipe = PhotoSwipe;
+						</script>
+					`}}/>
 				</body>
 			</Html>
 		)
