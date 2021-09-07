@@ -24,7 +24,7 @@ const NavList = styled.ul`
 	${rfs.marginTop('12px')}
 	text-align: right;
 
-	@media (min-width: ${Breakpoints.min.lg}px) {
+	@media (min-width: ${Breakpoints.min.md}px) {
 		margin-top: 0;
 		text-align: inherit;
 	}
@@ -41,7 +41,7 @@ const NavLink = styled.a`
 		padding-left: 0.75rem;
 	}
 	
-	@media (min-width: ${Breakpoints.min.lg}px) {
+	@media (min-width: ${Breakpoints.min.md}px) {
 		${rfs.margin('0 20px')}
 		margin-bottom: -0.5rem !important; // match default bootstrap padding
 	}
@@ -49,7 +49,7 @@ const NavLink = styled.a`
 	li:last-child & {
 		margin-right: 0;
 
-		@media (min-width: ${Breakpoints.min.lg}px) {
+		@media (min-width: ${Breakpoints.min.md}px) {
 			margin-right: -0.5rem; // match default bootstrap padding
 		}
 	}
@@ -77,6 +77,20 @@ const ColoredSideSm = styled.div`
 		background: ${({theme}) => theme.colors[3]};
 	}
 `
+const BrandContainer = styled.div`
+	padding-left: 12px !important;
+
+	@media (max-width: ${Breakpoints.max.md}px) {
+		padding-right: 0 !important;
+	}
+`
+const NavContainer = styled.div`
+	padding-right: 12px !important;
+	
+	@media (max-width: ${Breakpoints.max.md}px) {
+		padding-left: 0 !important;
+	}
+`
 
 export const SidebarPageHeader: React.FC = (props) => {
 	return (
@@ -84,14 +98,14 @@ export const SidebarPageHeader: React.FC = (props) => {
 			<div className="row gx-0">
 				<ColoredSide className="col-auto">
 					<Navbar variant={"none" as any} expand="md">
-						<div className="container gx-reset gx-lg-5">
+						<BrandContainer className="container gx-reset gx-lg-5">
 							<Link href="/" passHref><NavBrand as="a" className="navbar-brand">Allie Goodson</NavBrand></Link>
-						</div>
+						</BrandContainer>
 					</Navbar>
 				</ColoredSide>
 				<ColoredSideSm className="col">
-					<Navbar variant={"none" as any} expand="lg">
-						<div className="container gx-reset gx-lg-5">
+					<Navbar variant={"none" as any} expand="md">
+						<NavContainer className="container gx-reset gx-lg-5">
 							<Link href="/" passHref><CheaterNavBrand as="a" className="navbar-brand">Allie Goodson</CheaterNavBrand></Link>
 
 							<NavbarToggler type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -113,7 +127,7 @@ export const SidebarPageHeader: React.FC = (props) => {
 									</li>
 								</NavList>
 							</BsNavbar.Collapse>
-						</div>
+						</NavContainer>
 					</Navbar>
 				</ColoredSideSm>
 			</div>

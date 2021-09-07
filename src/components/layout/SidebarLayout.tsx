@@ -32,6 +32,12 @@ const CheaterBox = styled.div`
 	position: absolute;
 	width: 100%;
 `
+const SidebarContainer = styled.div`
+	padding-left: 12px !important;
+`
+const ContentContainer = styled.div`
+	padding-right: 12px !important;
+`
 
 export type Props = PageProps & {
 	darkMode: boolean
@@ -67,22 +73,22 @@ export const SidebarLayout: React.FC<Props> = (props) => {
 					<FixedContainer className="d-flex flex-grow-1">
 						<div className="row gx-0 flex-grow-1">
 							<ColoredSide className="col-12 col-md-auto d-none d-lg-block">
-								<div className="container gx-5 position-sticky top-0">
+								<SidebarContainer className="container gx-5 position-sticky top-0">
 									<SidebarPageContent>
 										<div className="position-relative d-inline-block">
 											<CheaterNavBrand>Allie Goodson</CheaterNavBrand>
 											<CheaterBox>{sidebarContent}</CheaterBox>
 										</div>
 									</SidebarPageContent>
-								</div>
+								</SidebarContainer>
 							</ColoredSide>
 							<div className="col d-flex">
 								<Column>
-									<div className="container gx-reset gx-lg-5 flex-grow-1">
+									<ContentContainer className="container gx-reset gx-lg-5 flex-grow-1">
 										<SidebarPageContent>
 											{children}
 										</SidebarPageContent>
-									</div>
+									</ContentContainer>
 									<div>
 										<PageFooter darkMode={darkMode} />
 									</div>
