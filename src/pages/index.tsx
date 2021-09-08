@@ -159,7 +159,6 @@ export default function Home(props: Props) {
 							}
 						}
 					}, {
-						disabled: true,
 						title: 'Various Multimedia',
 						type: 'Personal Projects',
 						url: '/multimedia',

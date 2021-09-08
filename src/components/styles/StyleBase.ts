@@ -3,9 +3,6 @@ import { rfs } from '../../models/rfs'
 import Color from 'color'
 
 export const StyleBase = createGlobalStyle`
-	:root {
-		--test: #FF5B4D;
-	}
 	::selection {
 		color: ${({theme}) => theme.colors[1]};
 		background: ${({theme}) => Color(theme.colors[2][0]).alpha(0.5).toString()};
@@ -64,5 +61,15 @@ export const StyleBase = createGlobalStyle`
 		li::marker {
 			color: ${({theme}) => theme.colors[4][0]};
 		}
+	}
+	.lightbox-video {
+		display: flex;
+		height: auto;
+		margin: auto;
+		max-height: 100%;
+		max-width: 100%;
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
 	}
 `

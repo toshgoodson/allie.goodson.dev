@@ -38,7 +38,7 @@ export const PageFooter: React.FC<Props> = (props) => {
 
 	return (
 		<Padding className="footer">
-			<div className="container">
+			<div className="container gx-reset">
 				<div className="row justify-content-end align-items-center">
 					<div className="col-auto">
 						<LinkButton type="button" onClick={handleToggleMode}>{props.darkMode ? <FiSunrise title="Toggle light mode"/> : <FiSunset title="Toggle dark mode"/>}</LinkButton>

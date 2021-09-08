@@ -1,13 +1,16 @@
-// $rfs-rem-value: 1;
-// $rfs-base-value: 20rem;
-// $font-size-root: 1px;
-// $font-size-base: 16rem;
-// $spacer: 12rem;
-// $grid-gutter-width: 24rem;
+/* Handy reset for gutters (since use of gx-* and gy-* cascades to children) */
+.gx-reset {
+	--bs-gutter-x: initial;
+}
+.gy-reset {
+	--bs-gutter-y: initial;
+}
 
-// @import "~bootstrap/scss/bootstrap-reboot.scss";
-// @import "~bootstrap/scss/bootstrap-grid.scss";
-// @import "~bootstrap/scss/_navbar.scss";
+/* So SPA page transitions don't smoothly scroll to top */
+html.normal-scroll {
+	scroll-behavior: auto !important;
+}
 
 @import "~bootstrap/scss/bootstrap.scss";
 @import '~swiper/swiper-bundle.css';
+@import "~photoswipe/dist/photoswipe.css";
