@@ -37,7 +37,6 @@ export default function Multimedia(props: Props) {
 			childSelector: '.js-gallery-item',
 			loop: true,
 			pswpModule: PhotoSwipe,
-			// showHideAnimationType: 'fade'
 		})
 		lightbox.on('itemData', (e: any) => {
 			const element = e.itemData.element;
@@ -45,10 +44,6 @@ export default function Multimedia(props: Props) {
 				const videoURL = element.href;
 				const imgPoster= element.dataset.pswpVideoPoster;
 				e.itemData = {
-					// ...e.itemData,
-					// msrc: imgPoster,
-					// src: imgPoster,
-					// html: `<video style="height: ${e.itemData.h}px; width: ${e.itemData.w}px; object-fit: cover;" autoplay loop poster="${imgPoster}"><source src="${videoURL}"></video>`
 					html: `<video style="height: ${e.itemData.h}px; width: ${e.itemData.w}px; object-fit: contain;" class="lightbox-video" autoplay loop poster="${imgPoster}"><source src="${videoURL}"></video>`
 				}
 			}
@@ -168,74 +163,6 @@ export default function Multimedia(props: Props) {
 				</React.Fragment>
 			)}
 		</div>
-		{/* <LightGallery
-			speed={500}
-			mode="lg-fade"
-			download={false}
-			plugins={[lgVideo]}
-		>
-			<a data-lg-size="554-554" data-src={tigerThumb} className="gallery-item">
-				<img src={tigerThumb} className="img-responsive" />
-			</a>
-			<a data-lg-size="682-904" data-video={`{"source": [{"src":"${testVideo}", "type":"video/webm"}], "attributes": {"preload": false, "autoplay": true}}`}>
-				<img src={tigerThumb} />
-			</a>
-		</LightGallery> */}
-
-		{/* <Gallery>
-			<Item
-				original="https://placekitten.com/1024/768?image=1"
-				thumbnail={tigerThumb}
-				width="1024"
-				height="768"
-				cropped={true}
-				
-			>
-				{({ ref, open }) => (
-					<a onClick={(e) => {e.preventDefault(); open()}} href="https://placekitten.com/1024/768?image=1" target="_blank">
-						<img ref={ref as any} src={tigerThumb} data-pswp-width="554" data-pswp-height="554" width="554" height="554" style={{height: '554px', width: '554px'}}/>
-					</a>
-				)}
-			</Item>
-			<Item
-				original="https://placekitten.com/1024/768?image=2"
-				thumbnail="https://placekitten.com/80/60?image=2"
-				width="1024"
-				height="768"
-			>
-				{({ ref, open }) => (
-					<a onClick={(e) => {e.preventDefault(); open()}} href="https://placekitten.com/1024/768?image=2" target="_blank">
-						<img ref={ref as any} src="https://placekitten.com/80/60?image=2" />
-					</a>
-				)}
-			</Item>
-		</Gallery> */}
-
-		{/* <div id="gallery">
-			<a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-2500.jpg" 
-				data-pswp-width="1875" 
-				data-pswp-height="2500" 
-				data-cropped="true" 
-				target="_blank">
-				<img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-200.jpg" alt="" style={{height: '300px', objectFit: 'cover'}} />
-			</a>
-			<a href={testVideo}
-				data-pswp-video-poster={spineThumb}
-				data-pswp-width="682"
-				data-pswp-height="904"
-				data-cropped="true" 
-				data-pswp-is-video="true"
-				target="_blank">
-				<img src={spineThumb} alt="" style={{height: '554px', width: '554px', objectFit: 'cover'}} />
-			</a>
-			<a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-2500.jpg" 
-				data-pswp-width="1875" 
-				data-pswp-height="2500" 
-				data-cropped="true" 
-				target="_blank">
-				<img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-200.jpg" alt="" style={{height: '300px', objectFit: 'cover'}} />
-			</a>
-		</div> */}
 	</SidebarLayout>
 }
 
