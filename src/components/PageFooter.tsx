@@ -4,10 +4,12 @@ import { FiSunrise, FiSunset } from 'react-icons/fi'
 import { HiOutlineMail } from 'react-icons/hi'
 import { IoLogoLinkedin } from 'react-icons/io'
 import { RiCopyrightLine } from 'react-icons/ri'
+import { toast } from 'react-toastify'
 import styled from "styled-components"
 import { useAppDispatch } from "../models/redux/hooks"
 import { rfs } from "../models/rfs"
 import { LinkButton } from "./Buttons"
+import { ModeToggleToastContainer } from "./ModeToggleToastContainer"
 
 
 const Padding = styled.div`
@@ -33,6 +35,9 @@ export const PageFooter: React.FC<Props> = (props) => {
 	const dispatch = useAppDispatch()
 
 	const handleToggleMode = () => {
+		toast(props.darkMode ? 'Ah, light mode!' : 'Ooo, dark mode.', {
+			containerId: 'modeToggle'
+		}, )
 		dispatch({type: 'TOGGLE_DARK_MODE'})
 	}
 
@@ -40,7 +45,8 @@ export const PageFooter: React.FC<Props> = (props) => {
 		<Padding className="footer">
 			<div className="container gx-reset">
 				<div className="row justify-content-end align-items-center">
-					<div className="col-auto">
+					<div className="col-auto position-relative">
+						<ModeToggleToastContainer/>
 						<LinkButton type="button" onClick={handleToggleMode}>{props.darkMode ? <FiSunrise title="Toggle light mode"/> : <FiSunset title="Toggle dark mode"/>}</LinkButton>
 					</div>
 					<div className="col-auto">
