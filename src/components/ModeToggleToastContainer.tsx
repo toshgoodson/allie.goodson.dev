@@ -50,7 +50,7 @@ const StyledToastContainer = styled(ToastContainer)`
 		color: ${({theme}) => theme.colors[0]};
 		cursor: pointer;
 		font-family: 'Open Sans', sans-serif;
-		${rfs.fontSize('18px')}
+		${rfs.fontSize('16px')}
 		${rfs.marginBottom('10px')}
 		${rfs.padding('7px 20px')}
 		transition: opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -71,10 +71,10 @@ const StyledToastContainer = styled(ToastContainer)`
 		}
 	}
 	.zjwoop-in {
-		animation: ${zjwoopIn} 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
+		animation: ${zjwoopIn} 0.4s cubic-bezier(0.23, 1, 0.32, 1) both;
 	}
 	.zjwoop-out {
-		animation: ${zjwoopOut} 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
+		animation: ${zjwoopOut} 0.4s cubic-bezier(0.23, 1, 0.32, 1) both;
 	}
 `
 const zjwoop = cssTransition({
