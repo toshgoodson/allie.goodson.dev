@@ -1,1 +1,0 @@
-self.__SSG_MANIFEST=new Set(["\u002F","\u002Fmarshawarma","\u002Fcopyright","\u002Fabout","\u002Fmultimedia","\u002Fcontact"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
