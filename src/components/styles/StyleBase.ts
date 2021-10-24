@@ -58,6 +58,10 @@ export const StyleBase = createGlobalStyle`
 		list-style-position: inside;
 		padding: 0;
 
+		&:last-child {
+			margin-bottom: 0;
+		}
+
 		li::marker {
 			color: ${({theme}) => theme.colors[4][0]};
 		}
