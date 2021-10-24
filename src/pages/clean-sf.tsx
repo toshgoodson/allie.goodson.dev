@@ -42,6 +42,7 @@ const ColorBox = styled.div`
 const OverviewText = styled.h2`
 	font-family: 'Judson', serif;
 	${rfs.fontSize('42px')};
+	font-weight: normal;
 	line-height: 1;
 	margin: 0;
 `
