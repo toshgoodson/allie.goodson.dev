@@ -27,6 +27,7 @@ import { MainLayout } from '../components/layout/MainLayout'
 import { Spacer } from '../components/layout/Spacer'
 import { MarshawarmaTitle } from '../components/marshawarma/MarshawarmaTitle'
 import { Picture } from '../components/Picture'
+import { ProjectOverview } from '../components/projects/ProjectOverview'
 import { PageProps } from '../interfaces/PageProps'
 import { Breakpoints } from '../models/Breakpoints'
 import { useAppSelector } from '../models/redux/hooks'
@@ -83,14 +84,15 @@ export default function Marshawarma(props: Props) {
 					}} />
 				</div>
 			</div>
-			<Spacer size={14} />
-			<h2>My 1st UX Project: I’ve gotta start somewhere</h2>
-			<Spacer size={12} />
-			<p>I am currently enrolled in the Google UX Design course through Coursera. Through the help of a design challenge generator each student is assigned a theme for a fictional app. My challenge is to “design a customer loyalty app for a food truck in California.” I decided to make an app for Marshawarma, a food truck specializing in Marshmallow desserts. This may sound like a “highdea”, but I just really love marshmallows and wanted to throw this idea to the universe and maybe one day Marshawarma will be realized.</p>
-			<p>Tools: Figma, Procreate</p>
-			<Spacer size={36} />
-			<hr />
-			<Spacer size={36} />
+		</ContentContainer>
+		<Spacer size={14} />
+		<div className="container-xl gx-0">
+			<ProjectOverview tools="Figma, Procreate">
+				<p>During the Google UX Design Certificate course, participants are assigned an app design challenge through a challenge generator. My challenge was to “design a customer loyalty app for a food truck in California.” I decided to make an app for Marshawarma, a food truck specializing in Marshmallow desserts. This may sound like a “highdea”, but I just really love marshmallows and wanted to throw this idea to the universe and maybe one day Marshawarma will be realized.</p>
+			</ProjectOverview>
+		</div>
+		<Spacer size={64} />
+		<ContentContainer>
 			<h2>Research</h2>
 			<Spacer size={12} />
 			<p>I conducted user interviews and competitive analysis to discover user behaviors and needs as well as what products and features are already available to people.</p>

@@ -1,36 +1,36 @@
+import Color from 'color'
 import { GetStaticProps } from 'next'
 import React from 'react'
 import styled from 'styled-components'
-import featureScreen from '../../assets/images/cleanSf/screen-feature.webp'
-import featureScreenFallback from '../../assets/images/cleanSf/screen-feature.png'
 import cleanMissionLogo from '../../assets/images/cleanSf/clean-mission-logo.png'
 import empathyMapImg from '../../assets/images/cleanSf/empathy-map.png'
-import paperMockOne from '../../assets/images/cleanSf/paper-mock-1.jpg'
-import paperMockOne2x from '../../assets/images/cleanSf/paper-mock-1@2x.jpg'
 import mocksImg from '../../assets/images/cleanSf/mocks.jpg'
 import mocksImg2x from '../../assets/images/cleanSf/mocks@2x.jpg'
-import styleGuideImg from '../../assets/images/cleanSf/style-guide.jpg'
+import paperMockOne from '../../assets/images/cleanSf/paper-mock-1.jpg'
+import paperMockOne2x from '../../assets/images/cleanSf/paper-mock-1@2x.jpg'
 import refuseRefuseLogo from '../../assets/images/cleanSf/refuse-refuse-logo.png'
 import rubbishLogo from '../../assets/images/cleanSf/rubbish-logo.png'
-import sfPublicWorksLogo from '../../assets/images/cleanSf/sf-public-works-logo.png'
-import siteMapImg from '../../assets/images/cleanSf/site-map.png'
-import mobileScreen from '../../assets/images/cleanSf/screen-mobile.jpg'
-import mobileScreen2x from '../../assets/images/cleanSf/screen-mobile@2x.jpg'
 import desktopScreen from '../../assets/images/cleanSf/screen-desktop.jpg'
 import desktopScreen2x from '../../assets/images/cleanSf/screen-desktop@2x.jpg'
+import featureScreenFallback from '../../assets/images/cleanSf/screen-feature.png'
+import featureScreen from '../../assets/images/cleanSf/screen-feature.webp'
+import mobileScreen from '../../assets/images/cleanSf/screen-mobile.jpg'
+import mobileScreen2x from '../../assets/images/cleanSf/screen-mobile@2x.jpg'
+import sfPublicWorksLogo from '../../assets/images/cleanSf/sf-public-works-logo.png'
+import siteMapImg from '../../assets/images/cleanSf/site-map.png'
+import styleGuideImg from '../../assets/images/cleanSf/style-guide.jpg'
 import { AnalysisColumn } from '../components/AnalysisColumn'
 import { ContentContainer } from '../components/layout/ContentContainer'
 import { MainLayout } from '../components/layout/MainLayout'
 import { Padding } from '../components/layout/Padding'
 import { Spacer } from '../components/layout/Spacer'
+import { Picture } from '../components/Picture'
 import { Card } from '../components/projects/Card'
+import { ProjectOverview } from '../components/projects/ProjectOverview'
 import { PageProps } from '../interfaces/PageProps'
-import { Breakpoints } from '../models/Breakpoints'
 import { useAppSelector } from '../models/redux/hooks'
 import { wrapper } from '../models/redux/store'
 import { rfs } from '../models/rfs'
-import { Picture } from '../components/Picture'
-import Color from 'color'
 
 const H1 = styled.h1`
 	${rfs.fontSize('48px')};
@@ -38,13 +38,6 @@ const H1 = styled.h1`
 `
 const ColorBox = styled.div`
 	background: ${({theme}) => theme.colors[6]};
-`
-const OverviewText = styled.h2`
-	font-family: 'Judson', serif;
-	${rfs.fontSize('42px')};
-	font-weight: normal;
-	line-height: 1;
-	margin: 0;
 `
 const FeaturePicture = styled(Picture)`
 	display: block;
@@ -104,44 +97,31 @@ export default function CleanSf(props: Props) {
 				alt: 'Clean SF device preview'
 			}} />
 		</ContentContainer>
-		<div className="container">
-			<ColorBox>
-				<Padding top={24} bottom={64}>
-					<ContentContainer>
-						<div className="row gy-4 align-items-end">
-							<div className="col-auto">
-								<OverviewText>Project Overview</OverviewText>
-							</div>
-							<div className="col-auto fw-light">
-								Tools: Adobe XD
-							</div>
+		<div className="container-xl gx-0">
+			<ProjectOverview tools="Adobe XD">
+				<div className="row gy-5">
+					<div className="col-12 col-md-6">
+						<div className="text-uppercase text-weight-bold">
+							Challenge
 						</div>
-						<Spacer size={64}/>
-						<div className="row gy-5">
-							<div className="col-12 col-md-6">
-								<div className="text-uppercase text-weight-bold">
-									Challenge
-								</div>
-								<Spacer size={24}/>
-								<div className="fw-light">
-									Many community cleanup organizations operate in the city of San Francisco while garbage continues to litter the streets and be illegally dumped. Cleanup events struggle to keep pace with litter and should not be relied upon solely, but the current municipal waste management solution should not be impacted.
-								</div>
-							</div>
-							<div className="col-12 col-md-6">
-								<div className="text-uppercase text-weight-bold">
-									Methods
-								</div>
-								<Spacer size={24}/>
-								<div className="fw-light">
-									<div><Arrow>‣</Arrow> Design a responsive and accessible website for a fictional municipal program</div>
-									<Spacer size={24} />
-									<div><Arrow>‣</Arrow> Branding and outreach that will encourage people to participate and support the program</div>
-								</div>
-							</div>
+						<Spacer size={24}/>
+						<div className="fw-light">
+							Many community cleanup organizations operate in the city of San Francisco while garbage continues to litter the streets and be illegally dumped. Cleanup events struggle to keep pace with litter and should not be relied upon solely, but the current municipal waste management solution should not be impacted.
 						</div>
-					</ContentContainer>
-				</Padding>
-			</ColorBox>
+					</div>
+					<div className="col-12 col-md-6">
+						<div className="text-uppercase text-weight-bold">
+							Methods
+						</div>
+						<Spacer size={24}/>
+						<div className="fw-light">
+							<div><Arrow>‣</Arrow> Design a responsive and accessible website for a fictional municipal program</div>
+							<Spacer size={24} />
+							<div><Arrow>‣</Arrow> Branding and outreach that will encourage people to participate and support the program</div>
+						</div>
+					</div>
+				</div>
+			</ProjectOverview>
 		</div>
 		<Spacer size={64}/>
 		<ContentContainer>
@@ -307,7 +287,7 @@ export default function CleanSf(props: Props) {
 			<img src={styleGuideImg} alt="Style guide" />
 		</div>
 		<Spacer size={41} />
-		<div className="container">
+		<div className="container-xl gx-0">
 			<ColorBox>
 				<Padding top={39}>
 					<ContentContainer>
@@ -322,14 +302,6 @@ export default function CleanSf(props: Props) {
 							<a href="https://xd.adobe.com/view/b3dd9cca-a837-49a1-99c7-1b65e6416da0-e68e/?fullscreen" target="_blank">
 								<MobileImage src={mobileScreen} srcSet={`${mobileScreen2x} 2x`}/>
 							</a>
-						{/* <div className="row gx-5 justify-content-center">
-							<div className="col-auto">
-								
-							</div>
-							<div className="col-auto">
-								
-							</div>
-						</div> */}
 						</PrototypeOffset>
 					</ContentContainer>
 				</Padding>
