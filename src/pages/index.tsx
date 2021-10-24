@@ -2,6 +2,8 @@ import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
+import cleanSfFallback from '../../assets/images/home/clean-sf-preview.png'
+import cleanSfImg from '../../assets/images/home/clean-sf-preview.webp'
 import marshawarmaDarkFallback from '../../assets/images/home/marshawarma-preview-dark.png'
 import marshawarmaDarkImg from '../../assets/images/home/marshawarma-preview-dark.webp'
 import marshawarmaFallback from '../../assets/images/home/marshawarma-preview.png'
@@ -135,17 +137,18 @@ export default function Home(props: Props) {
 							}
 						}
 					}, {
-						disabled: true,
-						title: 'Government Website',
+						title: 'Clean SF',
 						type: 'UX/UI Web Design',
-						url: '/gov',
+						url: '/clean-sf',
 						image: {
-							sources: [],
+							sources: [{
+								srcSet: cleanSfImg
+							}],
 							fallback: {
-								src: '',
-								alt: ''
+								src: cleanSfFallback,
+								alt: 'Clean SF'
 							}
-						}
+						},
 					}, {
 						disabled: true,
 						title: 'Project in the Works',
