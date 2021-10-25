@@ -77,6 +77,11 @@ export const ArtEntry: FC<Props> = ({year, title, medium, items}) => {
 									data-pswp-video-poster={item.posterSrc}
 									target="_blank">
 										<Thumbnail src={item.thumb.src} srcSet={item.thumb.src2x && `${item.thumb.src2x} 2x`} alt={item.thumb.alt}/>
+										<div className="pswp__hidden-caption-content">
+											({year}).<br/>
+											<em>{title}</em><br/>
+											[{medium}].
+										</div>
 									</ArtLink>
 								</div>
 							)}
