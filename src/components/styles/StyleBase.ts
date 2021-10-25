@@ -76,4 +76,18 @@ export const StyleBase = createGlobalStyle`
 		top: 50%;
 		transform: translateY(-50%);
 	}
+
+	.pswp__custom-caption {
+		font-size: 16px;
+		color: var(--pswp-icon-color);
+		padding: 2px 8px;
+		border-radius: 4px;
+
+		position: absolute;
+		left: 16px;
+		bottom: 16px;
+	}
+	.pswp__hidden-caption-content {
+		display: none;
+	}
 `

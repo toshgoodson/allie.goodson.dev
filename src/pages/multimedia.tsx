@@ -38,12 +38,39 @@ export default function Multimedia(props: Props) {
 			loop: true,
 			pswpModule: PhotoSwipe,
 		})
+		lightbox.on('uiRegister', function () {
+			lightbox.pswp.ui.registerElement({
+				name: 'custom-caption',
+				order: 9,
+				isButton: false,
+				appendTo: 'root',
+				html: 'Caption text',
+				onInit: (el: any, pswp: any) => {
+					lightbox.pswp.on('change', () => {
+						const currSlideElement = lightbox.pswp.currSlide.data.element
+						let captionHTML = ''
+						if (currSlideElement) {
+							const hiddenCaption = currSlideElement.querySelector('.pswp__hidden-caption-content')
+							if (hiddenCaption) {
+								// get caption from element with class hidden-caption-content
+								captionHTML = hiddenCaption.innerHTML
+							} else {
+								// get caption from alt attribute
+								captionHTML = currSlideElement.querySelector('img').getAttribute('alt')
+							}
+						}
+						el.innerHTML = captionHTML || ''
+					})
+				}
+			})
+		})
 		lightbox.on('itemData', (e: any) => {
 			const element = e.itemData.element;
-			if (element  && element.dataset.pswpIsVideo) {
+			if (element && element.dataset.pswpIsVideo) {
 				const videoURL = element.href;
-				const imgPoster= element.dataset.pswpVideoPoster;
+				const imgPoster = element.dataset.pswpVideoPoster;
 				e.itemData = {
+					element: element,
 					html: `<video style="height: ${e.itemData.h}px; width: ${e.itemData.w}px; object-fit: contain;" class="lightbox-video" autoplay loop poster="${imgPoster}"><source src="${videoURL}"></video>`
 				}
 			}
@@ -145,21 +172,21 @@ export default function Multimedia(props: Props) {
 			cropped: true,
 			height: 3873,
 			width: 2296
-		}]	
+		}]
 	}]
 
 	return <SidebarLayout {...props} darkMode={darkMode}
 		sidebarContent={<>
 			<div>Here is a collection of a few of my favorite personal and collaborative projects. A few were made to experiment, some made for fun, &amp; all because I love making things.</div>
-			<Spacer size={52}/>
-			<div className="text-end"><small>Please click image to enlarge <BiSmile/></small></div>
+			<Spacer size={52} />
+			<div className="text-end"><small>Please click image to enlarge <BiSmile /></small></div>
 		</>}
 	>
 		<div id="js-gallery">
 			{entries.map((entry, idx, array) =>
 				<React.Fragment key={idx}>
-					<ArtEntry {...entry}/>
-					{idx !== array.length - 1 && <Spacer size={100}/>}
+					<ArtEntry {...entry} />
+					{idx !== array.length - 1 && <Spacer size={100} />}
 				</React.Fragment>
 			)}
 		</div>

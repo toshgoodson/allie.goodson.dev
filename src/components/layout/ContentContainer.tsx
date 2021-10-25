@@ -10,6 +10,6 @@ const SmallContainer = styled.div`
 
 export const ContentContainer: React.FC = ({children}) => {
 	return <SmallContainer>
-		<div className="container">{children}</div>
+		<div className="container gx-reset">{children}</div>
 	</SmallContainer>
 }
