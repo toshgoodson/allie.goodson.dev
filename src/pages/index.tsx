@@ -115,6 +115,19 @@ export default function Home(props: Props) {
 			<PageContent>
 				<div className="container">
 					<ProjectPicker darkMode={darkMode} projects={[{
+						title: 'Clean SF',
+						type: 'UX/UI Web Design',
+						url: '/clean-sf',
+						image: {
+							sources: [{
+								srcSet: cleanSfImg
+							}],
+							fallback: {
+								src: cleanSfFallback,
+								alt: 'Clean SF'
+							}
+						},
+					}, {
 						title: 'Marshawarma',
 						type: 'UX/UI App Design',
 						url: '/marshawarma',
@@ -136,19 +149,6 @@ export default function Home(props: Props) {
 								alt: 'Marshawarma'
 							}
 						}
-					}, {
-						title: 'Clean SF',
-						type: 'UX/UI Web Design',
-						url: '/clean-sf',
-						image: {
-							sources: [{
-								srcSet: cleanSfImg
-							}],
-							fallback: {
-								src: cleanSfFallback,
-								alt: 'Clean SF'
-							}
-						},
 					}, {
 						disabled: true,
 						title: 'Project in the Works',

@@ -67,7 +67,7 @@ export const ArtEntry: FC<Props> = ({year, title, medium, items}) => {
 					<AspectRatio aspectWidth={1} aspectHeight={1}>
 						<div className="row gx-0 w-100 h-100">
 							{items.map((item) => 
-								<div className={'h-100 ' + (item.thumbColSize ? `col-${item.thumbColSize}` : 'col')}>
+								<div key={item.src} className={'h-100 ' + (item.thumbColSize ? `col-${item.thumbColSize}` : 'col')}>
 									<ArtLink href={item.src}
 									className="js-gallery-item"
 									data-pswp-width={item.width}
@@ -89,7 +89,7 @@ export const ArtEntry: FC<Props> = ({year, title, medium, items}) => {
 						<Blur>
 							<div className="row gx-0 w-100 h-100">
 								{items.map((item) => 
-									<div className={'h-100 ' + (item.thumbColSize ? `col-${item.thumbColSize}` : 'col')}>
+									<div key={item.src} className={'h-100 ' + (item.thumbColSize ? `col-${item.thumbColSize}` : 'col')}>
 										<ArtLink href={item.src}
 										data-pswp-width={item.width}
 										data-pswp-height={item.height}
