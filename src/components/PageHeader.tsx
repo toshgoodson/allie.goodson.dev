@@ -82,7 +82,7 @@ export const PageHeader: React.FC = (props) => {
 							<Link href="/contact" passHref><NavLink className="nav-link"><Swoop>Contact</Swoop></NavLink></Link>
 						</li>
 						<li className="nav-item">
-							<Link href="/resume-2022-02-10.pdf" passHref><NavLink className="nav-link" target="_blank"><Swoop>Resume</Swoop></NavLink></Link>
+							<Link href="/resume-2023-03-10.pdf" passHref><NavLink className="nav-link" target="_blank"><Swoop>Resume</Swoop></NavLink></Link>
 						</li>
 					</NavList>
 				</BsNavbar.Collapse>
