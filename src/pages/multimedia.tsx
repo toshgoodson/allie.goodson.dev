@@ -16,8 +16,8 @@ import welding1 from '../../assets/images/multimedia/welding-practice-1.jpg'
 import welding2 from '../../assets/images/multimedia/welding-practice-2.jpg'
 import macrame2Thumb from '../../assets/images/multimedia/macrame-2-thumb.jpg'
 import macrame2 from '../../assets/images/multimedia/macrame-2.jpg'
-import PhotoSwipeLightbox from 'photoswipe/dist/photoswipe-lightbox.esm.min.js';
-import PhotoSwipe from 'photoswipe/dist/photoswipe.esm.min.js';
+import PhotoSwipeLightbox from 'photoswipe/lightbox'
+import PhotoSwipe from 'photoswipe'
 
 import { SidebarLayout } from '../components/layout/SidebarLayout'
 import { Spacer } from '../components/layout/Spacer'
@@ -39,15 +39,15 @@ export default function Multimedia(props: Props) {
 			pswpModule: PhotoSwipe,
 		})
 		lightbox.on('uiRegister', function () {
-			lightbox.pswp.ui.registerElement({
+			lightbox.pswp?.ui?.registerElement({
 				name: 'custom-caption',
 				order: 9,
 				isButton: false,
 				appendTo: 'root',
 				html: 'Caption text',
 				onInit: (el: any, pswp: any) => {
-					lightbox.pswp.on('change', () => {
-						const currSlideElement = lightbox.pswp.currSlide.data.element
+					lightbox?.pswp?.on('change', () => {
+						const currSlideElement = lightbox?.pswp?.currSlide?.data.element
 						let captionHTML = ''
 						if (currSlideElement) {
 							const hiddenCaption = currSlideElement.querySelector('.pswp__hidden-caption-content')
@@ -56,7 +56,7 @@ export default function Multimedia(props: Props) {
 								captionHTML = hiddenCaption.innerHTML
 							} else {
 								// get caption from alt attribute
-								captionHTML = currSlideElement.querySelector('img').getAttribute('alt')
+								captionHTML = currSlideElement.querySelector('img')?.getAttribute('alt') ?? ''
 							}
 						}
 						el.innerHTML = captionHTML || ''
