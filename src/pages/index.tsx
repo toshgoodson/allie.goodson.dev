@@ -94,7 +94,7 @@ export default function Home(props: Props) {
 				<PageContent>
 					<ContentContainer>
 						<h1>Hello, I'm <Brand>Allie</Brand>.</h1>
-						<Subheader>I am a designer and artist based in San Francisco.<br/>I have a passion for <Wide>aesthetic<span>s</span></Wide> &amp; actually taking a moment to stop and smell the flowers.</Subheader>
+						<Subheader>I am a designer and artist based in California.<br/>I have a passion for <Wide>aesthetic<span>s</span></Wide> &amp; actually taking a moment to stop and smell the flowers.</Subheader>
 					</ContentContainer>
 				</PageContent>
 				<ContentContainer>
@@ -177,7 +177,7 @@ export const getStaticProps: GetStaticProps<Props> = wrapper.getStaticProps(stor
 			props: {
 				meta: {
 					title: 'home | allie goodson',
-					description: "Hello, I'm Allie. I am a designer and artist based in San Francisco. I have a passion for  A E S T H E T I C S  & actually taking a moment to stop and smell the flowers."
+					description: "Hello, I'm Allie. I am a designer and artist based in California. I have a passion for  A E S T H E T I C S  & actually taking a moment to stop and smell the flowers."
 				}
 			}
 		}
