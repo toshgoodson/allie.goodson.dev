@@ -63,7 +63,7 @@ export const getStaticProps: GetStaticProps<Props> = wrapper.getStaticProps(stor
 			props: {
 				meta: {
 					title: 'contact | allie goodson',
-					description: "Hello, I'm Allie. I am a designer and artist based in San Francisco. Let’s connect! Email me anytime about questions, project collaborations, UX work, or whatever else."
+					description: "Hello, I'm Allie. I am a designer and artist based in California. Let’s connect! Email me anytime about questions, project collaborations, UX work, or whatever else."
 				}
 			}
 		}
