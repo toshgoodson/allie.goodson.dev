@@ -224,7 +224,7 @@ export const getStaticProps: GetStaticProps<Props> = wrapper.getStaticProps(stor
 			props: {
 				meta: {
 					title: 'marshawarma | allie goodson',
-					description: ''
+					description: 'Marshawarma, a food truck specializing in Marshmallow desserts. This was made during an app design challenge for “a customer loyalty app for a food truck in California.”'
 				}
 			}
 		}
