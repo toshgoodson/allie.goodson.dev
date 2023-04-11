@@ -322,8 +322,8 @@ export const getStaticProps: GetStaticProps<Props> = wrapper.getStaticProps(stor
 		return {
 			props: {
 				meta: {
-					title: 'marshawarma | allie goodson',
-					description: ''
+					title: 'clean sf | allie goodson',
+					description: 'A fictional responsive government website and a real solution to pollution. Created during for a challenge to design a responsive and accessible website for a fictional municipal program.'
 				}
 			}
 		}
