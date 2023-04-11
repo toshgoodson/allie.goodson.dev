@@ -19,6 +19,7 @@ const Swoop = styled(BaseSwoop)`
 const Email = styled(Brand)`
 	color: ${({theme}) => theme.colors[1]};
 	${rfs.fontSize('44px')}
+	${rfs.marginBottom('20px')}
 
 	a { 
 		color: inherit !important;
@@ -32,12 +33,19 @@ const Email = styled(Brand)`
 const ColorSection = styled.div`
 	background: ${({theme}) => theme.colors[3]};
 	flex: 1;
-	${rfs.padding('5px 0 120px')}
+	${rfs.padding('10px 0 120px')}
+	position: relative;
 `
 const Subheader = styled.div`
 	font-family: 'Judson', serif;
 	${rfs.fontSize('31px')}
 	font-weight: bold;
+`
+
+const ReferenceInfo = styled.div`
+	bottom: 12px;
+	font-family: 'Judson', serif;
+	position: absolute;
 `
 
 type Props = PageProps
@@ -53,7 +61,11 @@ export default function Contact(props: Props) {
 			<ContentContainer>
 				<Subheader>Let’s connect! Email me anytime about questions, project collaborations, UX work, or whatever else.</Subheader>
 			</ContentContainer>
+			<ContentContainer>
+				<ReferenceInfo>References and letters of recommendation available upon request.</ReferenceInfo>
+			</ContentContainer>
 		</ColorSection>
+		
 	</MainLayout>
 }
 

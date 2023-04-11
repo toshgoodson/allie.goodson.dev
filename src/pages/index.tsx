@@ -2,6 +2,8 @@ import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
+import startupScienceFallback from '../../assets/images/home/boss-startup-science-preview.png'
+import startupScienceImg from '../../assets/images/home/boss-startup-science-preview.webp'
 import cleanSfFallback from '../../assets/images/home/clean-sf-preview.png'
 import cleanSfImg from '../../assets/images/home/clean-sf-preview.webp'
 import marshawarmaDarkFallback from '../../assets/images/home/marshawarma-preview-dark.png'
@@ -115,6 +117,19 @@ export default function Home(props: Props) {
 			<PageContent>
 				<div className="container">
 					<ProjectPicker darkMode={darkMode} projects={[{
+						title: 'Startup Science',
+						type: 'UX Design',
+						url: '/boss-startup-science',
+						image: {
+							sources: [{
+								srcSet: startupScienceImg
+							}],
+							fallback: {
+								src: startupScienceFallback,
+								alt: 'BOSS Startup Science'
+							}
+						}
+					}, {
 						title: 'Clean SF',
 						type: 'UX/UI Web Design',
 						url: '/clean-sf',
