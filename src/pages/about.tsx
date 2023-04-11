@@ -64,7 +64,7 @@ export default function About(props: Props) {
 				</div>
 				<div className="col-12 col-md-7">
 					<Description>
-						<p>Hello! I’m <Brand>Allie</Brand>. I am an artist with a bachelor’s in Digital Media Art from San Jose State University and a hopeful UX designer.</p>
+						<p>Hello! I’m <Brand>Allie</Brand>. I am an artist with a bachelor’s in Digital Media Art from San Jose State University and professional UX/UI designer.</p>
 
 						<p>My free time is usually spent on personal art projects or collaborative projects with friends in any medium I can get my hands on. I am excited to join a team that is motivated by solving problems and designing for change in the world.</p>
 					</Description>
@@ -81,7 +81,7 @@ export const getStaticProps: GetStaticProps<Props> = wrapper.getStaticProps(stor
 			props: {
 				meta: {
 					title: 'about | allie goodson',
-					description: 'Hello! I’m Allie. I am an artist with a bachelor’s in Digital Media Art from San Jose State University and a hopeful UX designer.'
+					description: 'Hello! I’m Allie. I am an artist with a bachelor’s in Digital Media Art from San Jose State University and a professional UX/UI designer.'
 				}
 			}
 		}
