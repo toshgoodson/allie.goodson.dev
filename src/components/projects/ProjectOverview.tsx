@@ -17,16 +17,17 @@ const OverviewText = styled.h2`
 `
 
 export type Props = {
+	title?: string
 	tools: string
 }
 
-export const ProjectOverview: FC<Props> = ({tools, children}) => {
+export const ProjectOverview: FC<Props> = ({title, tools, children}) => {
 	return <ColorBox>
 		<Padding top={24} bottom={64}>
 			<ContentContainer>
 				<div className="row gy-4 align-items-end">
 					<div className="col-auto">
-						<OverviewText>Project Overview</OverviewText>
+						<OverviewText>{title ?? 'Project Overview'}</OverviewText>
 					</div>
 					<div className="col-auto fw-light">
 						Tools: {tools}
