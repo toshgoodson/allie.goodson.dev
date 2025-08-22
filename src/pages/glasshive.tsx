@@ -62,7 +62,7 @@ export default function GlassHive(props: Props) {
 		</ContentContainer>
 		<div className="container-xl gx-0">
 			<ProjectOverview title="Overview" tools="Figma, Adobe XD, Adobe CC, Jira">
-				<div className="row gy-5">
+				<div className="row gy-5 gx-6">
 					<div className="col-12 col-md-6">
 						<div className="text-uppercase text-weight-bold">
 							Product
@@ -114,7 +114,7 @@ export default function GlassHive(props: Props) {
 			<WarmColorBox>
 				<Padding top={39} bottom={39}>
 					<ContentContainer>
-						<h3>Calendar Redesign</h3>
+						<h2>Calendar Redesign</h2>
 						<Spacer size={16} />
 						<p>I led the complete redesign of the calendar feature, transforming it from a static tool into a dynamic scheduling hub. This project addressed long-standing usability challenges while introducing powerful new capabilities such as integrated meeting scheduling, flexible daily and weekly views, and streamlined booking flows. The result was a tool that not only looked modern but also directly improved efficiency for users managing busy schedules.</p>
 						<Spacer size={56} />
