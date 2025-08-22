@@ -2,6 +2,8 @@ import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
+import glassHiveFallback from '../../assets/images/home/glasshive-preview.png'
+import glassHiveImg from '../../assets/images/home/glasshive-preview.webp'
 import startupScienceFallback from '../../assets/images/home/boss-startup-science-preview.png'
 import startupScienceImg from '../../assets/images/home/boss-startup-science-preview.webp'
 import cleanSfFallback from '../../assets/images/home/clean-sf-preview.png'
@@ -117,6 +119,19 @@ export default function Home(props: Props) {
 			<PageContent>
 				<div className="container">
 					<ProjectPicker darkMode={darkMode} projects={[{
+						title: 'GlassHive',
+						type: 'UX/UI Design',
+						url: '/glasshive',
+						image: {
+							sources: [{
+								srcSet: glassHiveImg
+							}],
+							fallback: {
+								src: glassHiveFallback,
+								alt: 'GlassHive'
+							}
+						}
+					},{
 						title: 'Startup Science',
 						type: 'UX Design',
 						url: '/boss-startup-science',

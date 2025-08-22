@@ -8,7 +8,8 @@ export const theme: Theme = {
 		'#FFD7D3',
 		['#E0877F', '#313539', '#313539', '#313539'],
 		'#222222',
-		'#F4D0CA'
+		'#F4D0CA',
+		'#F7F0E8'
 	]
 }
 
@@ -20,6 +21,7 @@ export const darkTheme: Theme = {
 		'#3E3D32',
 		['#DB1273', '#FDFDFD', '#FDFDFD', '#FDFDFD'],
 		'#222222',
-		'#3E3D32'
+		'#3E3D32',
+		'#2E2D22'
 	]
 }
