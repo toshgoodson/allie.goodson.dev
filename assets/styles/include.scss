@@ -15,3 +15,10 @@ html.normal-scroll {
 @import '~swiper/swiper-bundle.css';
 @import "~photoswipe/dist/photoswipe.css";
 @import "~react-toastify/dist/ReactToastify.minimal.css";
+
+.g-6, .gy-6 {
+  --bs-gutter-y: 3.5rem;
+}
+.g-6, .gx-6 {
+  --bs-gutter-x: 3.5rem;
+}
