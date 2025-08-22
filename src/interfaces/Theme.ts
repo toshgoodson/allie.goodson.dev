@@ -7,7 +7,8 @@ export type ThemeColors = [
 	string, // sections and asides
 	LinkColors, // special links
 	string, // shadows,
-	string // project overview background
+	string, // project overview background
+	string, // alternative box bg
 ]
 
 export type Theme = {
