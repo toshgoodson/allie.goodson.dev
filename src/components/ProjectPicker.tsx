@@ -44,7 +44,7 @@ const ProjectList = styled.ul`
 	}
 `
 const ListItem = styled.li`
-	${rfs.marginBottom('63px')}
+	${rfs.marginBottom('48px')}
 
 	&:last-child {
 		margin-bottom: 0;
