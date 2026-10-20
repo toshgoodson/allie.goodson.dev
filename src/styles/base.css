@@ -1,0 +1,51 @@
+/* Site-wide additions that sit around the ported sketch CSS: fonts, canvas zoom,
+   real links and buttons, focus rings, and the phone-menu dimmer. */
+@font-face{font-family:Corben;font-weight:700;font-display:swap;src:url(/fonts/corben-700.woff2) format('woff2')}
+@font-face{font-family:Corben;font-weight:400;font-display:swap;src:url(/fonts/corben-400.woff2) format('woff2')}
+@font-face{font-family:Shantell;font-weight:300 800;font-display:swap;src:url(/fonts/shantell-full.woff2) format('woff2-variations'),url(/fonts/shantell-full.woff2) format('woff2')}
+html,body{margin:0}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+/* Full-width pieces can round a hair past the window; never let that scroll sideways */
+body{overflow-x:clip}
+
+/* Fixed-width canvas (680px, or 390px on phones) scaled to the window; --z is set before first paint. */
+.pp{zoom:var(--z,1)}
+
+/* Images carry their intrinsic size; CSS sets the displayed size. */
+img{height:auto}
+
+/* Sketch elements that became real links and buttons */
+.nm,.lk a{text-decoration:none}
+a.nx{display:block;color:inherit;text-decoration:none}
+button.tg,button.bgr{border:0;padding:0;background:none;font:inherit}
+h1.ab{margin:0}
+
+/* Theme toggle shows the sun in light mode, the moon in dark */
+.nav .ti .i-moon,html.dk .nav .ti .i-sun{display:none}
+html.dk .nav .ti .i-moon{display:block}
+/* Hamburger turns into an X while the phone menu is open */
+.nav .hb .i-x,.nav .bgr .i-x,html.m .nav [aria-expanded=true] .i-menu{display:none}
+html.m .nav [aria-expanded=true] .i-x{display:block}
+
+/* Nav hover: a soft tint in the same rounded shape as the current-page chip
+   (the phone menu row uses the chip's padding/margin so the text doesn't move). */
+.lk a{transition:background .2s,color .2s}
+.nav .mm a{transition:opacity .25s,transform .4s cubic-bezier(.2,.8,.2,1),background .2s}
+@media (hover:hover){
+	.lk a:not(.on):hover{background:color-mix(in srgb,var(--pt) 16%,transparent)}
+	.mm a:not(.on):hover{background:color-mix(in srgb,var(--pt) 14%,transparent);border-radius:18px;padding:14px 16px;margin:0 -16px;border-bottom-color:transparent}
+	.mm a:has(+ a:not(.on):hover){border-bottom-color:transparent}
+}
+
+/* Visible focus ring: a page-colored halo inside an ink-colored outline reads on every background */
+:focus-visible{outline:2px solid var(--ink,#262068);outline-offset:2px;box-shadow:0 0 0 2px var(--page,#FDFAF3)}
+.tg:focus-visible{border-radius:50%}
+.row:focus-visible,.nx:focus-visible{outline-offset:-4px;box-shadow:inset 0 0 0 6px var(--page,#FDFAF3)}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Dims the page behind the open phone menu */
+.mmo{position:fixed;inset:0;z-index:29;background:rgba(11,10,31,.45);opacity:0;visibility:hidden;transition:opacity .45s,visibility 0s linear .45s}
+.mmo.on{opacity:1;visibility:visible;transition:opacity .45s}
+html:not(.m) .mmo{display:none}
+@media (prefers-reduced-motion:reduce){.mmo{transition:none}}

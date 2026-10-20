@@ -1,0 +1,63 @@
+/* Shared by the inner pages (case studies, About, Contact). Ported as-is from the sketches. */
+body{background:#FDFAF3;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;transition:background .3s}
+html.dk body{background:#14122E}
+.ic{width:1em;height:1em;display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.top{position:sticky;top:0;z-index:30;height:64px;margin-bottom:-64px}
+.nbk{position:absolute;left:0;right:0;top:0;height:84px;background:var(--page);pointer-events:none;transform:translateY(-100%);transition:transform .45s cubic-bezier(.2,.8,.2,1),background .3s;-webkit-mask:linear-gradient(#000,#000) top/100% 66px no-repeat,radial-gradient(51% 100% at 50% 0,#000 calc(100% - 1px),transparent 100%) 0 64px/88px 20px round no-repeat;mask:linear-gradient(#000,#000) top/100% 66px no-repeat,radial-gradient(51% 100% at 50% 0,#000 calc(100% - 1px),transparent 100%) 0 64px/88px 20px round no-repeat}
+.pp.sc .nbk{transform:none}
+.nav{position:relative;display:flex;align-items:center;padding:12px}
+.nm{height:40px;display:flex;align-items:center;padding:0 16px 3px;box-sizing:border-box;line-height:1;border-radius:20px;background:var(--pill);color:#FF6B5C;font-size:16px;font-family:'Corben',serif;font-weight:700;transition:background .3s}
+.lk{height:40px;display:flex;align-items:center;gap:2px;padding:0 4px;border-radius:20px;background:var(--pill);transition:background .3s}
+.lk a{font-size:13px;color:var(--pt);padding:7px 12px;border-radius:16px;cursor:pointer;display:flex;align-items:center;gap:4px}
+.lk a.on{background:var(--chip);color:var(--ct)}
+.tg{position:relative;width:48px;height:48px;margin-left:6px;display:flex;align-items:center;justify-content:center;color:var(--tgc);cursor:pointer;font-size:20px;line-height:1;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.tg:hover{transform:rotate(45deg)}
+.tg svg.bg{position:absolute;inset:0;width:48px;height:48px}
+.tg path.cl{fill:var(--tgb);transition:fill .3s}
+.tg .ic{position:relative}
+.hero{position:relative;height:380px;overflow:hidden}
+.hin>svg{position:absolute;inset:0;width:680px;height:380px;overflow:visible}
+/* Full-width header and nav: they stretch into the gutters beside the canvas (--bleed, set by script);
+   the header's content stays on the canvas in .hin */
+.hero,.top{margin-left:calc(-1 * var(--bleed,0px));margin-right:calc(-1 * var(--bleed,0px))}
+.hin{position:relative;width:680px;height:100%;margin:0 auto}
+html.m .hin{width:390px}
+.ab{position:absolute}
+.fr{position:absolute;border-radius:8px;background:#fff;overflow:hidden;border:3px solid #FDFAF3;box-shadow:7px 9px 0 var(--sh)}
+.fr img{display:block;width:100%;height:100%;object-fit:cover}
+.tape{position:absolute;width:56px;height:17px;background:rgba(253,250,243,.58);box-shadow:0 0 0 .5px rgba(38,32,104,.10);z-index:6}
+.note{position:absolute;min-width:96px;min-height:80px;padding:18px 14px 13px;box-sizing:border-box;white-space:nowrap;font-family:Shantell,'Comic Sans MS',cursive;font-size:14px;font-weight:500;font-variation-settings:'BNCE' 60,'INFM' 60;line-height:1.24;color:#262068;z-index:5}
+.note::before{content:"";position:absolute;left:50%;top:-8px;width:46px;height:16px;margin-left:-23px;background:rgba(253,250,243,.6);transform:rotate(-4deg)}
+.lbl{position:absolute;z-index:5;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;letter-spacing:.02em;line-height:1;padding:5px 8px;border-radius:3px;background:#262068;color:#FDFAF3;white-space:nowrap}
+.wrap{padding:0 32px}
+#cv{position:fixed;inset:0;width:100vw;height:100vh;z-index:99;pointer-events:none}
+.mob{display:none}
+html.m .dsk{display:none!important}
+html.m svg.mob{display:block}
+html.m .hb.mob{display:flex}
+html.m .pp{width:390px}
+.hb{width:40px;height:40px;border-radius:20px;border:0;padding:0;background:var(--pill);color:var(--pt);align-items:center;justify-content:center;font-size:20px;cursor:pointer;transition:background .3s}
+.mm{position:absolute;left:0;right:0;top:0;z-index:0;padding:76px 26px 50px;background:var(--pill);overflow:hidden;transform:translateY(-105%);visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s,background .3s;-webkit-mask:linear-gradient(#000,#000) 0 0/100% calc(100% - 19px) no-repeat,radial-gradient(51% 100% at 50% 0,#000 calc(100% - 1px),transparent 100%) 0 100%/44px 20px round no-repeat;mask:linear-gradient(#000,#000) 0 0/100% calc(100% - 19px) no-repeat,radial-gradient(51% 100% at 50% 0,#000 calc(100% - 1px),transparent 100%) 0 100%/44px 20px round no-repeat}
+.mm.open{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s,background .3s}
+html:not(.m) .mm{display:none}
+.mm a{position:relative;z-index:1;display:flex;align-items:center;gap:8px;font-size:30px;font-weight:500;letter-spacing:-1px;line-height:1;color:var(--pt);padding:14px 0;border-bottom:0.5px solid rgba(253,250,243,.2);text-decoration:none;cursor:pointer;opacity:0;transform:translateY(-8px);transition:opacity .25s,transform .4s cubic-bezier(.2,.8,.2,1)}
+.mm a:last-of-type{border-bottom:0}
+.mm a .ic{font-size:22px}
+.mm a.on{background:var(--chip);color:var(--ct);border-radius:18px;padding:14px 16px;margin:0 -16px;border-bottom-color:transparent}
+.mm a:has(+ a.on){border-bottom-color:transparent}
+.mm.open a{opacity:1;transform:none}
+.mm.open a:nth-of-type(1){transition-delay:.06s}
+.mm.open a:nth-of-type(2){transition-delay:.1s}
+.mm.open a:nth-of-type(3){transition-delay:.14s}
+.mm.open a:nth-of-type(4){transition-delay:.18s}
+.mmd{position:absolute;right:-46px;bottom:-38px;width:150px;height:150px;fill:#FFC857;transform:rotate(-40deg) scale(.8);transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.mm.open .mmd{transform:none}
+html.m .nav>.nm,html.m .nav>.hb,html.m .nav>.tg{position:relative;z-index:1}
+@media (prefers-reduced-motion:reduce){.mm,.mm a,.mmd{transition:none!important}}
+html.m .wrap{padding:0 22px}
+html.m .gist{font-size:19px;letter-spacing:-.2px}
+html.m .ch{padding-top:44px}
+html.m .chh h2{font-size:24px}
+html.m .hi{margin-top:48px;padding:30px 22px 26px}
+html.m .hi-r{row-gap:16px}
+html.m .hi-m{font-size:30px;letter-spacing:-1px}

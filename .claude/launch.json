@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "site",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["scripts/serve.mjs", "out", "8085"],
+      "port": 8085
+    },
+    {
+      "name": "dev",
+      "runtimeExecutable": "node_modules/.bin/next",
+      "runtimeArgs": ["dev", "-p", "8084"],
+      "port": 8084
+    }
+  ]
+}

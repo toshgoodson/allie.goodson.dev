@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BOSS Startup Science case study</title>
+<style>
+@font-face{font-family:Corben;font-weight:700;src:url(corben-700.woff2) format('woff2')}
+@font-face{font-family:Shantell;font-weight:300 800;src:url(shantell-full.woff2) format('woff2-variations'),url(shantell-full.woff2) format('woff2')}
+html,body{margin:0}
+body{background:#FDFAF3;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;transition:background .3s}
+body.dk{background:#14122E}
+.pp{--page:#FDFAF3;--ink:#262068;--mut:#625E94;--card:#FFFFFF;--ln:rgba(38,32,104,.12);--ty:#FFF0C7;--tp:#E7E8FF;--tk:#FDE3F4;--band:#4F50CF;--sh:rgba(20,18,64,.38);--pill:#262068;--pt:#FDFAF3;--chip:#DAECFF;--ct:#262068;--tgb:#FF5B4D;--tgc:#262068;--hd:#262068;--hdc:#FDFAF3;--board:#3B3B3D;--bf:#ECE9E1;--nv:#262068;--ht:#262068;width:680px;margin:0 auto;position:relative;background:var(--page);color:var(--ink);transition:background .3s}
+.pp.dk{--page:#14122E;--ink:#EDEBFA;--mut:#A9A6D6;--card:#1E1B44;--ln:rgba(237,235,250,.12);--ty:#3A2F12;--tp:#24225C;--tk:#3A1C3A;--band:#0E0C30;--sh:rgba(0,0,0,.5);--pill:#3A36A0;--pt:#F4F1FF;--chip:#DAECFF;--ct:#1E1B52;--tgb:#FFE7A6;--tgc:#1E1B52;--hd:#DAECFF;--hdc:#1E1B52;--board:#232325;--bf:#26243F;--nv:#0B0A26;--ht:#FDFAF3}
+.ic{width:1em;height:1em;display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.top{position:sticky;top:0;z-index:30;height:64px;margin-bottom:-64px}
+.nbk{position:absolute;left:0;right:0;top:0;height:84px;background:var(--page);pointer-events:none;transform:translateY(-100%);transition:transform .45s cubic-bezier(.2,.8,.2,1),background .3s;-webkit-mask:linear-gradient(#000,#000) top/100% 66px no-repeat,radial-gradient(51% 100% at 50% 0,#000 calc(100% - 1px),transparent 100%) 0 64px/88px 20px round no-repeat;mask:linear-gradient(#000,#000) top/100% 66px no-repeat,radial-gradient(51% 100% at 50% 0,#000 calc(100% - 1px),transparent 100%) 0 64px/88px 20px round no-repeat}
+.pp.sc .nbk{transform:none}
+.nav{position:relative;display:flex;align-items:center;padding:12px}
+.nm{height:40px;display:flex;align-items:center;padding:0 16px 3px;box-sizing:border-box;line-height:1;border-radius:20px;background:var(--pill);color:#FF6B5C;font-size:16px;font-family:'Corben',serif;font-weight:700;transition:background .3s}
+.lk{height:40px;display:flex;align-items:center;gap:2px;padding:0 4px;border-radius:20px;background:var(--pill);transition:background .3s}
+.lk a{font-size:13px;color:var(--pt);padding:7px 12px;border-radius:16px;cursor:pointer;display:flex;align-items:center;gap:4px}
+.lk a.on{background:var(--chip);color:var(--ct)}
+.tg{position:relative;width:48px;height:48px;margin-left:6px;display:flex;align-items:center;justify-content:center;color:var(--tgc);cursor:pointer;font-size:20px;line-height:1;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.tg:hover{transform:rotate(45deg)}
+.tg svg.bg{position:absolute;inset:0;width:48px;height:48px}
+.tg path.cl{fill:var(--tgb);transition:fill .3s}
+.tg .ic{position:relative}
+.hero{position:relative;height:380px;overflow:hidden}
+.hero>svg{position:absolute;inset:0;width:680px;height:380px}
+.ab{position:absolute}
+.ht{color:var(--ht);transition:color .3s}
+.band{position:relative;overflow:hidden;transition:background .3s}
+.fr{position:absolute;border-radius:8px;background:#fff;overflow:hidden;border:3px solid #FDFAF3;box-shadow:7px 9px 0 var(--sh)}
+.fr.ph{border-radius:14px}
+.fr img{display:block;width:100%;height:100%;object-fit:cover}
+.tape{position:absolute;width:56px;height:17px;background:rgba(253,250,243,.58);box-shadow:0 0 0 .5px rgba(38,32,104,.10);z-index:6}
+.note{position:absolute;min-width:96px;min-height:80px;padding:18px 14px 13px;box-sizing:border-box;white-space:nowrap;font-family:Shantell,'Comic Sans MS',cursive;font-size:14px;font-weight:500;font-variation-settings:'BNCE' 60,'INFM' 60;line-height:1.24;color:#262068;z-index:5}
+.note::before{content:"";position:absolute;left:50%;top:-8px;width:46px;height:16px;margin-left:-23px;background:rgba(253,250,243,.6);transform:rotate(-4deg)}
+.lfr{display:inline-block;font-weight:700;background:linear-gradient(90deg,#FF2D95 0%,#FF8A00 20%,#FFD500 40%,#2BD96B 60%,#1AA3FF 80%,#8F4DFF 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(.9px 0 0 #fff) drop-shadow(-.9px 0 0 #fff) drop-shadow(0 .9px 0 #fff) drop-shadow(0 -.9px 0 #fff)}
+.lbl{position:absolute;z-index:5;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;letter-spacing:.02em;line-height:1;padding:5px 8px;border-radius:3px;background:#262068;color:#FDFAF3;white-space:nowrap}
+.lbl.lt{background:#FDFAF3;color:#262068}
+.pp.dk .lbl{background:#EDEBFA;color:#1E1B52}
+.stk{position:absolute;z-index:4;display:block;filter:drop-shadow(4px 5px 0 rgba(20,18,64,.28))}
+.wrap{padding:0 32px}
+.meta{display:grid;grid-template-columns:1.1fr 1.05fr .95fr 1.2fr;column-gap:34px;row-gap:16px;padding:30px 0 28px;border-bottom:0.5px solid var(--ln)}
+.meta b{display:block;font-size:12px;font-weight:400;color:var(--mut);margin-bottom:6px}
+.meta span{display:block;font-size:14px;line-height:1.5}
+.gist{font-size:22px;line-height:1.45;letter-spacing:-.3px;margin:30px 0 8px}
+.ch{padding-top:56px}
+.chh{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.num{position:relative;z-index:0;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:#262068;flex:none}
+.num svg.bdg{position:absolute;inset:0;width:40px;height:40px;z-index:-1}
+.chh h3{font-size:26px;font-weight:500;letter-spacing:-.5px;margin:0;color:var(--ink)}
+.body{font-size:16px;line-height:1.6;margin:0 0 28px;max-width:560px}
+.cap{font-size:13px;color:var(--mut);margin:10px 32px 0}
+.ba{position:relative;height:455px;user-select:none;-webkit-user-select:none;overflow:hidden;margin-top:12px;background:#F4F5F9}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top left;pointer-events:none}
+.ba .aft{position:absolute;inset:0;clip-path:inset(0 0 0 50%)}
+.hdl{position:absolute;top:0;bottom:0;width:0;pointer-events:none;z-index:3}
+.hdl i.l{position:absolute;top:0;bottom:0;left:-1.5px;width:3px;background:var(--hd)}
+.hdl i.k{position:absolute;top:50%;left:-20px;width:40px;height:40px;margin-top:-20px;border-radius:20px;background:var(--hd);color:var(--hdc);display:flex;align-items:center;justify-content:center;font-size:18px;font-style:normal}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0;z-index:4}
+.tag{position:absolute;bottom:14px;font-size:12px;padding:5px 10px;border-radius:12px;background:#262068;color:#FDFAF3;z-index:3}
+.ba.ph{position:absolute;width:200px;height:433px;margin:0;border-radius:20px;border:3px solid #FDFAF3;box-shadow:7px 9px 0 var(--sh);background:#fff;z-index:2}
+.ba.ph .hdl i.k{width:32px;height:32px;left:-16px;margin-top:-16px;font-size:15px}
+.ba.ph .tag{bottom:10px;font-size:11px;padding:4px 8px}
+.out{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.oc{border-radius:16px;padding:16px;background:var(--card);border:0.5px solid var(--ln)}
+.oc svg{width:30px;height:30px;display:block;margin-bottom:10px}
+.oc b{display:block;font-size:15px;font-weight:500;margin-bottom:6px;line-height:1.3}
+.oc span{font-size:13px;line-height:1.45;color:var(--mut)}
+.nx{position:relative;height:130px;margin-top:64px;border-top:0.5px solid var(--ln);overflow:hidden;cursor:pointer}
+.nx .lab{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;padding:0 32px;color:#fff;mix-blend-mode:difference;pointer-events:none}
+.nx .layer{position:absolute;inset:0;z-index:1;clip-path:circle(0 at 0 0)}
+.nx .shot{position:absolute;inset:0;overflow:hidden;background:#4F50CF}
+.nx .shot>svg{position:absolute;inset:0;width:100%;height:100%}
+.nx .shot .fr{box-shadow:5px 6px 0 rgba(20,18,64,.38);border-width:2px}
+.lgc{display:flex;align-items:center;justify-content:center;height:100%;box-sizing:border-box;background:#fff}
+.fr .lgc img{width:auto;height:auto;object-fit:contain}
+.lic{position:absolute;z-index:4;padding:4px;background:#FDFAF3;line-height:0;filter:drop-shadow(4px 5px 0 rgba(6,4,30,.5))}
+.lic img{display:block;object-fit:cover;object-position:top}
+#cv{position:fixed;inset:0;width:100vw;height:100vh;z-index:99;pointer-events:none}
+
+html.m .meta{grid-template-columns:1fr 1fr;column-gap:20px}
+html.m .out{grid-template-columns:1fr}
+html.m .nx{height:auto;margin-top:48px}
+html.m .nx .layer{display:none}
+html.m .nx .lab{height:auto;padding:26px 22px 14px;color:var(--ink);mix-blend-mode:normal}
+html.m .nx .lab span:last-child{font-size:28px!important;letter-spacing:-1px!important}
+html.m .nx .lab .ic{font-size:24px!important}
+.nxm{display:none}
+html.m .nxm{display:block;position:relative;height:170px;margin:0 22px 8px;border-radius:16px;overflow:hidden}
+.nxm>svg{position:absolute;inset:0;width:100%;height:100%}
+.nxm .fr{box-shadow:5px 6px 0 rgba(20,18,64,.38);border-width:2px}
+.nxm .fr img{object-position:top}
+.nxm .pk{position:absolute;filter:drop-shadow(3px 4px 0 rgba(20,18,64,.32))}
+
+/* ---- phone layout (<600px): 390px canvas ---- */
+.mob{display:none}
+html.m .dsk{display:none!important}
+html.m svg.mob{display:block}
+html.m .hb.mob{display:flex}
+html.m .pp{width:390px}
+.hb{width:40px;height:40px;border-radius:20px;border:0;padding:0;background:var(--pill);color:var(--pt);align-items:center;justify-content:center;font-size:20px;cursor:pointer;transition:background .3s}
+.mm{position:absolute;left:0;right:0;top:0;z-index:0;padding:76px 26px 50px;background:var(--pill);overflow:hidden;transform:translateY(-105%);visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s,background .3s;-webkit-mask:linear-gradient(#000,#000) 0 0/100% calc(100% - 19px) no-repeat,radial-gradient(51% 100% at 50% 0,#000 calc(100% - 1px),transparent 100%) 0 100%/44px 20px round no-repeat;mask:linear-gradient(#000,#000) 0 0/100% calc(100% - 19px) no-repeat,radial-gradient(51% 100% at 50% 0,#000 calc(100% - 1px),transparent 100%) 0 100%/44px 20px round no-repeat}
+.mm.open{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s,background .3s}
+html:not(.m) .mm{display:none}
+.mm a{position:relative;z-index:1;display:flex;align-items:center;gap:8px;font-size:30px;font-weight:500;letter-spacing:-1px;line-height:1;color:var(--pt);padding:14px 0;border-bottom:0.5px solid rgba(253,250,243,.2);text-decoration:none;cursor:pointer;opacity:0;transform:translateY(-8px);transition:opacity .25s,transform .4s cubic-bezier(.2,.8,.2,1)}
+.mm a:last-of-type{border-bottom:0}
+.mm a .ic{font-size:22px}
+.mm a.on{background:var(--chip);color:var(--ct);border-radius:18px;padding:14px 16px;margin:0 -16px;border-bottom-color:transparent}
+.mm a:has(+ a.on){border-bottom-color:transparent}
+.mm.open a{opacity:1;transform:none}
+.mm.open a:nth-of-type(1){transition-delay:.06s}.mm.open a:nth-of-type(2){transition-delay:.1s}.mm.open a:nth-of-type(3){transition-delay:.14s}.mm.open a:nth-of-type(4){transition-delay:.18s}
+.mmd{position:absolute;right:-46px;bottom:-38px;width:150px;height:150px;fill:#FFC857;transform:rotate(-40deg) scale(.8);transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.mm.open .mmd{transform:none}
+html.m .nav>.nm,html.m .nav>.hb,html.m .nav>.tg{position:relative;z-index:1}
+@media (prefers-reduced-motion:reduce){.mm,.mm a,.mmd{transition:none!important}}
+html.m .wrap{padding:0 22px}
+html.m .gist{font-size:19px;letter-spacing:-.2px}
+html.m .ch{padding-top:44px}
+html.m .chh h3{font-size:24px}
+html.m .hi{margin-top:48px;padding:30px 22px 26px}
+html.m .hi-r{row-gap:16px}
+html.m .hi-m{font-size:30px;letter-spacing:-1px}
+html.m .hero{height:640px}
+</style>
+<body>
+<div class="pp" id="pp">
+  <div class="top"><div class="nbk"></div>
+    <div class="nav"><span class="nm">Allie Goodson</span><span style="flex:1"></span>
+      <div class="lk dsk"><a class="on">Work</a><a>About</a><a>Contact</a><a>Resume <svg class="ic" viewBox="0 0 24 24" style="font-size:12px"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+      <button class="hb mob" id="hb" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mm"><svg class="ic" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><div class="tg" id="tg" role="button" tabindex="0" aria-label="Switch to dark mode"><svg class="bg" viewBox="-104 -104 208 208"><path class="cl" id="tgp"/></svg><span id="ti"></span></div><div class="mm" id="mm" aria-hidden="true"><a class="on" aria-current="page">Work</a><a>About</a><a>Contact</a><a>Resume <svg class="ic" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></a><svg class="mmd" viewBox="-110 -110 220 220" aria-hidden="true"><path/></svg></div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <svg viewBox="0 0 680 380" id="sv" class="dsk"></svg><svg viewBox="0 0 390 640" id="svm" class="mob" style="width:390px;height:640px"></svg>
+    <div class="fr" data-m="left:34px;top:372px;width:256px;height:166px" style="left:366px;top:60px;width:256px;height:166px;transform:rotate(-5deg)"><img src="h_topics.webp" alt="BOSS academy: course topics grouped for founders" style="object-position:top left"></div>
+    <div class="fr" data-m="left:266px;top:418px;width:100px;height:143px" style="left:556px;top:150px;width:100px;height:143px;transform:rotate(7deg)"><img src="h_donut.webp" alt="Course analytics: how founders like to learn" style="object-position:top"></div>
+    <img class="stk" src="h_tile.webp" alt="Accelerator prep collection icon" data-m="left:226px;top:526px;width:72px" style="left:452px;top:214px;width:84px;transform:rotate(-8deg);z-index:2">
+    <svg viewBox="0 0 680 380" id="svb" class="dsk" style="position:absolute;inset:0;width:680px;height:380px;z-index:3;pointer-events:none"></svg><svg viewBox="0 0 390 640" id="svbm" class="mob" style="position:absolute;inset:0;width:390px;height:640px;z-index:3;pointer-events:none"></svg>
+    <div class="ab ht" data-m="left:24px;top:100px;font-size:50px" style="left:44px;top:92px;font-size:52px;font-weight:500;letter-spacing:-2px;line-height:1">BOSS<br>Startup<br>Science</div>
+    <div class="ab ht" data-m="left:26px;top:264px;width:316px" style="left:46px;top:262px;width:300px;font-size:16px;line-height:1.45">The only designer at an edtech startup for founders: the design system, the academy, and the admin tools.</div>
+  </div>
+
+  <div class="wrap">
+    <div class="meta" data-m="grid-template-columns:1fr 1fr" style="grid-template-columns:1fr 1.25fr 1.05fr 1.15fr"><div><b>Role</b><span>UX/UI designer</span></div><div><b>Timeline</b><span>Jul 2022 – Mar 2023</span></div><div><b>Focus</b><span>Design system, academy, admin + data</span></div><div><b>Tools</b><span>Figma, Adobe CC, Procreate, Jira</span></div></div>
+    <p class="gist">BOSS Startup Science pairs pre-accelerator courses for founders with a database where investors, accelerators, and incubators find startups to back. As the only designer, I built the design system first, then designed the academy, the data-heavy tables, and the admin tools for the MVP.</p>
+    <div class="ch"><div class="chh"><span class="num" data-c="#FFC857">01</span><h3>Design system</h3></div>
+      <p class="body">Engineers and I needed one reference before anything else, so the system came first: a purple-led palette with ready-made text and background pairs, a type scale, spacing, shape, and elevation tokens, and every button and input state.</p></div>
+  </div>
+
+  <div class="band" data-m="height:820px" style="height:468px;background:var(--tp)">
+    <div class="fr" data-m="left:20px;top:40px" style="left:26px;top:40px;width:150px;height:216px;transform:rotate(-3deg);z-index:1"><img src="d_palette.webp" alt="Color scales: purple, grurple, blue, green, yellow, red" style="object-position:top"></div>
+    <div class="fr" data-m="left:184px;top:50px;width:190px;height:104px" style="left:196px;top:30px;width:262px;height:144px;transform:rotate(2deg);z-index:2"><img src="d_access.webp" alt="Accessible palette: text and background pairs" style="object-position:top left"></div>
+    <div class="fr" data-m="left:186px;top:308px;width:186px;height:192px" style="left:182px;top:206px;width:206px;height:212px;transform:rotate(-2deg);z-index:3"><img src="d_buttons.webp" alt="Filled, elevated, tonal, outlined, and text buttons" style="object-position:top left"></div>
+    <div class="fr" data-m="left:54px;top:560px;width:290px;height:229px" style="left:408px;top:196px;width:246px;height:194px;transform:rotate(3deg);z-index:2"><img src="d_type.webp" alt="Type scale: display and headline styles with tokens" style="object-position:top left"></div>
+    <i class="tape" data-m="left:252px;top:42px" style="left:296px;top:22px;transform:rotate(4deg)"></i>
+    <i class="tape" data-m="left:252px;top:300px" style="left:250px;top:198px;transform:rotate(-5deg)"></i>
+    <span class="lbl" data-m="left:24px;top:274px" style="left:30px;top:278px;transform:rotate(-3deg)">boss design system</span>
+    <span class="lbl" data-m="left:190px;top:514px" style="left:196px;top:428px;transform:rotate(2deg)">buttonsbuttonsbuttons</span>
+    <div class="note" data-m="left:222px;top:178px" style="left:486px;top:40px;transform:rotate(4deg);background:#FFC857">One reference<br>for devs<br>and design</div>
+    <div class="note" data-m="left:20px;top:330px" style="left:40px;top:318px;transform:rotate(-4deg);background:#F49AD8">Every text color<br>paired with<br>its background</div>
+  </div>
+
+  <div class="wrap"><div class="ch"><div class="chh"><span class="num" data-c="#F49AD8">02</span><h3>Academy</h3></div>
+    <p class="body">The academy turns expert material into short courses founders can watch, listen to, or read. I designed the catalog, collections for each startup phase, and the progress and analytics views admins use to see what’s landing.</p></div></div>
+
+  <div class="band" data-m="height:700px" style="height:500px;background:var(--band)">
+    <div class="fr" data-m="left:16px;top:40px" style="left:28px;top:38px;width:340px;height:243px;transform:rotate(-2deg);z-index:1"><img src="a_collect.webp" alt="Collections for each startup phase: vision, product, go-to-market, accelerator prep" style="object-position:top left"></div>
+    <div class="fr" data-m="left:24px;top:438px;width:340px;height:220px" style="left:300px;top:226px;width:350px;height:227px;transform:rotate(3deg);z-index:2"><img src="a_progress.webp" alt="Admin view: member table with each founder’s course progress" style="object-position:top left"></div>
+    <img class="stk" src="a_tile.webp" alt="Vision phase collection icon" data-m="left:296px;top:16px;width:76px" style="left:410px;top:44px;width:86px;transform:rotate(9deg)">
+    <i class="tape" data-m="left:140px;top:30px" style="left:150px;top:28px;transform:rotate(-4deg)"></i>
+    <span class="lbl" data-m="left:22px;top:294px" style="left:34px;top:300px;transform:rotate(-2deg)">academy</span>
+    <span class="lbl" data-m="left:174px;top:668px" style="left:326px;top:466px;transform:rotate(2deg)">admin: course progress</span>
+    <div class="note" data-m="left:206px;top:300px" style="left:500px;top:52px;transform:rotate(5deg);background:#F49AD8">Watch, listen,<br>or read: every<br>course three ways</div>
+    <div class="note" data-m="left:22px;top:334px" style="left:54px;top:350px;transform:rotate(-4deg);background:#FFC857">Collections for<br>every startup<br>phase</div>
+  </div>
+
+  <div class="wrap"><div class="ch"><div class="chh"><span class="num" data-c="#7476F0" style="color:#FFF0C7;font-weight:600">03</span><h3>Admin + data</h3></div>
+    <p class="body">Behind the courses sit the tools that run the business: filterable tables for startups and members, invites with roles explained in plain words, credits and deals for founders, and dashboards for admins.</p></div></div>
+
+  <div class="band" data-m="height:668px" style="height:412px;background:var(--ty)">
+    <div class="fr" data-m="left:16px;top:44px;width:200px;height:179px" style="left:26px;top:44px;width:222px;height:199px;transform:rotate(-3deg);z-index:2"><img src="x_invite.webp" alt="Invite a member, with the chosen role explained" style="object-position:top left"></div>
+    <div class="fr" data-m="left:198px;top:66px;width:176px;height:175px" style="left:262px;top:28px;width:206px;height:205px;transform:rotate(3deg);z-index:1"><img src="x_pricing.webp" alt="Pricing: one credit or a subscription" style="object-position:top"></div>
+    <div class="fr" data-m="left:40px;top:404px;width:150px;height:217px" style="left:486px;top:40px;width:164px;height:237px;transform:rotate(-2deg);z-index:2"><img src="x_bars.webp" alt="Analytics: average rating by course" style="object-position:top"></div>
+    <i class="tape" data-m="left:258px;top:56px" style="left:330px;top:18px;transform:rotate(3deg)"></i>
+    <span class="lbl" data-m="left:18px;top:14px" style="left:26px;top:16px;transform:rotate(-2deg)">admin portal</span>
+    <div class="note" data-m="left:22px;top:258px" style="left:44px;top:276px;transform:rotate(-4deg);background:#DAECFF">Roles explained<br>right where<br>you pick them</div>
+    <div class="note" data-m="left:212px;top:276px" style="left:296px;top:262px;transform:rotate(3deg);background:#F49AD8">Credits or<br>a subscription,<br>side by side</div>
+    <div class="note" data-m="left:220px;top:474px" style="left:512px;top:296px;transform:rotate(-3deg);background:#FFC857">Ratings by<br>course, any<br>time range</div>
+  </div>
+
+  <div class="wrap"><div class="ch"><div class="chh"><span class="num" data-c="#FF5B4D"><svg class="ic" viewBox="0 0 24 24" style="font-size:16px;stroke-width:2.6"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><h3>What changed</h3></div>
+    <div class="out" id="out"></div>
+    <b style="display:block;font-size:12px;font-weight:400;color:var(--mut);margin:28px 0 6px">Looking back</b>
+    <p class="body">Midway through, the company pivoted. What started as a learning platform for startups quickly became a way to match startups with investors by stage and interest. Building the design system first is what made that pivot easy, for me and for the devs. Speed sometimes won over polish, but the system kept the fast work consistent, and it’s the first thing I’d build again.</p></div></div>
+
+  <div class="nx" id="nx"><div class="layer" id="nxl"><div class="shot" id="nxs"><svg viewBox="0 0 680 130"><path id="nxb1" fill="#FFC857"/><path id="nxb2" fill="#F49AD8"/></svg><div class="fr" style="left:14px;top:30px;width:150px;height:97px;transform:rotate(-4deg)"><img src="gh_c_booking.webp" alt=""></div><div class="fr" style="left:176px;top:10px;width:172px;height:115px;transform:rotate(3deg)"><img src="gh_c_month.webp" alt=""></div><div class="fr" style="left:362px;top:-8px;width:88px;height:131px;transform:rotate(-3deg)"><img src="gh_m_store.webp" alt="" style="object-position:top"></div><div class="fr" style="left:462px;top:16px;width:92px;height:105px;transform:rotate(4deg)"><img src="gh_f_review.webp" alt="" style="object-position:top"></div><div class="fr" style="left:566px;top:58px;width:150px;height:56px;transform:rotate(-3deg)"><img src="gh_o_kit.webp" alt=""></div><img src="gh_bee.webp" alt="" style="position:absolute;left:588px;top:-2px;width:66px;transform:rotate(12deg)"></div></div><div class="lab"><span style="font-size:12px;margin-bottom:6px">Next project</span><span style="font-size:38px;font-weight:500;letter-spacing:-1.5px;display:flex;align-items:center;gap:10px">GlassHive <svg class="ic" viewBox="0 0 24 24" style="font-size:32px"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></div><div class="nxm" aria-hidden="true" style="background:#7A5410"><svg viewBox="0 0 346 170"><path id="nxm1" fill="#FFC857"/><path id="nxm2" fill="#7476F0"/></svg><div class="fr" style="left:14px;top:34px;width:168px;height:112px;transform:rotate(-3deg);border-radius:8px"><img src="gh_c_month.webp" alt=""></div><div class="fr" style="left:196px;top:14px;width:78px;height:118px;transform:rotate(3deg);border-radius:8px"><img src="gh_m_store.webp" alt=""></div><div class="fr" style="left:268px;top:72px;width:66px;height:76px;transform:rotate(-4deg);border-radius:8px"><img src="gh_f_review.webp" alt=""></div><img class="pk" src="gh_bee.webp" alt="" style="left:282px;top:4px;width:50px;transform:rotate(12deg)"></div></div><!--/nx-->
+  <div style="height:40px"></div>
+</div>
+<canvas id="cv"></canvas>
+<script>
+const $=id=>document.getElementById(id),PI2=Math.PI*2,cl=v=>Math.max(0,Math.min(1,v)),NS='http://www.w3.org/2000/svg';
+const sp=(p,e)=>{const c=Math.abs(Math.cos(e)),s=Math.abs(Math.sin(e));return Math.pow(Math.pow(c,p)+Math.pow(s,p),-1/p)};
+const F={flower:a=>.62+.38*Math.pow(Math.abs(Math.cos(3*a)),.55),sun:a=>.8+.2*Math.pow(Math.abs(Math.cos(7*a)),.4),badge:a=>.9+.08*Math.pow(Math.abs(Math.cos(8*a)),.6),star:a=>sp(.55,a),clover:a=>.64+.36*Math.pow(Math.abs(Math.cos(2*a)),.5),blob:a=>.86+.09*Math.sin(3*a+1)+.05*Math.cos(5*a-.5)};
+function smooth(P){const n=P.length,m=(a,b)=>[(a[0]+b[0])/2,(a[1]+b[1])/2],f=v=>v.toFixed(1);let s=m(P[n-1],P[0]),d='M'+f(s[0])+' '+f(s[1]);for(let i=0;i<n;i++){const p=P[i],q=m(p,P[(i+1)%n]);d+='Q'+f(p[0])+' '+f(p[1])+' '+f(q[0])+' '+f(q[1])}return d+'Z'}
+const shapeD=(fn,cx=0,cy=0,r=100,rot=0)=>{const P=[];for(let i=0;i<144;i++){const a=i/144*PI2,q=r*F[fn](a);P.push([cx+q*Math.cos(a+rot),cy+q*Math.sin(a+rot)])}return smooth(P)};
+const PAL={l:{D:'#4F50CF',Y:'#FFC857',K:'#F49AD8',P:'#7476F0',I:'#DAECFF',O:'#FF5B4D',B:'#DAECFF'},d:{D:'#141240',Y:'#C98A26',K:'#8E3F86',P:'#3E40AE',I:'#FFE7A6',O:'#FF6B5C',B:'#2A2873'}};
+const HS=[['blob','P',340,190,600,0],['blob','D',40,40,175,1.2],['clover','K',620,30,160,.3],['sun','Y',640,350,170,.2],['blob','B',185,262,245,.4],['star','Y',332,60,40,.3]];
+const sv=$('sv'),hs=HS.map(h=>{const p=document.createElementNS(NS,'path');p.setAttribute('d',shapeD(h[0],h[2],h[3],h[4],h[5]));sv.appendChild(p);return[p,h[1]]});
+const BX=402,BY=330;
+const bdg=document.createElementNS(NS,'path');bdg.setAttribute('d',shapeD('badge',BX,BY,48,.17));$('svb').appendChild(bdg);hs.push([bdg,'Y']);
+const bt=document.createElementNS(NS,'text');bt.setAttribute('x',BX);bt.setAttribute('y',BY);bt.setAttribute('text-anchor','middle');bt.setAttribute('font-size','12');bt.setAttribute('font-weight','600');bt.setAttribute('fill','#2A1240');bt.setAttribute('transform','rotate(-8 '+BX+' '+BY+')');bt.innerHTML='<tspan x="'+BX+'" dy="-.2em">UX/UI</tspan><tspan x="'+BX+'" dy="1.2em">EdTech</tspan>';$('svb').appendChild(bt);
+$('nxb1').setAttribute('d',shapeD('blob',560,96,118,.3));$('nxb2').setAttribute('d',shapeD('clover',300,-10,70,.4));$('nxm1').setAttribute('d',shapeD('blob',290,150,96,0.3));$('nxm2').setAttribute('d',shapeD('clover',130,-6,58,0.4));
+$('tgp').setAttribute('d',shapeD('clover'));
+const SUN='<svg class="ic" viewBox="0 0 24 24"><path d="M8 12a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"/></svg>',MOON='<svg class="ic" viewBox="0 0 24 24"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454l0 .008"/></svg>';
+$('ti').innerHTML=SUN;
+let mode='l';const paint=()=>{hs.forEach(([p,k])=>p.setAttribute('fill',PAL[mode][k]))};paint();
+const OUT=[['sun','#FFC857','Design system first','Engineers and I shared one reference from day one, so fast MVP work still matched.'],['star','#7476F0','Learning, three ways','Courses founders can watch, listen to, or read, with analytics showing which way they pick.'],['clover','#F49AD8','The whole MVP','Academy, founder profiles, chat, filterable tables, permissions, and dashboards.']];
+$('out').innerHTML=OUT.map(o=>'<div class="oc"><svg viewBox="-110 -110 220 220"><path d="'+shapeD(o[0])+'" fill="'+o[1]+'"/></svg><b>'+o[2]+'</b><span>'+o[3]+'</span></div>').join('');
+document.querySelectorAll('.num').forEach(n=>{n.insertAdjacentHTML('afterbegin','<svg class="bdg" viewBox="-110 -110 220 220"><path d="'+shapeD('badge',0,0,100,.2)+'" fill="'+n.dataset.c+'"/></svg>')});
+document.querySelectorAll('.ba').forEach(b=>{const r=b.querySelector('input'),a=b.querySelector('.aft'),h=b.querySelector('.hdl');const set=()=>{a.style.clipPath='inset(0 0 0 '+r.value+'%)';h.style.left=r.value+'%'};r.addEventListener('input',set);set()});
+const hb=$('hb'),mm=$('mm'),HBI=hb.innerHTML,XI='<svg class="ic" viewBox="0 0 24 24"><path d="M18 6l-12 12M6 6l12 12"/></svg>';
+mm.querySelector('.mmd path').setAttribute('d',shapeD('sun'));
+const setMenu=o=>{mm.classList.toggle('open',o);mm.setAttribute('aria-hidden',!o);hb.setAttribute('aria-expanded',o);hb.setAttribute('aria-label',o?'Close menu':'Open menu');hb.innerHTML=o?XI:HBI};
+hb.onclick=e=>{e.stopPropagation();setMenu(!mm.classList.contains('open'))};
+document.addEventListener('click',e=>{if(mm.classList.contains('open')&&!mm.contains(e.target))setMenu(false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mm.classList.contains('open')){setMenu(false);hb.focus()}});
+const mkBadge=(svg,X,Y,R,rot,lines,fs)=>{const p=document.createElementNS(NS,'path');p.setAttribute('d',shapeD('badge',X,Y,R,.17));svg.appendChild(p);hs.push([p,'Y']);const t=document.createElementNS(NS,'text');t.setAttribute('x',X);t.setAttribute('y',Y);t.setAttribute('text-anchor','middle');t.setAttribute('font-size',fs);t.setAttribute('font-weight','600');t.setAttribute('fill','#2A1240');t.setAttribute('transform','rotate('+rot+' '+X+' '+Y+')');t.innerHTML=lines.map((l,i)=>'<tspan x="'+X+'" dy="'+(i?'1.2em':'-.2em')+'">'+l+'</tspan>').join('');svg.appendChild(t)};
+const mkShapes=(svg,list)=>list.forEach(h=>{const p=document.createElementNS(NS,'path');p.setAttribute('d',shapeD(h[0],h[2],h[3],h[4],h[5]));svg.appendChild(p);hs.push([p,h[1]])});
+const HSm=[['blob','P',195,320,560,0],['blob','D',0,22,120,1.2],['clover','K',386,32,106,.3],['sun','Y',382,618,120,.2],['blob','B',138,190,204,.4],['star','Y',354,300,26,.3]];
+mkShapes($('svm'),HSm);mkBadge($('svbm'),100,588,46,-8,['UX/UI','EdTech'],12);paint();
+const pp=$('pp');let Z=1;
+let M=null;function fit(){const w=document.documentElement.clientWidth,m=matchMedia('(max-width:599.98px)').matches;if(m!==M){M=m;document.documentElement.classList.toggle('m',m);document.querySelectorAll('[data-m]').forEach(el=>{if(el.dataset.d===undefined)el.dataset.d=el.getAttribute('style')||'';el.setAttribute('style',m?el.dataset.d+';'+el.dataset.m:el.dataset.d)});if(!m)setMenu(false)}Z=m?Math.max(.8,Math.min(1.5,w/390)):Math.max(.88,Math.min(1.6,w/680));pp.style.zoom=Z}
+fit();addEventListener('resize',fit);
+addEventListener('scroll',()=>pp.classList.toggle('sc',scrollY>40*Z),{passive:true});
+const nx=$('nx'),nl=$('nxl'),ns=$('nxs'),o={h:false,mx:0,my:0,cx:0,cy:0,r:0,v:0,ox:0,oy:0,s:1.1};
+const pos=e=>{const b=nx.getBoundingClientRect(),k=nx.offsetWidth/b.width;o.mx=(e.clientX-b.left)*k;o.my=(e.clientY-b.top)*k};
+nx.onmouseenter=e=>{pos(e);o.cx=o.mx;o.cy=o.my;o.h=true};nx.onmousemove=pos;nx.onmouseleave=()=>o.h=false;
+(function tick(now){const T=now/1000,w=nx.offsetWidth,h=nx.offsetHeight;o.v+=((o.h?100:0)-o.r)*.045;o.v*=.85;o.r+=o.v;o.cx+=(o.mx-o.cx)*.14;o.cy+=(o.my-o.cy)*.14;
+ const tx=o.h?(o.mx-w/2)*.03:0,ty=o.h?(o.my-h/2)*.08:0;o.ox+=(tx-o.ox)*.03;o.oy+=(ty-o.oy)*.03;o.s+=((o.h?1.04:1.1)-o.s)*.025;ns.style.transform='translate('+o.ox.toFixed(1)+'px,'+o.oy.toFixed(1)+'px) scale('+o.s.toFixed(3)+')';
+ if(o.r<1&&!o.h){nl.style.clipPath='circle(0 at 0 0)'}else{const P=[];for(let i=0;i<36;i++){const a=i/36*PI2,rr=Math.max(0,o.r*(1+.13*Math.sin(3*a+T*1.4)+.08*Math.sin(5*a-T*1.9)+.05*Math.cos(2*a+T*.8)));P.push([o.cx+rr*Math.cos(a),o.cy+rr*Math.sin(a)])}nl.style.clipPath="path('"+smooth(P)+"')"}
+ requestAnimationFrame(tick)})(performance.now());
+const cv=$('cv'),cx=cv.getContext('2d');let busy=false;
+function grid(gw,gh){const g=[];for(let i=0;i<(gw+2)*(gh+2);i++)g.push(Math.random());const at=(a,b)=>g[b*(gw+2)+a];return(u,v)=>{const x=u*gw,y=v*gh,x0=Math.floor(x),y0=Math.floor(y),fx=x-x0,fy=y-y0,sx=fx*fx*(3-2*fx),sy=fy*fy*(3-2*fy);return(at(x0,y0)*(1-sx)+at(x0+1,y0)*sx)*(1-sy)+(at(x0,y0+1)*(1-sx)+at(x0+1,y0+1)*sx)*sy}}
+function dissolve(dur,cover,col,done){const W=Math.max(1,Math.round(innerWidth/2)),Hh=Math.max(1,Math.round(innerHeight/2));cv.width=W;cv.height=Hh;
+ const g1=grid(5,Math.ceil(5*Hh/W)),g2=grid(13,Math.ceil(13*Hh/W)),N=new Float32Array(W*Hh);
+ for(let j=0;j<Hh;j++)for(let i=0;i<W;i++)N[j*W+i]=.62*g1(i/W,j/Hh)+.38*g2(i/W,j/Hh);
+ const img=cx.createImageData(W,Hh),u32=new Uint32Array(img.data.buffer),pk=(r,g,b,a)=>(a<<24)|(b<<16)|(g<<8)|r,FILL=pk(col[0],col[1],col[2],255),EDGE=pk(255,91,77,255),bw=.016,t0=performance.now();
+ (function f(now){const q=cl((now-t0)/dur),e=q<.5?2*q*q:1-Math.pow(-2*q+2,2)/2,th=.08+e*.9;
+  for(let i=0;i<u32.length;i++){const d=cover?th-N[i]:N[i]-th;u32[i]=d<=0?0:d<bw?EDGE:FILL}
+  cx.putImageData(img,0,0);if(q<1)requestAnimationFrame(f);else done()})(t0)}
+const tg=$('tg');tg.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tg.click()}};
+tg.onclick=()=>{if(busy)return;busy=true;const dk=mode==='l',col=dk?[20,18,64]:[253,250,243];
+ dissolve(700,true,col,()=>{mode=dk?'d':'l';paint();pp.classList.toggle('dk',dk);document.body.classList.toggle('dk',dk);$('ti').innerHTML=dk?MOON:SUN;tg.setAttribute('aria-label',dk?'Switch to light mode':'Switch to dark mode');
+  dissolve(700,false,col,()=>{cx.clearRect(0,0,cv.width,cv.height);busy=false})})};
+</script>
+</body>
+</html>
