@@ -67,7 +67,7 @@ const head = /* html */ `<header class="top"><div class="nbk"></div>
 </header>`
 
 const hero = /* html */ `<h1 class="sr">Allie Goodson, product designer</h1>
-<div class="pinw"><span id="work"></span><span class="snapat s0"></span><span class="snapat s1"></span>
+<div class="pinw"><span id="work"></span>
   <div class="pg">
     <div class="hero" id="hero"><div class="stage" id="stage">
       <svg viewBox="0 0 680 400" class="dsk" id="sv">${heroSvg(false)}</svg>
