@@ -1,0 +1,115 @@
+/* Home page, ported from the sketch. The sketch's viewer frame (.wr, .vp, .ctl) is gone:
+   .pp is the page, real scroll drives the hero, and the nav sticks to the top. */
+body{background:#FDFAF3;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;color:#262068;transition:background .3s}
+html.dk body{background:#14122E}
+.ic{width:1em;height:1em;display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.shot.pv{padding:0;display:block;overflow:hidden}
+/* The collage keeps the sketch's 680px layout, centered in the full-width row; past it the row's color shows */
+.pvi{position:absolute;top:0;bottom:0;left:50%;width:680px;margin-left:-340px}
+.pvi>svg{position:absolute;inset:0;width:100%;height:100%}
+.pf{position:absolute;border-radius:6px;background:#fff;overflow:hidden;border:2px solid #FDFAF3;box-shadow:5px 6px 0 rgba(20,18,64,.38)}
+.pf.ph{border-radius:10px}
+.pf img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.pk{position:absolute;filter:drop-shadow(3px 4px 0 rgba(20,18,64,.32))}
+.pp{--page:#FDFAF3;--ink:#262068;--ln:rgba(38,32,104,.14);--pill:#262068;--pt:#FDFAF3;--chip:#DAECFF;--ct:#262068;--blurb:#262068;--tgb:#FF5B4D;--tgc:#262068;position:relative;background:var(--page);color:var(--ink);transition:background .3s}
+html.dk .pp{--page:#14122E;--ink:#EDEBFA;--ln:rgba(237,235,250,.14);--pill:#3A36A0;--pt:#F4F1FF;--chip:#DAECFF;--ct:#1E1B52;--blurb:#FBE8F6;--tgb:#FFE7A6;--tgc:#1E1B52}
+/* Home is full-bleed: only the nav and the work list sit on the zoomed 680px (phone: 390px) canvas. */
+.pp{zoom:1}
+/* The nav spans the screen so its pills sit in the corners; it keeps the canvas zoom for size. */
+.top{zoom:var(--z,1)}
+/* The work list runs edge to edge (rows, lines and hover); its text lines up with the 680px canvas */
+.work{zoom:var(--z,1)}
+/* The hero fills the screen. Its 680×400 stage is scaled to fit (--hs, set by script) and centered;
+   shapes keep drawing past the stage edges, so the color reaches every edge of the screen. */
+.hero{position:relative;overflow:hidden;height:100vh;height:100svh;background:#4F50CF;transition:background .3s}
+html.dk .hero{background:#141240}
+/* "Scroll" cue: sits at the bottom of the stage (so it's always over the shapes), but its size
+   undoes the stage scale (--hs) and follows the nav's zoom (--z) instead, so it never gets big.
+   The chevron dips gently every few seconds. */
+.cue{position:absolute;left:50%;bottom:8px;z-index:2;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;padding:.4em .8em;border:0;border-radius:.8em;background:none;color:#262068;font:inherit;font-size:calc(12px * var(--z,1) / var(--hs,1));font-weight:500;line-height:1;cursor:pointer;transition:opacity .35s}
+.cue .ic{font-size:1.75em;stroke-width:1.5;margin-top:.05em;animation:cue 3.4s infinite}
+@keyframes cue{0%{transform:translateY(0);animation-timing-function:cubic-bezier(.45,0,.55,1)}16%{transform:translateY(.15em);animation-timing-function:cubic-bezier(.25,0,.25,1)}38%,100%{transform:translateY(0)}}
+html.m .cue{bottom:12px}
+@media (prefers-reduced-motion:reduce){.cue .ic{animation:none}}
+/* Touch screens: native snapping between the top and the words (turned on by script only while above the words) */
+html.snap{scroll-snap-type:y mandatory}
+.snapat{position:absolute;left:0;width:1px;height:1px;scroll-snap-align:start;pointer-events:none}
+.snapat.s0{top:0}
+.snapat.s1{top:100vh;top:100svh}
+.stage{position:absolute;left:50%;top:50%;width:680px;height:400px;transform:translate(-50%,-50%) scale(var(--hs,1))}
+.stage>svg{position:absolute;inset:0;width:680px;height:400px;overflow:visible}
+/* Pin: .pg sticks while the hero animates (one screen of scroll), holds on the finished
+   words for another .25 screen, then scrolls normally. Keep 1.25 in sync with HOLD in src/client/home.ts. */
+.pinw{position:relative}
+.pinsp{height:125vh;height:125svh}
+#work{position:absolute;left:0;top:225vh;top:225svh}
+.pg{position:sticky;top:0;background:var(--page);transition:background .3s}
+.tx{position:absolute;pointer-events:none}
+.cb{font-family:'Corben',serif;font-weight:700}
+.cr{font-family:'Corben',serif;font-weight:400}
+.st{font-family:'Corben',serif;font-weight:700;letter-spacing:-1.3px}
+/* At least a screen tall, so "Work" can always scroll the list to the top */
+.work{display:block;min-height:calc(100vh / var(--z,1))}
+.hd{display:flex;justify-content:space-between;padding:96px max(28px,calc(50% - 312px)) 12px;font-size:12px;color:var(--ink)}
+.hd h2{font:inherit;margin:0}
+.row{position:relative;display:block;height:120px;border-top:0.5px solid var(--ln);overflow:hidden;cursor:pointer;color:inherit;text-decoration:none}
+.lab{position:relative;z-index:2;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 max(28px,calc(50% - 312px));pointer-events:none;color:#fff;mix-blend-mode:difference;transition:opacity .4s}
+.rows:hover .row:not(:hover) .lab{opacity:.3}
+.row:last-child{border-bottom:0.5px solid var(--ln)}
+.layer{position:absolute;inset:0;z-index:1;clip-path:circle(0 at 0 0)}
+.shot{position:absolute;inset:0;padding:14px 28px;display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:28px 1fr;gap:10px;box-sizing:border-box}
+.shot span{border-radius:6px}
+.top{position:sticky;top:0;z-index:30;height:64px;margin-bottom:-64px}
+.nav{position:relative;display:flex;align-items:center;padding:12px;pointer-events:none}
+.nm{pointer-events:auto;height:40px;display:flex;align-items:center;padding:0 16px 3px;box-sizing:border-box;line-height:1;border-radius:20px;background:var(--pill);color:#FF6B5C;font-size:16px;opacity:0;transform:translateX(-16px);transition:opacity .35s,transform .55s cubic-bezier(.2,.8,.2,1),background .3s;cursor:pointer;text-decoration:none}
+.pp.sc .nm{opacity:1;transform:none}
+.pill{pointer-events:auto;position:relative;height:40px;width:40px;border-radius:20px;background:var(--pill);overflow:hidden;transition:width .55s cubic-bezier(.65,0,.35,1),background .3s}
+.bgr{position:absolute;left:0;top:0;width:40px;height:40px;display:flex;align-items:center;justify-content:center;color:var(--pt);cursor:pointer;font-size:20px;line-height:1;transition:opacity .2s,transform .45s}
+.bgr .ic,.tg .ic{display:block;line-height:1}
+.pp.op .bgr{opacity:0;transform:rotate(90deg);pointer-events:none}
+.lk{position:absolute;left:0;top:0;height:40px;display:flex;align-items:center;gap:2px;padding:0 4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
+.pp.op .lk{opacity:1;pointer-events:auto;transition:opacity .35s .22s}
+.lk a{font-size:13px;color:var(--pt);padding:7px 12px;border-radius:16px;cursor:pointer;display:flex;align-items:center;gap:4px;text-decoration:none;transition:background .3s,color .3s}
+.lk a.on{background:var(--chip);color:var(--ct)}
+.tg{pointer-events:auto;position:relative;width:48px;height:48px;margin-left:6px;display:flex;align-items:center;justify-content:center;color:var(--tgc);cursor:pointer;font-size:20px;line-height:1;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.tg:hover{transform:rotate(45deg)}
+.tg svg.bg{position:absolute;inset:0;width:48px;height:48px}
+.tg svg.bg path{fill:var(--tgb);transition:fill .3s}
+.tg .ic{position:relative}
+.nbk{position:absolute;left:0;right:0;top:0;height:84px;background:var(--page);pointer-events:none;transform:translateY(-100%);transition:transform .45s cubic-bezier(.2,.8,.2,1),background .3s;-webkit-mask:linear-gradient(#000,#000) top/100% 66px no-repeat,radial-gradient(51% 100% at 50% 0,#000 calc(100% - 1px),transparent 100%) 0 64px/88px 20px round no-repeat;mask:linear-gradient(#000,#000) top/100% 66px no-repeat,radial-gradient(51% 100% at 50% 0,#000 calc(100% - 1px),transparent 100%) 0 64px/88px 20px round no-repeat}
+.pp.sc .nbk{transform:none}
+#cv{position:fixed;inset:0;width:100vw;height:100vh;z-index:99;pointer-events:none}
+/* ---- phone layout (<600px): 390px canvas ---- */
+.mob{display:none}
+html.m .dsk{display:none!important}
+html.m svg.mob{display:block}
+/* On phones a strip of the hero stays above the list, as in the sketch */
+html.m #work{top:calc(225svh - 105px * var(--hs,1))}
+html.m .stage{width:390px;height:700px}
+html.m .stage>svg{width:390px;height:700px}
+html.m .hd{padding:44px 22px 12px}
+html.m .row{height:auto}
+html.m .row .layer{display:none}
+html.m .lab{height:auto;padding:18px 22px 12px;color:var(--ink);mix-blend-mode:normal}
+html.m .lab span:first-child{font-size:28px!important;letter-spacing:-1px!important}
+html.m .rows:hover .row:not(:hover) .lab{opacity:1}
+.pcard{display:none}
+html.m .pcard{display:block;position:relative;height:170px;margin:0 22px 22px;border-radius:16px;overflow:hidden}
+.pcard>svg{position:absolute;inset:0;width:100%;height:100%}
+.mm{position:absolute;left:0;right:0;top:0;z-index:0;pointer-events:auto;padding:76px 26px 50px;background:var(--pill);overflow:hidden;transform:translateY(-105%);visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s,background .3s;-webkit-mask:linear-gradient(#000,#000) 0 0/100% calc(100% - 19px) no-repeat,radial-gradient(51% 100% at 50% 0,#000 calc(100% - 1px),transparent 100%) 0 100%/44px 20px round no-repeat;mask:linear-gradient(#000,#000) 0 0/100% calc(100% - 19px) no-repeat,radial-gradient(51% 100% at 50% 0,#000 calc(100% - 1px),transparent 100%) 0 100%/44px 20px round no-repeat}
+.mm.open{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s,background .3s}
+html:not(.m) .mm{display:none}
+.mm a{position:relative;z-index:1;display:flex;align-items:center;gap:8px;font-size:30px;font-weight:500;letter-spacing:-1px;line-height:1;color:var(--pt);padding:14px 0;border-bottom:0.5px solid rgba(253,250,243,.2);text-decoration:none;cursor:pointer;opacity:0;transform:translateY(-8px);transition:opacity .25s,transform .4s cubic-bezier(.2,.8,.2,1)}
+.mm a:last-of-type{border-bottom:0}
+.mm a .ic{font-size:22px}
+.mm a.on{background:var(--chip);color:var(--ct);border-radius:18px;padding:14px 16px;margin:0 -16px;border-bottom-color:transparent}
+.mm a:has(+ a.on){border-bottom-color:transparent}
+.mm.open a{opacity:1;transform:none}
+.mm.open a:nth-of-type(1){transition-delay:.06s}.mm.open a:nth-of-type(2){transition-delay:.1s}.mm.open a:nth-of-type(3){transition-delay:.14s}.mm.open a:nth-of-type(4){transition-delay:.18s}
+.mmd{position:absolute;right:-46px;bottom:-38px;width:150px;height:150px;fill:#FFC857;transform:rotate(-40deg) scale(.8);transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.mm.open .mmd{transform:none}
+html.m .nav>.nm,html.m .nav>.pill,html.m .nav>.tg{position:relative;z-index:1}
+.pp.mo .nm{opacity:1;transform:none}
+/* While a page is arriving (.instant), the nav takes its state without animating */
+.pp.instant .nm,.pp.instant .pill,.pp.instant .bgr,.pp.instant .lk,.pp.instant .lk a,.pp.instant .nbk{transition:none!important}
+@media (prefers-reduced-motion:reduce){.mm,.mm a,.mmd{transition:none!important}}
