@@ -31,17 +31,28 @@ export const BADGE_INDEX = 8
 const cl = (v: number) => Math.max(0, Math.min(1, v))
 const e3 = (t: number) => (t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
 
-/** Transforms for scroll progress p (0–1), back-to-front. */
-export function frame(p: number, mobile: boolean) {
+export type FrameItem = { i: number; x: number; y: number; rot: number; sx: number; sy: number; z: number }
+
+/** Each shape's position, rotation (radians) and scale for scroll progress p (0–1), back-to-front. */
+export function frameValues(p: number, mobile: boolean): FrameItem[] {
 	return HERO.map((s, i) => {
 		const t = s.tm || 0, k = e3(cl((p - .1 - .12 * (t + 1)) / .55)), q = Math.sin(Math.PI * k) * .08
 		const A = mobile ? s.am : s.a, B = mobile ? s.bm : s.b, sg = i % 2 ? 1 : -1
 		const v = [0, 1, 2, 3, 4].map(j => A[j] + (B[j] - A[j]) * k)
-		const transform = 'translate(' + v[0].toFixed(1) + ' ' + v[1].toFixed(1) + ') rotate(' + (v[3] * 57.2958).toFixed(1) +
-			') scale(' + (v[2] * (1 + sg * q)).toFixed(3) + ' ' + (v[2] * (1 - sg * q)).toFixed(3) + ')'
-		return { i, transform, z: v[4] }
+		return { i, x: v[0], y: v[1], rot: v[3], sx: v[2] * (1 + sg * q), sy: v[2] * (1 - sg * q), z: v[4] }
 	}).sort((A, B) => A.z - B.z)
 }
+
+/** The same, as SVG transforms (for the drawing shown before the canvas takes over, or without script). */
+export const frame = (p: number, mobile: boolean) => frameValues(p, mobile).map(o => ({
+	i: o.i, z: o.z,
+	transform: 'translate(' + o.x.toFixed(1) + ' ' + o.y.toFixed(1) + ') rotate(' + (o.rot * 57.2958).toFixed(1) + ') scale(' + o.sx.toFixed(3) + ' ' + o.sy.toFixed(3) + ')',
+}))
+
+/** The big background blob is always the header's own background color, so it never needs drawing. */
+export const BACKDROP_INDEX = 0
+/** "Product designer" badge text lines: [text, baseline y] in shape units (26px, dy -.15em then +1.15em). */
+export const BADGE_LINES: [string, number][] = [['Product', -3.9], ['designer', 26]]
 
 /** "Product designer" fades out over the first 26%. */
 export const badgeTextOpacity = (p: number) => cl(1 - p / .26)
