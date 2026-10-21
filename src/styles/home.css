@@ -31,11 +31,6 @@ html.dk .hero{background:#141240}
 @keyframes cue{0%{transform:translateY(0);animation-timing-function:cubic-bezier(.45,0,.55,1)}16%{transform:translateY(.15em);animation-timing-function:cubic-bezier(.25,0,.25,1)}38%,100%{transform:translateY(0)}}
 html.m .cue{bottom:12px}
 @media (prefers-reduced-motion:reduce){.cue .ic{animation:none}}
-/* Touch screens: native snapping between the top and the words (turned on by script only while above the words) */
-html.snap{scroll-snap-type:y mandatory}
-.snapat{position:absolute;left:0;width:1px;height:1px;scroll-snap-align:start;pointer-events:none}
-.snapat.s0{top:0}
-.snapat.s1{top:100vh;top:100svh}
 .stage{position:absolute;left:50%;top:50%;width:680px;height:400px;transform:translate(-50%,-50%) scale(var(--hs,1))}
 .stage>svg{position:absolute;inset:0;width:680px;height:400px;overflow:visible}
 /* Once script has taken over, the shapes are painted on a canvas behind the stage (see src/client/heroCanvas.ts) */

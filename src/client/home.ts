@@ -106,15 +106,12 @@ export function initHome(): Off {
 	// Scripted scrolling (links, cue, glide). `go` can start at speed v0 (px/ms), so a glide carries
 	// on from your own scroll instead of restarting from a standstill.
 	let raf = 0, auto = 0 // direction of a running scripted scroll; 0 = none
-	const touchScreen = matchMedia('(pointer: coarse)')
-	const snapping = (on: boolean) => document.documentElement.classList.toggle('snap', on)
 	// Momentum bookkeeping: while gliding or just landed, wheel ticks that keep fading are the same
 	// gesture's momentum (swallowed); a tick that grows is a new scroll, which takes control back.
 	let tailDir = 0, tailUntil = 0, lastAbs = 0, glideT0 = 0
 	const go = (to: number, ms: number, v0 = 0) => {
 		cancelAnimationFrame(raf)
 		const from = scrollY, dist = to - from, dir = Math.sign(dist)
-		snapping(false)
 		if (reducedMotion() || Math.abs(dist) < 1) { scrollTo(0, to); return }
 		auto = dir
 		// Cubic Hermite from (from, v0) to (to, still). The start speed is capped low so the glide never
@@ -179,13 +176,50 @@ export function initHome(): Off {
 		if (down && y < H - 2) { e.preventDefault(); glide(H) }
 		else if (up && y > 2 && y <= H + 2) { e.preventDefault(); glide(0) }
 	}
-	// Touch screens use the browser's own snapping between the top and the words, which carries
-	// their momentum best. It's on only for gestures that start above the words.
-	const onTouch = () => { stop(); snapping(touchScreen.matches && scrollY < H - 2) }
+	// Touch: within the hero the page follows your finger itself (the browser's own scrolling would
+	// coast and stall partway), and when you let go it glides on, at your swipe's speed, to the top or
+	// the words, whichever way you were swiping. Swiping down from the words scrolls normally.
+	// The decision is made on the first move of each swipe, because after that iOS won't let the
+	// page take over the browser's scrolling.
+	type Touch = { y0: number; s0: number; lastY: number; lastT: number; v: number; mode: '' | 'drag' | 'native' }
+	let touch: Touch | null = null, touchEndT = 0
+	const onTouchStart = (ev: Event) => {
+		const e = ev as TouchEvent
+		stop()
+		touch = e.touches.length === 1 ? { y0: e.touches[0].clientY, s0: scrollY, lastY: e.touches[0].clientY, lastT: e.timeStamp, v: 0, mode: '' } : null
+	}
+	const onTouchMove = (ev: Event) => {
+		const e = ev as TouchEvent
+		if (!touch || e.touches.length !== 1) return
+		const fy = e.touches[0].clientY
+		if (!touch.mode) {
+			const y = scrollY, up = fy > touch.y0
+			touch.mode = y < H - 2 || (Math.abs(y - H) <= 2 && up) ? 'drag' : 'native'
+		}
+		if (touch.mode === 'drag' && e.cancelable) {
+			e.preventDefault()
+			scrollTo(0, Math.max(0, Math.min(H, touch.s0 + touch.y0 - fy)))
+			const dt = Math.max(1, e.timeStamp - touch.lastT), v = (touch.lastY - fy) / dt
+			touch.v = touch.v * .6 + v * .4
+		}
+		touch.lastY = fy
+		touch.lastT = e.timeStamp
+	}
+	const onTouchEnd = (ev: Event) => {
+		const t = touch
+		touch = null
+		touchEndT = (ev as TouchEvent).timeStamp
+		if (t?.mode !== 'drag') return
+		const y = scrollY, moved = y - t.s0
+		const down = Math.abs(t.v) > .05 ? t.v > 0 : moved > 0
+		if (Math.abs(moved) < 4 && Math.abs(t.v) < .05) return
+		const to = down ? H : 0
+		if (Math.abs(to - y) > 1) go(to, 900 + 900 * Math.abs(to - y) / H, Math.abs(t.v))
+	}
 	// Fallback (e.g. dragging the scrollbar): once scrolling stops partway, finish the move.
 	const settle = () => {
 		const y = scrollY
-		if (auto || document.documentElement.classList.contains('snap') || y <= 1 || y >= H - 1) return
+		if (auto || touch || y <= 1 || y >= H - 1) return
 		glide(dir >= 0 ? (y > SNAP_AT * H ? H : 0) : (y > (1 - SNAP_AT) * H ? H : 0))
 	}
 
@@ -200,7 +234,9 @@ export function initHome(): Off {
 		lastY = y
 		lastScrollT = t
 		if (!queued) queued = requestAnimationFrame(() => { queued = 0; update() })
-		if (!auto) { clearTimeout(settleT); settleT = window.setTimeout(settle, 220) }
+		// A flick up from the work list whose momentum carries into the hero glides on to the top right away.
+		if (!auto && !touch && dir < 0 && t - touchEndT < 2000 && y > 2 && y < H - 2) { glide(0); return }
+		if (!auto && !touch) { clearTimeout(settleT); settleT = window.setTimeout(settle, 220) }
 	}
 
 	const offs = [
@@ -209,7 +245,10 @@ export function initHome(): Off {
 		listen(window, 'site:mode', () => { manual = false; fitHero(); shown = -1; update() }),
 		listen(window, 'site:menu', update),
 		listen(window, 'wheel', onWheel, { passive: false }),
-		listen(window, 'touchstart', onTouch, { passive: true }),
+		listen(window, 'touchstart', onTouchStart, { passive: true }),
+		listen(window, 'touchmove', onTouchMove, { passive: false }),
+		listen(window, 'touchend', onTouchEnd, { passive: true }),
+		listen(window, 'touchcancel', onTouchEnd, { passive: true }),
 		listen(window, 'keydown', onKey),
 		listen(hb, 'click', e => {
 			if (view.mobile) return
@@ -264,7 +303,6 @@ export function initHome(): Off {
 	let settleIn = requestAnimationFrame(() => { settleIn = requestAnimationFrame(() => { update(); pp.classList.remove('instant') }) })
 	return () => {
 		cancelAnimationFrame(settleIn)
-		snapping(false)
 		ro.disconnect()
 		canvas.destroy()
 		stop()
