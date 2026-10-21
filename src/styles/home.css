@@ -38,6 +38,9 @@ html.snap{scroll-snap-type:y mandatory}
 .snapat.s1{top:100vh;top:100svh}
 .stage{position:absolute;left:50%;top:50%;width:680px;height:400px;transform:translate(-50%,-50%) scale(var(--hs,1))}
 .stage>svg{position:absolute;inset:0;width:680px;height:400px;overflow:visible}
+/* Once script has taken over, the shapes are painted on a canvas behind the stage (see src/client/heroCanvas.ts) */
+.hcv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero.painted .stage>svg{visibility:hidden}
 /* Pin: .pg sticks while the hero animates (one screen of scroll), holds on the finished
    words for another .25 screen, then scrolls normally. Keep 1.25 in sync with HOLD in src/client/home.ts. */
 .pinw{position:relative}

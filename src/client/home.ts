@@ -5,6 +5,7 @@
 // pill fades in and (on desktop) the hamburger expands into the links pill.
 
 import { badgeTextOpacity, endLine, frame, nameD } from '@/content/homeHero'
+import { createHeroCanvas } from './heroCanvas'
 import { $, listen, reducedMotion, view, type Off } from './site'
 
 /** Pinned scroll, in screens: 1 to animate + .25 holding on the words. Keep in sync with .pinsp in home.css. */
@@ -28,15 +29,21 @@ export function initHome(): Off {
 		m: { svg: svM, g: groups(svM), ttl: svM.querySelector<SVGTextElement>('.ttl'), order: '' },
 	}
 	const ends = [...pp.querySelectorAll<HTMLElement>('.end')]
+	// The shapes are painted on a canvas once fonts are ready; until then the SVG drawing animates.
+	const canvas = createHeroCanvas(heroEl, stage, hero)
+	let painting = false
 	const work = lk.querySelector<HTMLElement>('[data-k=work]')
 	let manual = false
 
 	function draw(p: number) {
-		const h = view.mobile ? hero.m : hero.d, f = frame(p, view.mobile)
-		f.forEach(({ i, transform }) => h.g[i].setAttribute('transform', transform))
-		const order = f.map(o => o.i).join()
-		if (order !== h.order) { f.forEach(({ i }) => h.svg.appendChild(h.g[i])); h.order = order }
-		if (h.ttl) h.ttl.style.opacity = String(badgeTextOpacity(p))
+		if (painting) canvas.draw(p)
+		else {
+			const h = view.mobile ? hero.m : hero.d, f = frame(p, view.mobile)
+			f.forEach(({ i, transform }) => h.g[i].setAttribute('transform', transform))
+			const order = f.map(o => o.i).join()
+			if (order !== h.order) { f.forEach(({ i }) => h.svg.appendChild(h.g[i])); h.order = order }
+			if (h.ttl) h.ttl.style.opacity = String(badgeTextOpacity(p))
+		}
 		ends.forEach((el, i) => {
 			const [o, mt] = endLine(p, i)
 			el.style.opacity = String(o)
@@ -50,6 +57,7 @@ export function initHome(): Off {
 		const w = heroEl.clientWidth
 		H = heroEl.clientHeight || innerHeight
 		document.documentElement.style.setProperty('--hs', String(view.mobile ? Math.min(w / 390, H / 700) : Math.min(w / 680, H / 400)))
+		canvas.resize(view.mobile)
 	}
 	const maxScroll = () => document.documentElement.scrollHeight - innerHeight
 	const workY = () => anchor.getBoundingClientRect().top + scrollY
@@ -239,6 +247,10 @@ export function initHome(): Off {
 		const d = nameD(w1, w2)
 		hero.d.g[6].querySelector('path')?.setAttribute('d', d)
 		hero.m.g[6].querySelector('path')?.setAttribute('d', d)
+	}).finally(() => {
+		canvas.refreshShapes()
+		painting = true
+		canvas.start(shown < 0 ? target : shown)
 	})
 
 	// The hero's height follows the visible screen (100svh), which mobile toolbars change without a resize event.
@@ -254,6 +266,7 @@ export function initHome(): Off {
 		cancelAnimationFrame(settleIn)
 		snapping(false)
 		ro.disconnect()
+		canvas.destroy()
 		stop()
 		clearTimeout(settleT)
 		cancelAnimationFrame(queued)
