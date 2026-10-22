@@ -179,44 +179,51 @@ function initVideo(): Off {
 // ---- Hover peeks: a wobbly blob springs open around the cursor and reveals the picture layer ----
 type Peek = {
 	el: HTMLElement; layer: HTMLElement; shot: HTMLElement; R: number
-	h: boolean; mx: number; my: number; cx: number; cy: number; r: number; v: number; ox: number; oy: number; s: number
+	// pr is the radius one spring step ago, so frames that land between steps can draw partway
+	h: boolean; mx: number; my: number; cx: number; cy: number; r: number; pr: number; v: number; ox: number; oy: number; s: number
 	// Row geometry, measured once per hover (and after scroll/resize) instead of on every move or frame
 	box: { left: number; top: number; k: number; w: number; h: number } | null
 }
 function initPeeks(): Off {
 	const ps: Peek[] = [...document.querySelectorAll<HTMLElement>('[data-peek]')].flatMap(el => {
 		const layer = el.querySelector<HTMLElement>('.layer'), shot = el.querySelector<HTMLElement>('.shot')
-		return layer && shot ? [{ el, layer, shot, R: Number(el.dataset.peek), h: false, mx: 0, my: 0, cx: 0, cy: 0, r: 0, v: 0, ox: 0, oy: 0, s: 1.1, box: null }] : []
+		return layer && shot ? [{ el, layer, shot, R: Number(el.dataset.peek), h: false, mx: 0, my: 0, cx: 0, cy: 0, r: 0, pr: 0, v: 0, ox: 0, oy: 0, s: 1.1, box: null }] : []
 	})
 	if (!ps.length) return noop
 	const measure = (o: Peek) => {
 		const b = o.el.getBoundingClientRect(), k = o.el.offsetWidth / b.width
 		return (o.box = { left: b.left, top: b.top, k, w: o.el.clientWidth, h: o.el.clientHeight })
 	}
-	let raf = 0, last = 0
+	let raf = 0, last = 0, acc = 0
 	const tick = (now: number) => {
 		const T = now / 1000, still = reducedMotion()
 		// Frame-rate independent easing: n is how many 60fps frames have passed.
 		const n = last ? Math.min(4, (now - last) / 16.7) : 1, ease = (rate: number) => 1 - Math.pow(1 - rate, n)
 		last = now
+		// The spring keeps its 60fps steps. On a 120Hz screen most frames land between two steps,
+		// so carry the leftover time and draw partway between them instead of lurching.
+		acc += n
+		const steps = Math.floor(acc)
+		acc -= steps
 		let busy = false
 		for (const o of ps) {
 			const box = o.box ?? measure(o)
 			if (still) {
-				o.r = o.h ? o.R : 0; o.v = 0; o.cx = o.mx; o.cy = o.my; o.ox = o.oy = 0; o.s = o.h ? 1.04 : 1.1
+				o.r = o.pr = o.h ? o.R : 0; o.v = 0; o.cx = o.mx; o.cy = o.my; o.ox = o.oy = 0; o.s = o.h ? 1.04 : 1.1
 			} else {
-				for (let i = 0; i < Math.round(n); i++) { o.v += ((o.h ? o.R : 0) - o.r) * .045; o.v *= .85; o.r += o.v }
+				for (let i = 0; i < steps; i++) { o.pr = o.r; o.v += ((o.h ? o.R : 0) - o.r) * .045; o.v *= .85; o.r += o.v }
 				// The blob trails the cursor a little (the playful lag from the sketch, which used .14); the pictures drift lazily.
 				o.cx += (o.mx - o.cx) * ease(.18); o.cy += (o.my - o.cy) * ease(.18)
 				const tx = o.h ? (o.mx - box.w / 2) * .03 : 0, ty = o.h ? (o.my - box.h / 2) * .08 : 0
 				o.ox += (tx - o.ox) * ease(.03); o.oy += (ty - o.oy) * ease(.03); o.s += ((o.h ? 1.04 : 1.1) - o.s) * ease(.025)
 			}
 			o.shot.style.transform = 'translate(' + o.ox.toFixed(1) + 'px,' + o.oy.toFixed(1) + 'px) scale(' + o.s.toFixed(3) + ')'
-			o.layer.style.clipPath = o.r < 1 && !o.h ? 'circle(0 at 0 0)' : "path('" + peekBlob(o.cx, o.cy, o.r, T, still ? 0 : 1) + "')"
+			const r = o.pr + (o.r - o.pr) * acc
+			o.layer.style.clipPath = r < 1 && !o.h ? 'circle(0 at 0 0)' : "path('" + peekBlob(o.cx, o.cy, r, T, still ? 0 : 1) + "')"
 			if (o.h || o.r >= .5 || Math.abs(o.v) > .01 || Math.abs(o.s - 1.1) > .002 || Math.abs(o.ox) > .05 || Math.abs(o.oy) > .05) busy = true
 		}
 		raf = busy ? requestAnimationFrame(tick) : 0
-		if (!raf) last = 0
+		if (!raf) last = acc = 0
 	}
 	const wake = () => { if (!raf) raf = requestAnimationFrame(tick) }
 	// Mouse only: on touch screens a tap just follows the link.
