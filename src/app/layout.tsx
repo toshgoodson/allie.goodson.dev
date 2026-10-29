@@ -27,6 +27,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				{/* Reserve the scrollbar's space from the start, so the boot script measures the final width
 				    and the canvas doesn't rescale (and the nav doesn't jump) when the scrollbar appears. */}
 				<style>{'html{scrollbar-gutter:stable}'}</style>
+				{/* The site has its own dark mode, so ask the Dark Reader extension not to repaint it. */}
+				<meta name="darkreader-lock" />
 			</head>
 			<body>
 				{/* First thing in <body> (not <head>), where the reserved scrollbar space is already known. */}
