@@ -7,7 +7,9 @@ import { shapeD, type ShapeName } from './shapes'
 
 export const EMAIL = 'allie@goodson.dev'
 export const LINKEDIN = 'https://www.linkedin.com/in/alliegoodson/'
-export const RESUME = '/AllieGoodson_Resume_2026.pdf'
+// Not the PDF itself: PDF-tool extensions stick "Edit"/"Sign" buttons next to any link ending in .pdf.
+// public/resume.html forwards to the PDF, so that's where to change the file name.
+export const RESUME = '/resume'
 
 /** Two palettes keyed by letter; shapes use class="f-<letter>" so dark mode is pure CSS. */
 export type Palette = { l: Record<string, string>; d: Record<string, string> }
